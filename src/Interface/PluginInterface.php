@@ -1,8 +1,9 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (!defined('ABSPATH')) exit;
 
-function mdnj_add_plugin_interface_menu() {
+function mdnj_add_plugin_interface_menu()
+{
   add_menu_page(
     'MyDataNinja WooCommerce Plugin',
     'MyDataNinja',
@@ -13,7 +14,7 @@ function mdnj_add_plugin_interface_menu() {
     56
   );
 
-  if (mdnj_is_api_key_authorized()){
+  if (mdnj_is_api_key_authorized()) {
     add_submenu_page(
       'mydataninja-integration',
       'Reports',
@@ -34,41 +35,36 @@ function mdnj_add_plugin_interface_menu() {
   );
 
   remove_submenu_page('mydataninja-integration', 'mydataninja-integration');
-
-  echo '<style>
-        #toplevel_page_mydataninja-integration img {
-            max-width: 21px;
-            max-height: 21px;
-            filter: grayscale(100%) brightness(200%);
-        }
-    </style>';
 }
 
-function mdnj_display_reports_interface() {
+function mdnj_display_reports_interface()
+{
   mdnj_save_options();
 
   $is_reports_page = true;
   $is_settings_page = false;
 
-  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+  call_user_func(function () use ($is_reports_page, $is_settings_page) {
     include(plugin_dir_path(__DIR__) . '../templates/index.php');
   });
 }
 
-function mdnj_display_settings_interface() {
+function mdnj_display_settings_interface()
+{
   mdnj_save_options();
 
   $is_reports_page = false;
   $is_settings_page = true;
 
-  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+  call_user_func(function () use ($is_reports_page, $is_settings_page) {
     include(plugin_dir_path(__DIR__) . '../templates/index.php');
   });
 }
 
 add_action('admin_menu', 'mdnj_add_plugin_interface_menu');
 
-function mdnj_is_api_key_authorized() {
+function mdnj_is_api_key_authorized()
+{
   global $wpdb;
   $prefix = 'MyDataNinja - API';
 
@@ -88,16 +84,17 @@ function mdnj_is_api_key_authorized() {
   return $result > 0;
 }
 
-function mdnj_display_plugin_interface() {
-    mdnj_save_options();
+function mdnj_display_plugin_interface()
+{
+  mdnj_save_options();
 
-    $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
-    $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
-    $is_settings_page = $current_page === 'mydataninja-settings';
+  $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
+  $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
+  $is_settings_page = $current_page === 'mydataninja-settings';
 
-    call_user_func(function() use ($is_reports_page, $is_settings_page) {
-      include(plugin_dir_path(__DIR__) . '../templates/index.php');
-    });
+  call_user_func(function () use ($is_reports_page, $is_settings_page) {
+    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+  });
 }
 
 function mdnj_save_options()
@@ -132,7 +129,8 @@ function mdnj_save_options()
   }
 }
 
-function mdnj_enqueue_custom_styles() {
+function mdnj_enqueue_custom_styles()
+{
   global $mdnj_myDataNinjaConfig;
 
   wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)), [], $mdnj_myDataNinjaConfig['VERSION']);
@@ -157,7 +155,8 @@ add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 
 add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 
-function mdnj_get_order_statistics() {
+function mdnj_get_order_statistics()
+{
   $today = gmdate('Y-m-d');
   $firstDayOfMonth = gmdate('Y-m-01');
   $dateRanges = [
