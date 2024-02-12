@@ -1,0 +1,108 @@
+.wrap {
+    color: #333;
+}
+
+.authorize-btn[disabled] {
+    background-color: rgb(22 163 74);
+    opacity: 0.8;
+    cursor: not-allowed;
+}
+
+.mydataninja-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.mydataninja-logo img {
+    max-width: 180px;
+    height: auto;
+}
+
+.interface-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.custom-interface {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    color: #fff;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.authorize-btn {
+    background-color: #FF4E00;
+}
+
+.save-btn {
+    background-color: #3B82F6;
+}
+
+.checkboxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0px;
+}
+
+.checkboxes label {
+    margin-top: 5px;
+    margin-right: 20px;
+}
+
+input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    outline: none;
+}
+
+input[type="checkbox"]:checked {
+    background-color: #3B82F6; 
+    border-color: #3B82F6;
+}
+
+input[type="checkbox"]:checked::before {
+    content: '\2713'; 
+    display: block;
+    color: #fff; 
+    text-align: center;
+    line-height: 18px;
+    font-size: 14px;
+}
+
+.custom-interface {
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-top: 20px;
+}
+
+.custom-interface p {
+    margin-bottom: 10px;
+}
+
+.authorize-btn,
+.install-btn {
+    padding: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
