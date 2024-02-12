@@ -24,6 +24,7 @@
                 </div>
 
                 <input type="submit" class="btn save-btn" style="font-size: 12px;" value="Save Changes">
+                
             </form>
         </div>
     </div>
