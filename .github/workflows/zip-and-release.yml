@@ -1,0 +1,27 @@
+name: Zip and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Create Zip File
+      run: |
+        zip -r mydataninja.zip .
+
+    - name: Upload Release Asset
+      uses: actions/upload-release-asset@v2
+      with:
+        upload_url: ${{ github.event.release.upload_url }}
+        asset_path: ./mydataninja.zip
+        asset_name: mydataninja.zip
+        asset_content_type: application/zip
+        api_key: ${{ secrets.GITHUB_TOKEN }}
