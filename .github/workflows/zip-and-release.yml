@@ -22,6 +22,6 @@ jobs:
       with:
         files: mydataninja.zip
         tag_name: ${{ steps.get_commit.outputs.commit_sha }}
-        title: Release ${{ steps.get_commit.outputs.commit_sha }}
+        name: Release ${{ steps.get_commit.outputs.commit_sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
