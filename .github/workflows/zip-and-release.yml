@@ -3,7 +3,7 @@ name: Zip and Release
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build:
@@ -11,17 +11,15 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Create Zip File
       run: |
-        zip -r mydataninja.zip .
+        zip -r release.zip .
 
     - name: Upload Release Asset
-      uses: actions/upload-release-asset@v2
+      uses: softprops/action-gh-release@v1
       with:
-        upload_url: ${{ github.event.release.upload_url }}
-        asset_path: ./mydataninja.zip
-        asset_name: mydataninja.zip
-        asset_content_type: application/zip
-        api_key: ${{ secrets.GITHUB_TOKEN }}
+        files: release.zip
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
