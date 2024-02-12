@@ -21,7 +21,7 @@ jobs:
       uses: softprops/action-gh-release@v1
       with:
         files: mydataninja.zip
-        tag_name: ${{ steps.get_commit.outputs.commit_sha }}
+        tag_name: mydataninja@v5
         name: Release ${{ steps.get_commit.outputs.commit_sha }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
