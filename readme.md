@@ -3,7 +3,7 @@
 <p align="center">
     <a href="https://github.com/iamdataninja/mydataninja-wordpress-plugin/releases"><img src="https://img.shields.io/github/downloads/iamdataninja/mydataninja-wordpress-plugin/total.svg" alt="Total Downloads"></a>
     <a href="https://github.com/iamdataninja/mydataninja-wordpress-plugin/releases"><img src="https://img.shields.io/github/v/release/iamdataninja/mydataninja-wordpress-plugin" alt="Latest Stable Version"></a>
-    <a href="https://github.com/iamdataninja/mydataninja-wordpress-plugin/blob/main/LICENSE"><img src="https://img.shields.io/github/license/iamdataninja/mydataninja-wordpress-plugin" alt="License"></a>
+    <a href="https://github.com/iamdataninja/mydataninja-wordpress-plugin/blob/master/LICENSE"><img src="https://img.shields.io/github/license/iamdataninja/mydataninja-wordpress-plugin" alt="License"></a>
 </p>
 
 # MyDataNinja WooCommerce Integration
