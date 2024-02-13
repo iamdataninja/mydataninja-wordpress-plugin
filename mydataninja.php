@@ -12,8 +12,8 @@ require __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-include_once __DIR__ . '/src/Profits/AddProfitField.php';
-include_once __DIR__ . '/src/Profits/AddProfitToOrders.php';
+include_once __DIR__ . '/src/Cost of Goods/AddCostOfGoodsField.php';
+include_once __DIR__ . '/src/Cost of Goods/AddCogAndProfitToOrders.php';
 include_once __DIR__ . '/src/Script/AddScript.php';
 include_once __DIR__ . '/src/Script/SendLastEventId.php';
 include_once __DIR__ . '/src/Interface/PluginInterface.php';

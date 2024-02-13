@@ -62,6 +62,7 @@ function add_event_id_to_order_object($response, $object, $request) {
         $event_id = null;
     }
 
+    $data = $response->get_data();
     $data['event_id'] = $event_id;
     $response->set_data($data);
 
