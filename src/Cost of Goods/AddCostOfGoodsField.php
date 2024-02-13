@@ -7,7 +7,7 @@ function add_cost_of_goods_field() {
 
     if ($include_profits === 'yes') {
 
-        $label = __('Cost of Goods', 'mydataninja-woocommerce-plugin') . ' (' . get_woocommerce_currency() . ')';
+        $label = __('Cost of Goods', 'mydataninja-woocommerce-plugin') . ' (' . get_woocommerce_currency_symbol() . ')';
 
         woocommerce_wp_text_input([
             'id' => '_cost_of_goods',
