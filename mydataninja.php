@@ -9,14 +9,13 @@ Tags: woocommerce, e-commerce, profit, profit tracking, sales, sales management,
 
 require __DIR__ . '/vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
-
 include_once __DIR__ . '/src/Cost of Goods/AddCostOfGoodsField.php';
 include_once __DIR__ . '/src/Cost of Goods/AddCogAndProfitToOrders.php';
 include_once __DIR__ . '/src/Script/AddScript.php';
 include_once __DIR__ . '/src/Script/SendLastEventId.php';
 include_once __DIR__ . '/src/Interface/PluginInterface.php';
+
+$myDataNinjaConfig = include __DIR__ . '/config.php';
 
 function set_default_options_on_activation() {
     if (get_option('_include_profits') === false) {

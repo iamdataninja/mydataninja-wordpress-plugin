@@ -38,6 +38,8 @@ function display_plugin_interface() {
 }
 
 function enqueue_custom_styles() {
+    global $myDataNinjaConfig;
+
     wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)));
     wp_enqueue_script('mydataninja-custom-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], null, true);
 
@@ -45,7 +47,7 @@ function enqueue_custom_styles() {
         'base_url' => home_url(),
         'currency' => get_woocommerce_currency(),
         'name' => get_bloginfo('name'),
-        'front_base_url' => $_ENV['FRONT_BASE_URL']
+        'front_base_url' => $myDataNinjaConfig['FRONT_BASE_URL']
     ]);
 }
 
