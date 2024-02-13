@@ -1,6 +1,6 @@
 <?php
 
-function calculate_order_cost_of_goods($order_id): float|int
+function calculate_order_cost_of_goods($order_id)
 {
   $order = wc_get_order($order_id);
   $items = $order->get_items();
@@ -18,7 +18,7 @@ function calculate_order_cost_of_goods($order_id): float|int
   return $total_cost_of_goods;
 }
 
-function calculate_order_profit($order_id): float|int
+function calculate_order_profit($order_id)
 {
   $order = wc_get_order($order_id);
   $items = $order->get_items();

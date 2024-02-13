@@ -1,6 +1,6 @@
 <?php
 
-function add_cost_of_goods_field(): void
+function add_cost_of_goods_field()
 {
   global $woocommerce, $post;
 
@@ -34,7 +34,7 @@ function add_cost_of_goods_field(): void
 
 add_action('woocommerce_product_options_pricing', 'add_cost_of_goods_field');
 
-function add_cost_of_goods_field_to_variations($loop, $variation_data, $variation): void
+function add_cost_of_goods_field_to_variations($loop, $variation_data, $variation)
 {
   woocommerce_wp_text_input([
     'id' => '_cost_of_goods[' . $variation->ID . ']',
@@ -48,7 +48,7 @@ function add_cost_of_goods_field_to_variations($loop, $variation_data, $variatio
 
 add_action('woocommerce_variation_options_pricing', 'add_cost_of_goods_field_to_variations', 10, 3);
 
-function save_cost_of_goods_field($post_id): void
+function save_cost_of_goods_field($post_id)
 {
   $cost_of_goods = isset($_POST['_cost_of_goods']) ? sanitize_text_field($_POST['_cost_of_goods']) : '';
 
@@ -67,7 +67,7 @@ function save_cost_of_goods_field_for_variations($variation_id, $i): void
 
 add_action('woocommerce_save_product_variation', 'save_cost_of_goods_field_for_variations', 10, 2);
 
-function display_profit_field(): void
+function display_profit_field()
 {
   global $post;
 
