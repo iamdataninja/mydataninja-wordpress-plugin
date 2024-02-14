@@ -50,8 +50,8 @@ function calculate_order_profit($order_id)
 
 function add_profit_and_cost_of_goods_to_order_response($response, $object) {
   $order_id = $object->get_id();
-  $response->data['profit'] = calculate_order_profit($order_id);
-  $response->data['cost_of_goods'] = calculate_order_cost_of_goods($order_id);
+  $response->data['mydataninja_profit'] = calculate_order_profit($order_id);
+  $response->data['mydataninja_cost_of_goods'] = calculate_order_cost_of_goods($order_id);
 
   return $response;
 }
