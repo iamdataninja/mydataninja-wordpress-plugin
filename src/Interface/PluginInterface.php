@@ -50,9 +50,10 @@ function enqueue_custom_styles() {
     global $myDataNinjaConfig;
 
     wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)));
-    wp_enqueue_script('mydataninja-custom-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], null, true);
+    wp_enqueue_script('mydataninja-authorize-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], null, true);
+    wp_enqueue_script('mydataninja-plugin-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), [], null, true);
 
-    wp_localize_script('mydataninja-custom-script', 'mydataninja_vars', [
+    wp_localize_script('mydataninja-authorize-script', 'mydataninja_vars', [
         'base_url' => home_url(),
         'currency' => get_woocommerce_currency(),
         'name' => get_bloginfo('name'),

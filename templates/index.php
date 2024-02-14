@@ -1,3 +1,22 @@
+<?php
+    function pretty_field_name($field_name) {
+      $pretty_name = str_replace('_', ' ', $field_name);
+      $pretty_name = ucwords($pretty_name);
+      return $pretty_name;
+    }
+
+    global $wpdb;
+    $query = "
+        SELECT DISTINCT($wpdb->postmeta.meta_key)
+        FROM $wpdb->posts
+        LEFT JOIN $wpdb->postmeta
+        ON $wpdb->posts.ID = $wpdb->postmeta.post_id
+        WHERE $wpdb->posts.post_type = 'product'
+        AND $wpdb->postmeta.meta_value REGEXP '^-?[0-9]+$' OR $wpdb->postmeta.meta_value REGEXP '^-?[0-9]*\.[0-9]+$'
+    ";
+    $meta_keys = $wpdb->get_col($query);
+?>
+
 <div class="wrap">
     <div class="mydataninja-logo">
         <img src="https://mydataninja.com/wp-content/uploads/2023/07/logo.png" alt="MyDataNinja Logo">
@@ -28,7 +47,19 @@
                     </label>
 
                     <label for="_existing_cog_field_name" id="_existing_cog_field_name_label" style="display: none;">
-                        <input placeholder="Field name" type="text" id="_existing_cog_field_name" name="_existing_cog_field_name" value="<?php echo esc_attr(get_option('_existing_cog_field_name')); ?>">
+                        <select id="_existing_cog_field_name" name="_existing_cog_field_name">
+                          <?php
+                          if (!empty($meta_keys)) {
+                            foreach ($meta_keys as $key) {
+                              $pretty_name = pretty_field_name($key);
+                              $selected = selected($key, get_option('_existing_cog_field_name'), false);
+                              echo "<option value='$key' $selected>$pretty_name</option>";
+                            }
+                          } else {
+                            echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
+                          }
+                          ?>
+                        </select>
                     </label>
                 </div>
 
@@ -38,16 +69,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var checkbox = document.getElementById('_use_existing_cog_field');
-        var label = document.getElementById('_existing_cog_field_name_label');
-
-        label.style.display = checkbox.checked ? 'block' : 'none';
-
-        checkbox.addEventListener('change', function() {
-            label.style.display = checkbox.checked ? 'block' : 'none';
-        });
-    });
-</script>
