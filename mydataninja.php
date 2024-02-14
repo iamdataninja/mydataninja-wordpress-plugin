@@ -8,6 +8,23 @@ Tags: woocommerce, e-commerce, profit, profit tracking, sales, sales management,
 */
 
 require __DIR__ . '/vendor/autoload.php';
+require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+
+function show_woocommerce_dependency_error() {
+  if (!class_exists('WooCommerce')) {
+    ?>
+      <div class="error">
+          <p><?php _e('MyDataNinja WooCommerce Plugin has been deactivated because WooCommerce is not active.', 'mydataninja'); ?></p>
+      </div>
+    <?php
+  }
+}
+
+if (!class_exists('WooCommerce')) {
+  deactivate_plugins(plugin_basename(__FILE__));
+  add_action('admin_notices', 'show_woocommerce_dependency_error');
+  return;
+}
 
 include_once __DIR__ . '/src/Cost of Goods/AddCostOfGoodsField.php';
 include_once __DIR__ . '/src/Cost of Goods/AddCogAndProfitToOrders.php';
@@ -18,13 +35,13 @@ include_once __DIR__ . '/src/Interface/PluginInterface.php';
 $myDataNinjaConfig = include __DIR__ . '/config.php';
 
 function set_default_options_on_activation() {
-    if (get_option('_include_profits') === false) {
-        update_option('_include_profits', 'yes');
-    }
+  if (get_option('_include_profits') === false) {
+    update_option('_include_profits', 'yes');
+  }
 
-    if (get_option('_include_tracker') === false) {
-        update_option('_include_tracker', 'yes');
-    }
+  if (get_option('_include_tracker') === false) {
+    update_option('_include_tracker', 'yes');
+  }
 }
 
 register_activation_hook(__FILE__, 'set_default_options_on_activation');
