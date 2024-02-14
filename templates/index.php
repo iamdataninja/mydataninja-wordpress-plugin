@@ -30,6 +30,7 @@
                   <?php echo is_api_key_authorized() ? 'Authorized Successfully' : 'Authorize'; ?>
                 </button>
 
+              <?php if(is_api_key_authorized()): ?>
                 <div class="checkbox-container">
                     <div class="checkboxes">
                         <div class="checkbox-row">
@@ -78,6 +79,7 @@
 
                     <input type="submit" class="btn save-btn" style="font-size: 14px; width: 80%" value="Save Changes">
                 </div>
+            <?php endif; ?>
 
             </form>
         </div>
