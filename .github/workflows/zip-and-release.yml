@@ -20,7 +20,7 @@ jobs:
       - name: Fetch Contributors
         id: contributors
         run: |
-          CONTRIBUTORS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/contributors | jq -r '[.[] | "- ![.login](.avatar_url) .login"] | join("\n")')
+          CONTRIBUTORS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/contributors | jq -r '[.[] | ("- [" + .login + "](" + .html_url + ")\n\n![.login](" + .avatar_url + "&s=100)") ] | join("\n\n")')
           echo "::set-output name=list::$CONTRIBUTORS"
 
       - name: Create Release
