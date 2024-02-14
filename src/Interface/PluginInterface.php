@@ -1,15 +1,22 @@
 <?php
 
 function add_plugin_interface_menu() {
-    add_menu_page(
-        'MyDataNinja WooCommerce Plugin',
-        'MyDataNinja',
-        'manage_options',
-        'mydataninja-plugin',
-        'display_plugin_interface',
-        'dashicons-share-alt2',
-        56
-    );
+  add_menu_page(
+      'MyDataNinja WooCommerce Plugin',
+      'MyDataNinja',
+      'manage_options',
+      'mydataninja-plugin',
+      'display_plugin_interface',
+      plugins_url('../assets/icons/mydataninja.png', __DIR__),
+      56
+  );
+  echo '<style>
+        #toplevel_page_mydataninja-plugin img {
+            max-width: 21px;
+            max-height: 21px;
+            filter: grayscale(100%) brightness(200%);
+        }
+    </style>';
 }
 
 add_action('admin_menu', 'add_plugin_interface_menu');
