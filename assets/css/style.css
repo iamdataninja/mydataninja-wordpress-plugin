@@ -14,7 +14,7 @@
 }
 
 .mydataninja-logo img {
-    max-width: 180px;
+    max-width: 150px;
     height: auto;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .custom-interface {
-    max-width: 600px;
+    max-width: 450px;
     margin: 20px auto;
     padding: 20px;
     border: 1px solid #ddd;
@@ -52,18 +52,40 @@
     background-color: #3B82F6;
 }
 
+.checkbox-container {
+    border: 1px solid #D3D3D3;
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+}
+
 .checkboxes {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    margin: 10px 0px;
+    margin: 5px 0px;
 }
 
-.checkboxes label {
-    margin-top: 5px;
-    margin-right: 20px;
+.checkbox-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 7px 0;
+    width: 80%;
+}
+
+.checkbox-label {
+    text-align: left;
+    flex: 3;
+}
+
+.checkbox-input {
+    justify-content: flex-end;
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
 input[type="checkbox"] {
@@ -105,8 +127,4 @@ input[type="checkbox"]:checked::before {
     padding: 10px;
     margin-right: 10px;
     cursor: pointer;
-}
-
-.custom-interface input[type="text"] {
-    width: 250px;
 }

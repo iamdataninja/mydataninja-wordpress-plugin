@@ -30,40 +30,54 @@
                   <?php echo is_api_key_authorized() ? 'Authorized Successfully' : 'Authorize'; ?>
                 </button>
 
-                <div class="checkboxes">
-                    <label for="_include_profits">
-                        <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('_include_profits'), 'yes'); ?>>
-                        Include MyDataNinja "Cost of Goods" Field
-                    </label>
+                <div class="checkbox-container">
+                    <div class="checkboxes">
+                        <div class="checkbox-row">
+                            <div class="checkbox-label wide-label">
+                                <label for="_include_profits">Include MyDataNinja "Cost of Goods" Field</label>
+                            </div>
+                            <div class="checkbox-input narrow-input">
+                                <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('_include_profits'), 'yes'); ?>>
+                            </div>
+                        </div>
 
-                    <label for="_include_tracker">
-                        <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('_include_tracker'), 'yes'); ?>>
-                        Include Tracker on Website
-                    </label>
+                        <div class="checkbox-row">
+                            <div class="checkbox-label">
+                                <label for="_include_tracker">Include Tracker on Website</label>
+                            </div>
+                            <div class="checkbox-input">
+                                <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('_include_tracker'), 'yes'); ?>>
+                            </div>
+                        </div>
 
-                    <label for="_use_existing_cog_field">
-                        <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('_use_existing_cog_field'), 'yes'); ?>>
-                        Use Existing Cost of Goods Field
-                    </label>
+                        <div class="checkbox-row">
+                            <div class="checkbox-label">
+                                <label for="_use_existing_cog_field">Use Existing Cost of Goods Field</label>
+                            </div>
+                            <div class="checkbox-input">
+                                <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('_use_existing_cog_field'), 'yes'); ?>>
+                            </div>
+                        </div>
 
-                    <label for="_existing_cog_field_name" id="_existing_cog_field_name_label" style="display: none;">
-                        <select id="_existing_cog_field_name" name="_existing_cog_field_name">
-                          <?php
-                          if (!empty($meta_keys)) {
-                            foreach ($meta_keys as $key) {
-                              $pretty_name = pretty_field_name($key);
-                              $selected = selected($key, get_option('_existing_cog_field_name'), false);
-                              echo "<option value='$key' $selected>$pretty_name</option>";
-                            }
-                          } else {
-                            echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
-                          }
-                          ?>
-                        </select>
-                    </label>
+                        <div class="checkbox-row">
+                            <select id="_existing_cog_field_name" name="_existing_cog_field_name" style="width: 100%">
+                              <?php
+                              if (!empty($meta_keys)) {
+                                foreach ($meta_keys as $key) {
+                                  $pretty_name = pretty_field_name($key);
+                                  $selected = selected($key, get_option('_existing_cog_field_name'), false);
+                                  echo "<option value='$key' $selected>$pretty_name</option>";
+                                }
+                              } else {
+                                echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
+                              }
+                              ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="btn save-btn" style="font-size: 14px; width: 80%" value="Save Changes">
                 </div>
-
-                <input type="submit" class="btn save-btn" style="font-size: 12px;" value="Save Changes">
 
             </form>
         </div>
