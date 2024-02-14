@@ -1,7 +1,12 @@
 <?php
 
+global $cog_field_name;
+$cog_field_name = get_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
+
 function calculate_order_cost_of_goods($order_id)
 {
+  global $cog_field_name;
+
   $order = wc_get_order($order_id);
   $items = $order->get_items();
 
@@ -10,7 +15,7 @@ function calculate_order_cost_of_goods($order_id)
   foreach ($items as $item) {
     $product_id = $item->get_variation_id() ? $item->get_variation_id() : $item->get_product_id();
 
-    $cost_of_goods = get_post_meta($product_id, '_cost_of_goods', true);
+    $cost_of_goods = get_post_meta($product_id, $cog_field_name, true);
 
     $total_cost_of_goods += !empty($cost_of_goods) ? floatval($cost_of_goods) : 0;
   }
@@ -20,6 +25,8 @@ function calculate_order_cost_of_goods($order_id)
 
 function calculate_order_profit($order_id)
 {
+  global $cog_field_name;
+
   $order = wc_get_order($order_id);
   $items = $order->get_items();
 
@@ -28,7 +35,7 @@ function calculate_order_profit($order_id)
   foreach ($items as $item) {
     $product_id = $item->get_variation_id() ? $item->get_variation_id() : $item->get_product_id();
 
-    $cost_of_goods = get_post_meta($product_id, '_cost_of_goods', true);
+    $cost_of_goods = get_post_meta($product_id, $cog_field_name, true);
     $product = wc_get_product($product_id);
     $price = $product ? $product->get_price() : 0;
 

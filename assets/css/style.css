@@ -106,3 +106,7 @@ input[type="checkbox"]:checked::before {
     margin-right: 10px;
     cursor: pointer;
 }
+
+.custom-interface input[type="text"] {
+    width: 250px;
+}
