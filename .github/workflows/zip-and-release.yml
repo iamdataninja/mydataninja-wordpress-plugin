@@ -32,7 +32,7 @@ jobs:
           tag_name: mydataninja@v${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
           body: |
-            Contributors: ${{ steps.contribitors.outputs.list }}
+            Contributors: ${{ steps.contributors.outputs.list }}
           draft: false
           prerelease: false
 
