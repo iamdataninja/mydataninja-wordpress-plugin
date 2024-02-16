@@ -1,9 +1,13 @@
 <?php
-    function pretty_field_name($field_name) {
-      $pretty_name = str_replace('_', ' ', $field_name);
-      $pretty_name = ucwords($pretty_name);
-      return $pretty_name;
-    }
+
+$permalink_structure = get_option('permalink_structure');
+$is_plain_permalinks = empty($permalink_structure);
+
+function pretty_field_name($field_name) {
+  $pretty_name = str_replace('_', ' ', $field_name);
+  $pretty_name = ucwords($pretty_name);
+  return $pretty_name;
+}
 
     global $wpdb;
     $query = "

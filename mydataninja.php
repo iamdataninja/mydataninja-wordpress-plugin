@@ -11,7 +11,7 @@ require __DIR__ . '/vendor/autoload.php';
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
 function show_woocommerce_dependency_error() {
-  if (!class_exists('WooCommerce')) {
+  if (!is_plugin_active('woocommerce/woocommerce.php')) {
     ?>
       <div class="error">
           <p><?php _e('MyDataNinja WooCommerce Plugin has been deactivated because WooCommerce is not active.', 'mydataninja'); ?></p>
@@ -20,8 +20,8 @@ function show_woocommerce_dependency_error() {
   }
 }
 
-if (!class_exists('WooCommerce')) {
-  deactivate_plugins(plugin_basename(__FILE__));
+if (!is_plugin_active('woocommerce/woocommerce.php')) {
+  deactivate_plugins(plugin_basename('mydataninja/mydataninja.php'));
   add_action('admin_notices', 'show_woocommerce_dependency_error');
   return;
 }
