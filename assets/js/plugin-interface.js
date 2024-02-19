@@ -52,7 +52,7 @@ async function sendRequest(url) {
     const response = await fetch(url, {
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer mdj_5MCTgKsLIHpSmXSUbHgSub9zXbZX3RMd4xPEktd0EgHGeiOs9wGNQRHvb1fA'
+            'Authorization': 'Bearer ' + php_vars.accessToken,
         }
     });
     return await response.json();

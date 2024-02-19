@@ -62,6 +62,7 @@ function enqueue_custom_styles() {
 
   $orderStatistics = get_order_statistics();
   wp_localize_script('mydataninja-plugin-interface-script', 'php_vars', [
+    'accessToken' => get_option('mydataninja_access_token'),
     'currencySymbol' => get_woocommerce_currency_symbol(),
     'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
     'todayOrders' => $orderStatistics['today']['count'],
