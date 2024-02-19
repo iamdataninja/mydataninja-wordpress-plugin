@@ -79,7 +79,7 @@ async function fetchAndRenderData() {
             sendRequest(php_vars.apiBaseUrl + 'api/workspace/dashboard/data/totalSales')
         ]);
 
-        renderData(totals, totalsData, ['Revenue', 'Cost', 'ROI']);
+        renderData(totals, totalsData, ['Revenue', 'Spent', 'ROI']);
         renderGroupedNetworks(groupedNetworks, groupedNetworksData);
         renderData(totalSales, totalSalesData, ['Quantity', 'AOV']);
     } catch (error) {
@@ -88,7 +88,7 @@ async function fetchAndRenderData() {
 }
 
 function renderData(container, data, keys) {
-    container.innerHTML += createDiv('Total Profit', data.profit);
+    container.innerHTML += createDiv('Total Profit', data.profit ?? data.income);
     const dataDiv = document.createElement('div');
     dataDiv.style.display = 'flex';
     dataDiv.style.justifyContent = 'space-between';
