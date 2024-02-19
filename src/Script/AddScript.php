@@ -25,6 +25,8 @@ function create_attach_website_endpoint() {
     ));
 }
 
+add_action('rest_api_init', 'create_attach_website_endpoint');
+
 function check_user($consumer_secret_substr) {
     global $wpdb;
     $prefix = 'MyDataNinja - API';
@@ -39,7 +41,7 @@ function check_user($consumer_secret_substr) {
     if ($results) {
         foreach ($results as $row) {
             $consumer_secret = $row['consumer_secret'];
-            
+
             if(substr($consumer_secret, -7) == $consumer_secret_substr){
                 return True;
             }
@@ -49,7 +51,6 @@ function check_user($consumer_secret_substr) {
     return False;
 }
 
-add_action('rest_api_init', 'create_attach_website_endpoint');
 
 function add_ninja_script() {
     global $wp;

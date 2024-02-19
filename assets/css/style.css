@@ -26,6 +26,7 @@
 }
 
 .custom-interface {
+    min-width: 450px;
     max-width: 450px;
     margin: 20px auto;
     padding: 20px;
@@ -119,7 +120,7 @@ input[type="checkbox"]:checked::before {
 }
 
 .custom-interface p {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .authorize-btn,
@@ -127,4 +128,85 @@ input[type="checkbox"]:checked::before {
     padding: 10px;
     margin-right: 10px;
     cursor: pointer;
+}
+
+.tabs {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border-bottom: 1px solid #ddd;
+}
+
+.tab-link {
+    background-color: #f1f1f1;
+    color: #222;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.tab-link:hover {
+    background-color: #ddd;
+}
+
+.tab-link.current {
+    background-color: #ccc;
+}
+
+.tab-content {
+    display: none;
+    padding: 15px;
+    border-top: none;
+}
+
+.tab-content.current {
+    display: block;
+}
+
+.no-underline {
+    text-decoration: none;
+}
+
+.no-underline:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.warning-message {
+    color: #9F6000;
+    background-color: #FEEFB3;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.widget-container {
+    margin-top: 50px;
+}
+
+.widget {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px; /* Reduced from 20px */
+    border: 1px solid #D3D3D3;
+    border-radius: 10px;
+    margin-top: 10px; /* Reduced from 15px */
+    width: 100%;
+}
+
+.widget > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#sales, #groupedNetworks {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 10px;
 }

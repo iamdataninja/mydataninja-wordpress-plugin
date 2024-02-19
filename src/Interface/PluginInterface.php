@@ -47,7 +47,7 @@ function display_plugin_interface() {
 }
 
 function enqueue_custom_styles() {
-    global $myDataNinjaConfig;
+    global $myDataNinjaConfig, $myDataNinjaConfig;
 
     wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)));
     wp_enqueue_script('mydataninja-authorize-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], null, true);
@@ -59,6 +59,41 @@ function enqueue_custom_styles() {
         'name' => get_bloginfo('name'),
         'front_base_url' => $myDataNinjaConfig['FRONT_BASE_URL']
     ]);
+
+  $orderStatistics = get_order_statistics();
+  wp_localize_script('mydataninja-plugin-interface-script', 'php_vars', [
+    'currencySymbol' => get_woocommerce_currency_symbol(),
+    'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
+    'todayOrders' => $orderStatistics['today']['count'],
+    'todayAverage' => $orderStatistics['today']['average'],
+    'monthOrders' => $orderStatistics['month']['count'],
+    'monthAverage' => $orderStatistics['month']['average'],
+    'allTimeOrders' => $orderStatistics['allTime']['count'],
+    'allTimeAverage' => $orderStatistics['allTime']['average'],
+  ]);
 }
 
 add_action('admin_enqueue_scripts', 'enqueue_custom_styles');
+
+function get_order_statistics() {
+  $today = date('Y-m-d');
+  $firstDayOfMonth = date('Y-m-01');
+  $dateRanges = [
+    'today' => $today,
+    'month' => $firstDayOfMonth . '...' . $today,
+    'allTime' => ''
+  ];
+  $statistics = [];
+
+  foreach ($dateRanges as $period => $dateRange) {
+    $orders = wc_get_orders(['return' => 'ids', 'date_created' => $dateRange]);
+    $total = array_reduce($orders, function ($carry, $orderId) {
+      $order = wc_get_order($orderId);
+      return $carry + $order->get_total();
+    }, 0);
+    $average = count($orders) ? $total / count($orders) : 0;
+    $statistics[$period] = ['count' => count($orders), 'average' => $average];
+  }
+
+  return $statistics;
+}
