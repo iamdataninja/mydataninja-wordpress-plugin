@@ -1,6 +1,6 @@
 <?php
 /*
-Plugin Name: MyDataNinja WooCommerce Plugin
+Plugin Name: MyDataNinja WooCommerce
 Description: Effortlessly track and manage profits for your products.
 Version: 1.0
 Author: <a href="https://github.com/Afcyy">Vazha Aptsiauri</a> | <a href="https://mydataninja.com/">MyDataNinja</a>
