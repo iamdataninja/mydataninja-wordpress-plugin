@@ -74,9 +74,9 @@ async function fetchAndRenderData() {
         const totalSales = document.getElementById('totalSales');
 
         const [totalsData, groupedNetworksData, totalSalesData] = await Promise.all([
-            sendRequest(php_vars.apiBaseUrl + 'api/workspace/dashboard/data/totals'),
-            sendRequest(php_vars.apiBaseUrl + 'api/workspace/dashboard/data/grouped-network-reports'),
-            sendRequest(php_vars.apiBaseUrl + 'api/workspace/dashboard/data/totalSales')
+            sendRequest(php_vars.apiBaseUrl + '/api/workspace/dashboard/data/totals'),
+            sendRequest(php_vars.apiBaseUrl + '/api/workspace/dashboard/data/grouped-network-reports'),
+            sendRequest(php_vars.apiBaseUrl + '/api/workspace/dashboard/data/totalSales')
         ]);
 
         renderData(totals, totalsData, ['Revenue', 'Spent', 'ROI']);
