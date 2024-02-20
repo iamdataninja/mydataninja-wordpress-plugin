@@ -5,6 +5,8 @@ Description: One, Easy Solution to Create, Track and Optimize Digital Marketing 
 Version: 1.0
 Author: <a href="https://github.com/Afcyy">Vazha Aptsiauri</a> | <a href="https://mydataninja.com/">MyDataNinja</a>
 Tags: woocommerce, e-commerce, google ads, facebook ads, meta ads, ppc, digital advertising, sales, sales management, business analytics
+License: GPLv3
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
 require __DIR__ . '/vendor/autoload.php';
