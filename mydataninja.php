@@ -26,8 +26,8 @@ if (!is_plugin_active('woocommerce/woocommerce.php')) {
   return;
 }
 
-include_once __DIR__ . '/src/Cost of Goods/AddCostOfGoodsField.php';
-include_once __DIR__ . '/src/Cost of Goods/AddCogAndProfitToOrders.php';
+include_once __DIR__ . '/src/CostOfGoods/AddCostOfGoodsField.php';
+include_once __DIR__ . '/src/CostOfGoods/AddCogAndProfitToOrders.php';
 include_once __DIR__ . '/src/Script/AddScript.php';
 include_once __DIR__ . '/src/Script/SendLastEventId.php';
 include_once __DIR__ . '/src/Interface/PluginInterface.php';

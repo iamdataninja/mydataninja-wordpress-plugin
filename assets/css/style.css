@@ -26,10 +26,10 @@
 }
 
 .custom-interface {
-    min-width: 450px;
-    max-width: 450px;
+    min-width: 500px;
+    max-width: 500px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #f9f9f9;
@@ -156,7 +156,7 @@ input[type="checkbox"]:checked::before {
 
 .tab-content {
     display: none;
-    padding: 15px;
+    padding: 5px;
     border-top: none;
 }
 
