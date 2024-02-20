@@ -15,7 +15,7 @@ jobs:
 
       - name: Create Zip File
         run: |
-          zip -r mydataninja.zip .
+          zip -r mydataninja.zip . -x ".*" -x "__MACOSX"
 
       - name: Fetch Contributors
         id: contributors
