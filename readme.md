@@ -54,4 +54,4 @@ Please ensure your changes are well-documented and include relevant unit tests, 
 
 ## License
 
-This project is licensed under the MIT License. The full terms of the license can be found in the `LICENSE` file in the root directory of the project.
+This project is licensed under the GPLv2 License. The full terms of the license can be found in the `LICENSE` file in the root directory of the project.
