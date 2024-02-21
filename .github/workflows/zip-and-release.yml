@@ -23,6 +23,12 @@ jobs:
           CONTRIBUTORS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/contributors | jq -r '[.[] | ("- [" + .login + "](" + .html_url + ")\n\n![.login](" + .avatar_url + "&s=100)") ] | join("\n\n")')
           echo "::set-output name=list::$CONTRIBUTORS"
 
+      - name: Fetch Commit Messages
+        id: commits
+        run: |
+          COMMITS=$(git log --format="- %s" $(git describe --tags --abbrev=0)..HEAD)
+          echo "::set-output name=list::$COMMITS"
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -32,6 +38,9 @@ jobs:
           tag_name: mydataninja@v${{ github.run_number }}
           release_name: Release ${{ github.run_number }}
           body: |
+            ## Changes
+            ${{ steps.commits.outputs.list }}
+            
             ## Contributors
             ${{ steps.contributors.outputs.list }}
           draft: false
