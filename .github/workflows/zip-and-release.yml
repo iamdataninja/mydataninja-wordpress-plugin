@@ -49,7 +49,7 @@ jobs:
           body: |
             ## Changes
             ${{ steps.commits.outputs.list }}
-            
+
             ## Contributors
             ${{ steps.contributors.outputs.list }}
           draft: false
