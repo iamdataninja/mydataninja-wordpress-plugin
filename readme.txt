@@ -10,8 +10,6 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 Comprehensive tool that connects your WooCommerce store with the MyDataNinja Marketing Automation Platform.
 
-Testing
-
 == MyDataNinja WooCommerce Integration ==
 
 This project is a WordPress plugin that integrates the MyDataNinja Marketing Automation Platform with WooCommerce stores.
