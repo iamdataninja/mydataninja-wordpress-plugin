@@ -26,8 +26,8 @@ jobs:
       - name: Fetch Commit Messages
         id: commits
         run: |
-          LAST_RELEASE_DATE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/${{ github.repository }}/releases/latest | jq -r '.published_at')
-          COMMITS=$(git log --format="- %s" --since="$LAST_RELEASE_DATE")
+          LAST_TAG_HASH=$(git rev-list --tags --max-count=1)
+          COMMITS=$(git log --format="- %s" $LAST_TAG_HASH..HEAD)
           echo "::set-output name=list::$COMMITS"
 
       - name: Create Release
