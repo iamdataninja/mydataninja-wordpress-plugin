@@ -4,7 +4,7 @@ Plugin Name: MyDataNinja - Ad Performance Tracking, Order Reports, CRM, Analytic
 Description: One, Easy Solution to Create, Track and Optimize Digital Marketing Campaigns.
 Version: 1.0
 Author: <a href="https://github.com/Afcyy">Vazha Aptsiauri</a> | <a href="https://mydataninja.com/">MyDataNinja</a>
-Tags: woocommerce, e-commerce, google ads, facebook ads, meta ads, ppc, digital advertising, sales, sales management, business analytics
+Tags: woocommerce, e-commerce, google ads, facebook ads, meta ads, ppc, digital advertising, sales, sales management, business analytics, woocommerce, e-commerce, google ads, facebook ads, digital advertising
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
