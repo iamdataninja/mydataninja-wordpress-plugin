@@ -46,6 +46,10 @@ function display_plugin_interface() {
         }
 
         update_option('_include_profits', isset($_POST['_include_profits']) ? 'yes' : 'no');
+        if (isset($_POST['_include_profits'])) {
+          update_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
+        }
+
         update_option('_include_tracker', isset($_POST['_include_tracker']) ? 'yes' : 'no');
         update_option('_use_existing_cog_field', isset($_POST['_use_existing_cog_field']) ? 'yes' : 'no');
         update_option('_existing_cog_field_name', isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods');
