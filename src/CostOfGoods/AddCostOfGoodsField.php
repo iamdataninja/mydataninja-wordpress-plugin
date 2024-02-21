@@ -27,7 +27,7 @@ function add_cost_of_goods_field()
     ?>
       <script>
           jQuery(document).ready(function($) {
-              var costOfGoodsFieldWrapper = $('.' + <?php echo json_encode($cog_field_name); ?> + '_field');
+              var costOfGoodsFieldWrapper = $('.' + <?php echo wp_json_encode($cog_field_name); ?> + '_field');
               costOfGoodsFieldWrapper.append('<span class="description"><?php display_profit_field(); ?></span>');
           });
       </script>
