@@ -57,7 +57,7 @@ $meta_keys = $wpdb->get_col($query);
                     echo '<button class="btn authorize-btn" disabled>Authorized Successfully</button>';
                   } else {
                     if ($is_plain_permalinks) {
-                      echo '<a href="' . admin_url('options-permalink.php') . '" class="btn authorize-btn save-btn no-underline"">Adjust Permalink Settings</a>';
+                      echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="btn authorize-btn save-btn no-underline">Adjust Permalink Settings</a>';
                     } else {
                       echo '<button class="btn authorize-btn" onclick="authorize()">Authorize</button>';
                     }
@@ -101,8 +101,7 @@ $meta_keys = $wpdb->get_col($query);
                                       foreach ($meta_keys as $key) {
                                         $pretty_name = pretty_field_name($key);
                                         $selected = selected($key, get_option('_existing_cog_field_name'), false);
-                                        echo "<option value='$key' $selected>$pretty_name</option>";
-                                      }
+                                        echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($pretty_name) . '</option>';                                      }
                                     } else {
                                       echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
                                     }
