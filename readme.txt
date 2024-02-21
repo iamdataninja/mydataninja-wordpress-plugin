@@ -8,6 +8,8 @@ Stable tag: 1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
+TEST
+
 Comprehensive tool that connects your WooCommerce store with the MyDataNinja Marketing Automation Platform.
 
 == MyDataNinja WooCommerce Integration ==
