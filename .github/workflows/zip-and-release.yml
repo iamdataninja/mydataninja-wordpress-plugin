@@ -15,7 +15,7 @@ jobs:
 
       - name: Create Zip File
         run: |
-          zip -r mydataninja.zip . -x ".*" -x "__MACOSX"
+          zip -r mydataninja.zip . -x ".*" -x "__MACOSX" -x "src/.gitignore" -x "assets/.DS_Store"
 
       - name: Fetch Contributors
         id: contributors
