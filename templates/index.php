@@ -10,15 +10,15 @@ function pretty_field_name($field_name) {
 }
 
 global $wpdb;
-$query = "
-        SELECT DISTINCT($wpdb->postmeta.meta_key)
-        FROM $wpdb->posts
-        LEFT JOIN $wpdb->postmeta
-        ON $wpdb->posts.ID = $wpdb->postmeta.post_id
-        WHERE $wpdb->posts.post_type = 'product'
-        AND $wpdb->postmeta.meta_value REGEXP '^-?[0-9]+$' OR $wpdb->postmeta.meta_value REGEXP '^-?[0-9]*\.[0-9]+$'
-    ";
-$meta_keys = $wpdb->get_col($query);
+$meta_keys = $wpdb->get_col("
+    SELECT DISTINCT($wpdb->postmeta.meta_key)
+    FROM $wpdb->posts
+    LEFT JOIN $wpdb->postmeta
+    ON $wpdb->posts.ID = $wpdb->postmeta.post_id
+    WHERE $wpdb->posts.post_type = 'product'
+    AND $wpdb->postmeta.meta_value REGEXP '^-?[0-9]+$' OR $wpdb->postmeta.meta_value REGEXP '^-?[0-9]*\.[0-9]+$'
+");
+
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

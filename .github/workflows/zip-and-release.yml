@@ -38,10 +38,6 @@ jobs:
           COMMITS="${COMMITS//$'\n'/'%0A'}"
           echo "::set-output name=list::$COMMITS"
 
-      - name: Debug Commit Messages
-        run: |
-          echo "${{ steps.commits.outputs.list }}"
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -52,7 +48,7 @@ jobs:
           release_name: Release ${{ github.run_number }}
           body: |
             ## Changes
-            ${{ replace(steps.commits.outputs.list, '%0A', '<br>') }}
+            ${{ steps.commits.outputs.list }}
 
             ## Contributors
             ${{ steps.contributors.outputs.list }}

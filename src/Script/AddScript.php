@@ -34,14 +34,11 @@ function check_user($consumer_secret_substr) {
   $results = wp_cache_get('mydataninja_api_keys');
 
   if ($results === false) {
-    $query = $wpdb->prepare(
+    $results = $wpdb->get_results($wpdb->prepare(
       "SELECT consumer_key, consumer_secret FROM {$wpdb->prefix}woocommerce_api_keys WHERE description LIKE %s",
-      $prefix . '%'
-    );
+      sanitize_text_field($prefix) . '%'
+    ), ARRAY_A);
 
-    $results = $wpdb->get_results($query, ARRAY_A);
-
-    // Store results in cache for future use
     wp_cache_set('mydataninja_api_keys', $results);
   }
 
