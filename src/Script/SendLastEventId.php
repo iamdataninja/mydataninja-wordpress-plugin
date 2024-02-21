@@ -13,7 +13,7 @@ function send_last_event_id_to_server() {
                         data: {
                             action: 'save_last_event_id',
                             last_event_id: lastEventId,
-                            order_id: <?php echo json_encode(wc_get_order_id_by_order_key($_GET['key'])); ?>
+                            order_id: <?php echo wp_json_encode(wc_get_order_id_by_order_key($_GET['key'])); ?>
                         },
                     });
                 }
