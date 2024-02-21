@@ -59,18 +59,27 @@ function display_plugin_interface() {
 }
 
 function enqueue_custom_styles() {
-    global $myDataNinjaConfig, $myDataNinjaConfig;
+  global $myDataNinjaConfig;
 
-    wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)));
-    wp_enqueue_script('mydataninja-authorize-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], null, true);
-    wp_enqueue_script('mydataninja-plugin-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), [], null, true);
+  $style_path = plugin_dir_path(__DIR__) . 'assets/css/style.css';
+  $style_version = filemtime($style_path);
 
-    wp_localize_script('mydataninja-authorize-script', 'mydataninja_vars', [
-        'base_url' => home_url(),
-        'currency' => get_woocommerce_currency(),
-        'name' => get_bloginfo('name'),
-        'front_base_url' => $myDataNinjaConfig['FRONT_BASE_URL']
-    ]);
+  $authorize_script_path = plugin_dir_path(__DIR__) . 'assets/js/authorize.js';
+  $authorize_script_version = filemtime($authorize_script_path);
+
+  $plugin_interface_script_path = plugin_dir_path(__DIR__) . 'assets/js/plugin-interface.js';
+  $plugin_interface_script_version = filemtime($plugin_interface_script_path);
+
+  wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)), [], $style_version);
+  wp_enqueue_script('mydataninja-authorize-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], $authorize_script_version, true);
+  wp_enqueue_script('mydataninja-plugin-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), [], $plugin_interface_script_version, true);
+
+  wp_localize_script('mydataninja-authorize-script', 'mydataninja_vars', [
+    'base_url' => home_url(),
+    'currency' => get_woocommerce_currency(),
+    'name' => get_bloginfo('name'),
+    'front_base_url' => $myDataNinjaConfig['FRONT_BASE_URL']
+  ]);
 
   $orderStatistics = get_order_statistics();
   wp_localize_script('mydataninja-plugin-interface-script', 'php_vars', [
