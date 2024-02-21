@@ -52,7 +52,7 @@ jobs:
           release_name: Release ${{ github.run_number }}
           body: |
             ## Changes
-            ${{ steps.commits.outputs.list }}
+            ${{ replace(steps.commits.outputs.list, '%0A', '<br>') }}
 
             ## Contributors
             ${{ steps.contributors.outputs.list }}
