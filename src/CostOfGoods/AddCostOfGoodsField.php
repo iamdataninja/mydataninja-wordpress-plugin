@@ -24,6 +24,8 @@ function add_cost_of_goods_field()
       ],
     ]);
 
+    wp_nonce_field('save_cost_of_goods_nonce', 'cost_of_goods_nonce_field');
+
     ?>
       <script>
           jQuery(document).ready(function($) {
@@ -49,6 +51,8 @@ function add_cost_of_goods_field_to_variations($loop, $variation_data, $variatio
     'value' => get_post_meta($variation->ID, $cog_field_name, true),
     'wrapper_class' => 'form-row',
   ]);
+
+  wp_nonce_field('save_cost_of_goods_nonce', 'cost_of_goods_nonce_field');
 }
 
 add_action('woocommerce_variation_options_pricing', 'add_cost_of_goods_field_to_variations', 10, 3);
@@ -75,6 +79,14 @@ add_action('woocommerce_process_product_meta', 'save_cost_of_goods_field');
 function save_cost_of_goods_field_for_variations($variation_id, $i): void
 {
   global $cog_field_name;
+
+  if (!isset($_POST['cost_of_goods_nonce_field'])) {
+    return;
+  }
+
+  if (!wp_verify_nonce($_POST['cost_of_goods_nonce_field'], 'save_cost_of_goods_nonce')) {
+    return;
+  }
 
   $cost_of_goods = $_POST[$cog_field_name][$variation_id];
   if (isset($cost_of_goods)) {
