@@ -1,6 +1,14 @@
 <?php
 
 function send_last_event_id_to_server() {
+    if (!isset($_POST['mydataninja_nonce_field'])) {
+        return;
+    }
+
+    if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
+        return;
+    }
+
     if (is_wc_endpoint_url('order-received')) {
         ?>
         <script>
