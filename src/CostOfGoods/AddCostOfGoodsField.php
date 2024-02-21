@@ -57,6 +57,14 @@ function save_cost_of_goods_field($post_id)
 {
   global $cog_field_name;
 
+  if (!isset($_POST['cost_of_goods_nonce_field'])) {
+    return;
+  }
+
+  if (!wp_verify_nonce($_POST['cost_of_goods_nonce_field'], 'save_cost_of_goods_nonce')) {
+    return;
+  }
+
   $cost_of_goods = isset($_POST[$cog_field_name]) ? sanitize_text_field($_POST[$cog_field_name]) : '';
 
   update_post_meta($post_id, $cog_field_name, $cost_of_goods);
