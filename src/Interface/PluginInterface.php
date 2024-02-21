@@ -22,17 +22,23 @@ function add_plugin_interface_menu() {
 add_action('admin_menu', 'add_plugin_interface_menu');
 
 function is_api_key_authorized() {
-    global $wpdb;
-    $prefix = 'MyDataNinja - API';
+  global $wpdb;
+  $prefix = 'MyDataNinja - API';
 
+  $cache_key = 'mydataninja_api_key_count';
+  $result = wp_cache_get($cache_key);
+
+  if ($result === false) {
     $result = $wpdb->get_var(
-        $wpdb->prepare(
-            "SELECT COUNT(*) FROM {$wpdb->prefix}woocommerce_api_keys WHERE description LIKE %s",
-            $prefix . '%'
-        )
+      $wpdb->prepare(
+        "SELECT COUNT(*) FROM {$wpdb->prefix}woocommerce_api_keys WHERE description LIKE %s",
+        $prefix . '%'
+      )
     );
+    wp_cache_set($cache_key, $result);
+  }
 
-    return $result > 0;
+  return $result > 0;
 }
 
 function display_plugin_interface() {
