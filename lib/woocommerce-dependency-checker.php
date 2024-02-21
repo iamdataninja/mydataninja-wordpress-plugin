@@ -13,7 +13,7 @@ function check_woocommerce_dependency() {
 function show_woocommerce_dependency_error() {
   ?>
     <div class="error">
-        <p><?php _e('MyDataNinja WooCommerce Plugin has been deactivated because WooCommerce is not active.', 'mydataninja'); ?></p>
+        <p><?php esc_html_e('MyDataNinja WooCommerce Plugin has been deactivated because WooCommerce is not active.', 'mydataninja'); ?></p>
     </div>
   <?php
 }
