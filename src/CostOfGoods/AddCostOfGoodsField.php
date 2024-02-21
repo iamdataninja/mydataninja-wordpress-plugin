@@ -107,7 +107,13 @@ function display_profit_field()
     $profit_fixed = $product->get_price() - $cost_of_goods;
     $profit_percentage = ($profit_fixed / $cost_of_goods) * 100;
 
-    echo 'Profit is ' . wc_price($profit_fixed) . ' (' . number_format($profit_percentage, 2) . '%)';
+    $allowed_html = array(
+      'span' => array(
+        'class' => array(),
+      ),
+    );
+
+    echo wp_kses('Profit is ' . wc_price($profit_fixed) . ' (' . number_format($profit_percentage, 2) . '%)', $allowed_html);
   }
 }
 
