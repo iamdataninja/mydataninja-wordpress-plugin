@@ -77,8 +77,8 @@ function enqueue_custom_styles() {
 add_action('admin_enqueue_scripts', 'enqueue_custom_styles');
 
 function get_order_statistics() {
-  $today = date('Y-m-d');
-  $firstDayOfMonth = date('Y-m-01');
+  $today = gmdate('Y-m-d');
+  $firstDayOfMonth = gmdate('Y-m-01');
   $dateRanges = [
     'today' => $today,
     'month' => $firstDayOfMonth . '...' . $today,
