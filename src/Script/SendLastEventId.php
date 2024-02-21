@@ -30,6 +30,14 @@ function send_last_event_id_to_server() {
 add_action('wp_footer', 'send_last_event_id_to_server');
 
 function save_last_event_id_callback() {
+    if (!isset($_POST['mydataninja_nonce_field'])) {
+        return;
+    }
+
+    if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
+        return;
+    }
+
     $last_event_id = $_POST['last_event_id'];
     $order_id = $_POST['order_id'];
 
