@@ -28,29 +28,35 @@ function create_attach_website_endpoint() {
 add_action('rest_api_init', 'create_attach_website_endpoint');
 
 function check_user($consumer_secret_substr) {
-    global $wpdb;
-    $prefix = 'MyDataNinja - API';
+  global $wpdb;
+  $prefix = 'MyDataNinja - API';
 
+  $results = wp_cache_get('mydataninja_api_keys');
+
+  if ($results === false) {
     $query = $wpdb->prepare(
-        "SELECT consumer_key, consumer_secret FROM {$wpdb->prefix}woocommerce_api_keys WHERE description LIKE %s",
-        $prefix . '%'
+      "SELECT consumer_key, consumer_secret FROM {$wpdb->prefix}woocommerce_api_keys WHERE description LIKE %s",
+      $prefix . '%'
     );
 
     $results = $wpdb->get_results($query, ARRAY_A);
 
-    if ($results) {
-        foreach ($results as $row) {
-            $consumer_secret = $row['consumer_secret'];
+    // Store results in cache for future use
+    wp_cache_set('mydataninja_api_keys', $results);
+  }
 
-            if(substr($consumer_secret, -7) == $consumer_secret_substr){
-                return True;
-            }
-        }
+  if ($results) {
+    foreach ($results as $row) {
+      $consumer_secret = $row['consumer_secret'];
+
+      if(substr($consumer_secret, -7) == $consumer_secret_substr){
+        return True;
+      }
     }
+  }
 
-    return False;
+  return False;
 }
-
 
 function add_ninja_script() {
     global $wp;
