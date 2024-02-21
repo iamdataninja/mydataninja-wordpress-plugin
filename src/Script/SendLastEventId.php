@@ -16,7 +16,7 @@ function send_last_event_id_to_server() {
                 function sendLastEventIdToServer() {
                     var lastEventId = nj.getLastEventId();
                     $.ajax({
-                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                        url: '<?php echo esc_url(admin_url('admin-ajax.php')); ?>',
                         type: 'POST',
                         data: {
                             action: 'save_last_event_id',
