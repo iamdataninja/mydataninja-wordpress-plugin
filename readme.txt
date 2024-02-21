@@ -1,6 +1,6 @@
 === MyDataNinja - Ad Performance Tracking, Order Reports, CRM, Analytics, and Optimization Tools ===
 
-Tags: woocommerce, e-commerce, google ads, facebook ads, meta ads, ppc, digital advertising, sales, sales management, business analytics
+Tags: woocommerce, e-commerce, google ads, facebook ads, digital advertising
 Requires at least: 6.0
 Tested up to: 6.4
 Requires PHP: 7.4
