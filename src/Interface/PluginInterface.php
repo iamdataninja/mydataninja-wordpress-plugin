@@ -37,6 +37,14 @@ function is_api_key_authorized() {
 
 function display_plugin_interface() {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (!isset($_POST['mydataninja_nonce_field'])) {
+          return;
+        }
+
+        if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
+          return;
+        }
+
         update_option('_include_profits', isset($_POST['_include_profits']) ? 'yes' : 'no');
         update_option('_include_tracker', isset($_POST['_include_tracker']) ? 'yes' : 'no');
         update_option('_use_existing_cog_field', isset($_POST['_use_existing_cog_field']) ? 'yes' : 'no');

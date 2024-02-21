@@ -39,6 +39,7 @@ $meta_keys = $wpdb->get_col($query);
 
             <div id="tab-1" class="tab-content current">
                 <form method="post" action="">
+                  <?php wp_nonce_field('mydataninja_nonce', 'mydataninja_nonce_field'); ?>
                     <p>
                       <?php
                       if ($is_plain_permalinks && is_api_key_authorized()) {
