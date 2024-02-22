@@ -46,6 +46,30 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+    var tabLinks = document.querySelectorAll('.tab-link');
+    var tabContents = document.querySelectorAll('.tab-content');
+
+    tabLinks.forEach(function(tabLink) {
+        tabLink.addEventListener('click', function() {
+            var tabId = this.getAttribute('data-tab');
+
+            tabLinks.forEach(function(tabLink) {
+                tabLink.classList.remove('current');
+            });
+            tabContents.forEach(function(tabContent) {
+                tabContent.classList.remove('current');
+            });
+
+            this.classList.add('current');
+            document.getElementById(tabId).classList.add('current');
+
+            var newUrl = '/wp-admin/admin.php?page=' + (tabId === 'tab-1' ? 'mydataninja-settings' : 'mydataninja-reports');
+            window.history.pushState({}, '', newUrl);
+        });
+    });
+});
+
 async function sendRequest(url) {
     const response = await fetch(url, {
         method: 'GET',
