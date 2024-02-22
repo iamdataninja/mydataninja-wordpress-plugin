@@ -101,30 +101,6 @@
     align-items: center;
 }
 
-input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 16px;
-    height: 16px;
-    border-radius: 3px;
-    outline: none;
-}
-
-input[type="checkbox"]:checked {
-    background-color: #3B82F6; 
-    border-color: #3B82F6;
-}
-
-input[type="checkbox"]:checked::before {
-    content: '\2713'; 
-    display: block;
-    color: #fff; 
-    text-align: center;
-    line-height: 18px;
-    font-size: 14px;
-}
-
 .custom-interface {
     padding: 20px;
     border: 1px solid #ddd;

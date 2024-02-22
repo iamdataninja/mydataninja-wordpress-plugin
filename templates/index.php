@@ -96,7 +96,7 @@ $meta_keys = $wpdb->get_col("
                               </div>
 
                               <div class="checkbox-row">
-                                  <select id="_existing_cog_field_name" name="_existing_cog_field_name" style="width: 100%">
+                                  <select id="_existing_cog_field_name" name="_existing_cog_field_name" style="min-width: 100%">
                                     <?php
                                     if (!empty($meta_keys)) {
                                       foreach ($meta_keys as $key) {

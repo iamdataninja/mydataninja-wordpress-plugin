@@ -32,8 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (includeCogCheckbox.checked) {
             useExistingCogCheckbox.checked = false;
             selectField.style.display = 'none';
-        } else {
-            selectField.style.display = 'block';
         }
     });
 
