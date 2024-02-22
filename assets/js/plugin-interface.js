@@ -103,8 +103,7 @@ function renderGroupedNetworks(container, data) {
         const groupDiv = document.createElement('div');
         groupDiv.className = 'widget';
         container.appendChild(groupDiv);
-        const title = group.charAt(0).toUpperCase() + group.slice(1) + ' Total Profit';
-        groupDiv.innerHTML += `<h3>${title}</h3>`;
+        groupDiv.innerHTML += `<h3>${group.charAt(0).toUpperCase() + group.slice(1)}</h3>`;
         renderData(groupDiv, data.data[group], ['Income', 'Spent', 'ROI']);
     }
 }
