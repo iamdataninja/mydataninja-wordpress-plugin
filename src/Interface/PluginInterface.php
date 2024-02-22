@@ -11,6 +11,17 @@ function add_plugin_interface_menu() {
     56
   );
 
+  if (is_api_key_authorized()){
+    add_submenu_page(
+      'mydataninja-plugin',
+      'Reports',
+      'Reports',
+      'manage_options',
+      'mydataninja-reports',
+      'display_reports_interface'
+    );
+  }
+
   add_submenu_page(
     'mydataninja-plugin',
     'Settings',
@@ -18,16 +29,6 @@ function add_plugin_interface_menu() {
     'manage_options',
     'mydataninja-settings',
     'display_settings_interface'
-  );
-
-  // Add submenus
-  add_submenu_page(
-    'mydataninja-plugin',
-    'Reports',
-    'Reports',
-    'manage_options',
-    'mydataninja-reports',
-    'display_reports_interface'
   );
 
   remove_submenu_page('mydataninja-plugin', 'mydataninja-plugin');
@@ -42,6 +43,8 @@ function add_plugin_interface_menu() {
 }
 
 function display_reports_interface() {
+  saveOptions();
+
   $is_reports_page = true;
   $is_settings_page = false;
 
@@ -51,6 +54,8 @@ function display_reports_interface() {
 }
 
 function display_settings_interface() {
+  saveOptions();
+
   $is_reports_page = false;
   $is_settings_page = true;
 
@@ -82,24 +87,7 @@ function is_api_key_authorized() {
 }
 
 function display_plugin_interface() {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        if (!isset($_POST['mydataninja_nonce_field'])) {
-          return;
-        }
-
-        if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
-          return;
-        }
-
-        update_option('_include_profits', isset($_POST['_include_profits']) ? 'yes' : 'no');
-        if (isset($_POST['_include_profits'])) {
-          update_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
-        }
-
-        update_option('_include_tracker', isset($_POST['_include_tracker']) ? 'yes' : 'no');
-        update_option('_use_existing_cog_field', isset($_POST['_use_existing_cog_field']) ? 'yes' : 'no');
-        update_option('_existing_cog_field_name', isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods');
-    }
+    saveOptions();
 
     $current_page = $_GET['page'];
     $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-plugin';
@@ -108,6 +96,28 @@ function display_plugin_interface() {
     call_user_func(function() use ($is_reports_page, $is_settings_page) {
       include(plugin_dir_path(__DIR__) . '../templates/index.php');
     });
+}
+
+function saveOptions()
+{
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['mydataninja_nonce_field'])) {
+      return;
+    }
+
+    if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
+      return;
+    }
+
+    update_option('_include_profits', isset($_POST['_include_profits']) ? 'yes' : 'no');
+    if (isset($_POST['_include_profits'])) {
+      update_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
+    }
+
+    update_option('_include_tracker', isset($_POST['_include_tracker']) ? 'yes' : 'no');
+    update_option('_use_existing_cog_field', isset($_POST['_use_existing_cog_field']) ? 'yes' : 'no');
+    update_option('_existing_cog_field_name', isset($_POST['_use_existing_cog_field']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods');
+  }
 }
 
 function enqueue_custom_styles() {

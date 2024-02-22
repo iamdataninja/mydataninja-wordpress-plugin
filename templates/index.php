@@ -18,7 +18,6 @@ $meta_keys = $wpdb->get_col("
     WHERE $wpdb->posts.post_type = 'product'
     AND $wpdb->postmeta.meta_value REGEXP '^-?[0-9]+$' OR $wpdb->postmeta.meta_value REGEXP '^-?[0-9]*\.[0-9]+$'
 ");
-
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -30,10 +29,12 @@ $meta_keys = $wpdb->get_col("
     <div class="interface-container">
         <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
         <div class="custom-interface">
-            <ul class="tabs">
-                <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
-                <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
-            </ul>
+            <?php if (is_api_key_authorized()): ?>
+                <ul class="tabs">
+                    <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
+                    <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
+                </ul>
+            <?php endif; ?>
 
             <div id="tab-1" class="tab-content <?php echo $is_settings_page ? 'current' : ''; ?>">
                 <form method="post" action="">
