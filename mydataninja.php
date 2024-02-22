@@ -18,6 +18,7 @@ if (!check_woocommerce_dependency()) {
 }
 
 require_once __DIR__ . '/lib/default-options-setter.php';
+set_default_options_on_activation(__FILE__);
 require_once __DIR__ . '/includes.php';
 
 $myDataNinjaConfig = include __DIR__ . '/config.php';
