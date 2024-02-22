@@ -84,6 +84,8 @@ async function fetchAndRenderData() {
         renderData(totalSales, totalSalesData, ['Quantity', 'AOV']);
     } catch (error) {
         console.error('Error:', error);
+        const widgetContainer = document.querySelector('.widget-container');
+        widgetContainer.innerHTML = "<p>Currently, we are unable to retrieve MyDataNinja Widgets.</p>";
     }
 }
 
