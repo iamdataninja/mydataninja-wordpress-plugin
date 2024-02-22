@@ -30,14 +30,12 @@ $meta_keys = $wpdb->get_col("
     <div class="interface-container">
         <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
         <div class="custom-interface">
-          <?php if(is_api_key_authorized()): ?>
-              <ul class="tabs">
-                  <li class="tab-link current" data-tab="tab-1">Settings</li>
-                  <li class="tab-link" data-tab="tab-2">Reports</li>
-              </ul>
-          <?php endif; ?>
+            <ul class="tabs">
+                <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
+                <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
+            </ul>
 
-            <div id="tab-1" class="tab-content current">
+            <div id="tab-1" class="tab-content <?php echo $is_settings_page ? 'current' : ''; ?>">
                 <form method="post" action="">
                   <?php wp_nonce_field('mydataninja_nonce', 'mydataninja_nonce_field'); ?>
                     <p>
@@ -120,7 +118,7 @@ $meta_keys = $wpdb->get_col("
                 </form>
             </div>
 
-            <div id="tab-2" class="tab-content">
+            <div id="tab-2" class="tab-content <?php echo $is_reports_page ? 'current' : ''; ?>">
                 <h2>Order Reports</h2>
 
                 <canvas id="ordersChart"></canvas>

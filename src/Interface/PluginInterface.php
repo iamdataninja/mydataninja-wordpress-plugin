@@ -2,14 +2,36 @@
 
 function add_plugin_interface_menu() {
   add_menu_page(
-      'MyDataNinja WooCommerce Plugin',
-      'MyDataNinja',
-      'manage_options',
-      'mydataninja-plugin',
-      'display_plugin_interface',
-      plugins_url('../assets/icons/mydataninja.png', __DIR__),
-      56
+    'MyDataNinja WooCommerce Plugin',
+    'MyDataNinja',
+    'manage_options',
+    'mydataninja-plugin',
+    'display_plugin_interface',
+    plugins_url('../assets/icons/mydataninja.png', __DIR__),
+    56
   );
+
+  add_submenu_page(
+    'mydataninja-plugin',
+    'Settings',
+    'Settings',
+    'manage_options',
+    'mydataninja-settings',
+    'display_settings_interface'
+  );
+
+  // Add submenus
+  add_submenu_page(
+    'mydataninja-plugin',
+    'Reports',
+    'Reports',
+    'manage_options',
+    'mydataninja-reports',
+    'display_reports_interface'
+  );
+
+  remove_submenu_page('mydataninja-plugin', 'mydataninja-plugin');
+
   echo '<style>
         #toplevel_page_mydataninja-plugin img {
             max-width: 21px;
@@ -17,6 +39,24 @@ function add_plugin_interface_menu() {
             filter: grayscale(100%) brightness(200%);
         }
     </style>';
+}
+
+function display_reports_interface() {
+  $is_reports_page = true;
+  $is_settings_page = false;
+
+  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+  });
+}
+
+function display_settings_interface() {
+  $is_reports_page = false;
+  $is_settings_page = true;
+
+  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+  });
 }
 
 add_action('admin_menu', 'add_plugin_interface_menu');
@@ -61,7 +101,13 @@ function display_plugin_interface() {
         update_option('_existing_cog_field_name', isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods');
     }
 
-    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+    $current_page = $_GET['page'];
+    $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-plugin';
+    $is_settings_page = $current_page === 'mydataninja-settings';
+
+    call_user_func(function() use ($is_reports_page, $is_settings_page) {
+      include(plugin_dir_path(__DIR__) . '../templates/index.php');
+    });
 }
 
 function enqueue_custom_styles() {
