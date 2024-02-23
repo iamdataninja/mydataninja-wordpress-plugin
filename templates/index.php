@@ -47,7 +47,7 @@ $meta_keys = $wpdb->get_col("
                       } elseif ($is_plain_permalinks) {
                         echo 'To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.';
                       } else {
-                        echo 'Click "Authorize" to seamlessly link your store with <a href="https://mydataninja.com/">MyDataNinja.</a> Unlock valuable insights into your order profitability, effortlessly monitor user behavior, enhance their experience, and optimize your orders and ads with precision.';
+                        echo 'Click "Authorize" to seamlessly link your store with <a href="https://mydataninja.com/" style="color: #FF4E00!important;">MyDataNinja.</a> Unlock valuable insights into your order profitability, effortlessly monitor user behavior, enhance their experience, and optimize your orders and ads with precision.';
                       }
                       ?>
                     </p>
@@ -55,14 +55,11 @@ $meta_keys = $wpdb->get_col("
                   <?php
                   if (is_api_key_authorized() && !$is_plain_permalinks) {
                     echo '<button class="btn authorize-btn" disabled>Authorized Successfully</button>';
-                  } else {
+                    echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn authorize-btn">Open MyDataNinja</a>';                  } else {
                     if ($is_plain_permalinks) {
                       echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="btn authorize-btn save-btn no-underline">Adjust Permalink Settings</a>';
                     } else {
-                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . get_bloginfo('name') . '&currency=' . get_woocommerce_currency() . '&base_url=' . home_url() . '" class="btn authorize-btn" style="
-                                text-decoration: none;
-                                color: white!important;
-                            ">Authorize</a>';
+                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . get_bloginfo('name') . '&currency=' . get_woocommerce_currency() . '&base_url=' . home_url() . '" class="btn authorize-btn">Authorize</a>';
                     }
                   }
                   ?>
