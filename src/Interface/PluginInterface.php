@@ -127,13 +127,6 @@ function enqueue_custom_styles() {
   wp_enqueue_script('mydataninja-authorize-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION'], true);
   wp_enqueue_script('mydataninja-plugin-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION'], true);
 
-  wp_localize_script('mydataninja-authorize-script', 'mydataninja_vars', [
-    'base_url' => home_url(),
-    'currency' => get_woocommerce_currency(),
-    'name' => get_bloginfo('name'),
-    'front_base_url' => $myDataNinjaConfig['FRONT_BASE_URL']
-  ]);
-
   $orderStatistics = get_order_statistics();
   wp_localize_script('mydataninja-plugin-interface-script', 'php_vars', [
     'accessToken' => get_option('mydataninja_access_token'),
