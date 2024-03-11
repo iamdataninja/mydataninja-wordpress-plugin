@@ -20,7 +20,7 @@ $meta_keys = $wpdb->get_col("
     AND $wpdb->postmeta.meta_value REGEXP '^-?[0-9]+$' OR $wpdb->postmeta.meta_value REGEXP '^-?[0-9]*\.[0-9]+$'
 ");
 ?>
-
+<script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="wrap">
@@ -28,7 +28,7 @@ $meta_keys = $wpdb->get_col("
         <img src="https://mydataninja.com/wp-content/uploads/2023/07/logo.png" alt="MyDataNinja Logo">
     </div>
     <div class="interface-container">
-        <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
+        <h1 class='title'>Welcome to MyDataNinja WooCommerce Plugin</h1>
         <div class="custom-interface">
             <?php if (is_api_key_authorized()): ?>
                 <ul class="tabs">
@@ -45,17 +45,18 @@ $meta_keys = $wpdb->get_col("
                       if ($is_plain_permalinks && is_api_key_authorized()) {
                         echo '<div class="warning-message">In order to ensure optimal functionality of the plugin, we kindly request you to refrain from using the "plain" option.</div>';
                       } elseif ($is_plain_permalinks) {
-                        echo 'To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.';
+                        echo '<p class="text-base">To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.</p>';
                       } else {
-                        echo 'Click "Authorize" to seamlessly link your store with <a href="https://mydataninja.com/" style="color: #FF4E00!important;">MyDataNinja.</a> Unlock valuable insights into your order profitability, effortlessly monitor user behavior, enhance their experience, and optimize your orders and ads with precision.';
+                        echo '<p class="text-base">Click "Authorize" to seamlessly link your store with <a href="https://mydataninja.com/" style="color: #FF4E00!important;" class="font-bold">MyDataNinja.</a> Unlock valuable insights into your order profitability, effortlessly monitor user behavior, enhance their experience, and optimize your orders and ads with precision.</p>';
                       }
                       ?>
                     </p>
 
                   <?php
                   if (is_api_key_authorized() && !$is_plain_permalinks) {
-                    echo '<button class="btn authorize-btn" disabled>Authorized Successfully</button>';
-                    echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn authorize-btn">Open MyDataNinja</a>';                  } else {
+                    echo '<a class="btn authorize-btn" disabled>Authorized Successfully</a>';
+                    echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn authorize-btn">Open MyDataNinja</a>';                
+                    } else {
                     if ($is_plain_permalinks) {
                       echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="btn authorize-btn save-btn no-underline">Adjust Permalink Settings</a>';
                     } else {
@@ -113,7 +114,7 @@ $meta_keys = $wpdb->get_col("
                               </div>
                           </div>
 
-                          <input type="submit" class="btn save-btn" style="font-size: 14px; width: 80%" value="Save Changes">
+                          <input type="submit" class="save-btn" value="Save Changes">
                       </div>
                   <?php endif; ?>
 

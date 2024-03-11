@@ -1,16 +1,38 @@
-.wrap {
-    color: #333;
+@font-face {
+    font-family: FiraGoRegular;
+    src: url(../fonts/FiraGO-Regular.ttf);
+  }
+
+@font-face {
+    font-family: sfRegular;
+    src: url(../fonts/sf-pro-display-regular.woff);
+}
+.title{
+    font-family: sfRegular !important;
+    font-weight: 600 !important;
 }
 
-.mydataninja a {
+.wrap {
+    color: #333; 
+    font-family: sfRegular !important;
+}
+
+a {
     text-decoration: none;
-    color: white!important;
+    color: white!important; 
+    font-family: FiraGoRegular !important;
 }
 
 .authorize-btn[disabled] {
-    background-color: rgb(22 163 74);
-    opacity: 0.8;
     cursor: not-allowed;
+    font-size: 14px;
+    font-family: sfRegular !important;
+    background: #d7d7d7;
+    color: #939393 !important;
+}
+.authorize-btn[disabled]:hover {
+    background: #d7d7d7;
+    color: #939393 !important;
 }
 
 .mydataninja-logo {
@@ -19,6 +41,7 @@
 }
 
 .mydataninja-logo img {
+    margin: auto;
     max-width: 150px;
     height: auto;
 }
@@ -48,21 +71,42 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin: 0px 5px;
 }
 
 .authorize-btn {
     background-color: #FF4E00;
+    border-radius: 8px;
+    margin-top: 10px;
+    font-size: 14px;
 }
-
+.authorize-btn:hover {
+    background-color: #ff4e00bf;
+    transition: background-color 0.2s ease;
+}
+a:focus{
+    box-shadow: none;
+}
 .save-btn {
+    border: 1px solid #3B82F6;
+    color: #3B82F6 !important;
+    background-color: white;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    margin: auto;
+}
+.save-btn:hover {
     background-color: #3B82F6;
+    transition: background-color 0.3s ease;
+    color: white !important;
 }
 
 .checkbox-container {
     border: 1px solid #D3D3D3;
     margin-top: 15px;
     padding: 15px;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -99,6 +143,11 @@
     flex: 10;
 }
 
+label{
+    font-weight: 600;
+    font-size: 14px;
+}
+
 .checkbox-input {
     justify-content: flex-end;
     flex: 1;
@@ -119,7 +168,6 @@
 .authorize-btn,
 .install-btn {
     padding: 10px;
-    margin-right: 10px;
     cursor: pointer;
 }
 
@@ -167,11 +215,13 @@
 }
 
 .warning-message {
-    color: #9F6000;
-    background-color: #FEEFB3;
+    font-family: sfRegular;
+    background-color: #FEF4E4;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     margin: 10px 0;
+    border: 1px solid #FFBB02;
+    font-size: 12px;
 }
 
 .widget-container {
@@ -185,7 +235,7 @@
     justify-content: center;
     padding: 10px;
     border: 1px solid #D3D3D3;
-    border-radius: 10px;
+    border-radius: 8px;
     margin-top: 10px;
     width: 100%;
 }
@@ -202,4 +252,42 @@
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 10px;
+}
+
+input[type=checkbox]{
+    border: 2px solid #B4B4B4 !important
+
+}
+
+input[type=checkbox]:checked::before{
+    content: '\2713';
+    display: flex;
+    align-items: center;
+    margin: auto;
+    height: 100%;
+    color: #FF4E00;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+input[type=checkbox]:focus{
+border:none;
+box-shadow: none
+}
+
+.checkbox-input input[type="checkbox"]:checked {
+    border: 2px solid #FF4E00 !important;
+}
+
+select {
+    padding: 8px !important;
+    border-radius: 10px !important;
+    font-size: 12px !important;
+    font-family: sfRegular !important;
+    font-weight: 600 !important;
+    border: 1px solid #b0b0b0 !important;
+}
+
+select:hover{
+    color: #222 !important;
 }
