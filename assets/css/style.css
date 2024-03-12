@@ -238,13 +238,34 @@ label{
     border-radius: 8px;
     margin-top: 10px;
     width: 100%;
+    gap: 10px;
+    background:linear-gradient(123.14deg, rgb(255, 78, 0) 4.05%, rgb(255, 157, 0) 91.29%);
+    color: white;
+    font-family: sfRegular !important;
 }
 
 .widget > div {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    width: 100%;
+}
+
+.widget-cont {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 30px;
+    padding: 15px 20px;
+    gap: 10px;
+    width: 100%;
+}
+
+.widget-cont > h1 {
+    font-size: 14px !important;
 }
 
 #sales, #groupedNetworks {

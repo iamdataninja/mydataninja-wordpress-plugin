@@ -82,9 +82,9 @@ async function sendRequest(url) {
 
 function createDiv(title, value) {
     return `
-    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+    <div class='widget-cont'>
         <h4 style="font-size: 0.875rem; text-align: center; margin-bottom: 0;">${title}</h4>
-        <h1 style="font-size: 1.125rem; margin-top: 0;">$${value ?? 0}</h1>
+        <h1 style="font-size: 24px; color: white;  padding: 4px 0px ">$${value ?? 0}</h1>
     </div>
 `;
 }
@@ -107,7 +107,7 @@ async function fetchAndRenderData() {
     } catch (error) {
         console.error('Error:', error);
         const widgetContainer = document.querySelector('.widget-container');
-        widgetContainer.innerHTML = "<p>Currently, we are unable to retrieve MyDataNinja Widgets.</p>";
+        widgetContainer.innerHTML = "<p class='warning-message'>Currently, we are unable to retrieve MyDataNinja Widgets.</p>";
     }
 }
 
