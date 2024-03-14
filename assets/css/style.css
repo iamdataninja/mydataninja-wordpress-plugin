@@ -17,7 +17,7 @@
     font-family: sfRegular !important;
 }
 
-a {
+.wrap a {
     text-decoration: none;
     color: white!important; 
     font-family: FiraGoRegular !important;
