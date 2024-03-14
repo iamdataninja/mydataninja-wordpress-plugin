@@ -1,61 +1,5 @@
 <?php
 
-function send_last_event_id_to_server() {
-    if (!isset($_POST['mydataninja_nonce_field'])) {
-        return;
-    }
-
-    if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
-        return;
-    }
-
-    if (is_wc_endpoint_url('order-received')) {
-        ?>
-        <script>
-            jQuery(document).ready(function($) {
-                function sendLastEventIdToServer() {
-                    var lastEventId = nj.getLastEventId();
-                    $.ajax({
-                        url: '<?php echo esc_url(admin_url('admin-ajax.php')); ?>',
-                        type: 'POST',
-                        data: {
-                            action: 'save_last_event_id',
-                            last_event_id: lastEventId,
-                            order_id: <?php echo wp_json_encode(wc_get_order_id_by_order_key($_GET['key'])); ?>
-                        },
-                    });
-                }
-
-                nj.push(['on', 'onEventIdUpdated', function(e) {
-                    sendLastEventIdToServer();
-                }]);
-            });
-        </script>
-        <?php
-    }
-}
-
-add_action('wp_footer', 'send_last_event_id_to_server');
-
-function save_last_event_id_callback() {
-    if (!isset($_POST['mydataninja_nonce_field'])) {
-        return;
-    }
-
-    if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
-        return;
-    }
-
-    $last_event_id = $_POST['last_event_id'];
-    $order_id = $_POST['order_id'];
-
-    update_post_meta($order_id, 'event_id', $last_event_id);
-
-    wp_die();
-}
-
-add_action('wp_ajax_save_last_event_id', 'save_last_event_id_callback');
-
 function modify_order_payload_before_webhook($payload, $resource, $resource_id, $webhook_id) {
     if ($resource === 'order') {
         $order = wc_get_order($resource_id);
@@ -86,3 +30,13 @@ function add_event_id_to_order_object($response, $object, $request) {
 }
 
 add_filter('woocommerce_rest_prepare_shop_order_object', 'add_event_id_to_order_object', 10, 3);
+
+function add_njeventid_to_order( $order_id ) {
+  $njeventid = isset($_COOKIE['njeventid']) ? $_COOKIE['njeventid'] : null;
+  
+  if(!$njeventid) return;
+  
+  update_post_meta($order_id, 'event_id', $njeventid);
+}
+
+add_action('woocommerce_checkout_order_processed', 'add_njeventid_to_order', 10, 1);
