@@ -23,7 +23,7 @@ $meta_keys = $wpdb->get_col("
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class="wrap">
+<div class="mydataninja wrap">
     <div class="mydataninja-logo">
         <img src="https://mydataninja.com/wp-content/uploads/2023/07/logo.png" alt="MyDataNinja Logo">
     </div>
@@ -111,6 +111,12 @@ $meta_keys = $wpdb->get_col("
                                     }
                                     ?>
                                   </select>
+                              </div>
+
+                              <div class="checkbox-row" style="flex-direction: column; text-align: left">
+                                <label for="_default_profit_margin" style="width: 100%;">Default Profit Margin (%)</label>
+                                <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
+                                <p>This will be used if a product doesn't have a cost of goods (COG) defined or if the user opts out of that option.</p>
                               </div>
                           </div>
 
