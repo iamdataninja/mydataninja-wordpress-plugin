@@ -21,7 +21,7 @@ $meta_keys = $wpdb->get_col("
 ");
 ?>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="<?php echo plugins_url('/assets/js/chart.js', __DIR__); ?>"></script>
 
 <div class="mydataninja wrap">
     <div class="mydataninja-logo">
