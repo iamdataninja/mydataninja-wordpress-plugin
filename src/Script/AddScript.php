@@ -64,15 +64,17 @@ function mdnj_add_ninja_script() {
     $include_tracker = get_option('mdnj_include_tracker', 'yes');
     $website_id = get_option('dataninja_website_id');
 
-    if ($include_tracker === 'yes') {
-        ?>
-        <script type="text/javascript" data-website="<?php echo esc_attr($website_id); ?>" src="https://static.mydataninja.com/ninja.js" async defer></script>
-        <script type="text/javascript">
-            var nj = window.nj || [];            
-            nj.push(["init", {}]);
-        </script>
-        <?php
-    }
+      if ($include_tracker === 'yes') {
+        wp_enqueue_script('mydataninja-tracker-script', plugins_url('assets/js/tracker.js', plugin_dir_path(__DIR__)), [], false, true);
+
+        wp_enqueue_script('mydataninja-external-script', 'https://static.mydataninja.com/ninja.js', ['mydataninja-tracker-script'], false, true);
+        add_filter('script_loader_tag', function($tag, $handle) use ($website_id) {
+          if ($handle !== 'mydataninja-external-script') {
+            return $tag;
+          }
+          return str_replace('<script', '<script data-website="' . esc_attr($website_id) . '"', $tag);
+        }, 10, 2);
+      }
 }
 
 add_action('wp_footer', 'mdnj_add_ninja_script');
