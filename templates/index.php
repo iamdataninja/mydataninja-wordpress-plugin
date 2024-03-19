@@ -30,7 +30,7 @@ $meta_keys = $wpdb->get_col("
     <div class="interface-container">
         <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
         <div class="custom-interface">
-            <?php if (is_api_key_authorized()): ?>
+            <?php if (mdnj_is_api_key_authorized()): ?>
                 <ul class="tabs">
                     <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
                     <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
@@ -42,7 +42,7 @@ $meta_keys = $wpdb->get_col("
                   <?php wp_nonce_field('mydataninja_nonce', 'mydataninja_nonce_field'); ?>
                     <p>
                       <?php
-                      if ($is_plain_permalinks && is_api_key_authorized()) {
+                      if ($is_plain_permalinks && mdnj_is_api_key_authorized()) {
                         echo '<div class="warning-message">In order to ensure optimal functionality of the plugin, we kindly request you to refrain from using the "plain" option.</div>';
                       } elseif ($is_plain_permalinks) {
                         echo 'To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.';
@@ -53,7 +53,7 @@ $meta_keys = $wpdb->get_col("
                     </p>
 
                   <?php
-                  if (is_api_key_authorized() && !$is_plain_permalinks) {
+                  if (mdnj_is_api_key_authorized() && !$is_plain_permalinks) {
                     echo '<button class="btn authorize-btn" disabled>Authorized Successfully</button>';
                     echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn authorize-btn">Open MyDataNinja</a>';                  } else {
                     if ($is_plain_permalinks) {
@@ -64,7 +64,7 @@ $meta_keys = $wpdb->get_col("
                   }
                   ?>
 
-                  <?php if(is_api_key_authorized()): ?>
+                  <?php if(mdnj_is_api_key_authorized()): ?>
                       <div class="checkbox-container">
                           <div class="checkboxes">
                               <div class="checkbox-row">
