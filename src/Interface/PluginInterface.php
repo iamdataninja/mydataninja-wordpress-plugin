@@ -136,8 +136,8 @@ function mdnj_enqueue_custom_styles() {
   global $myDataNinjaConfig;
 
   wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION']);
-  wp_enqueue_script('mydataninja-authorize-script', plugins_url('assets/js/authorize.js', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION'], true);
-  wp_enqueue_script('mydataninja-plugin-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION'], true);
+  wp_enqueue_script('mydataninja-chart-script', plugins_url('assets/js/chart.js', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION'], true);
+  wp_enqueue_script('mydataninja-plugin-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), ['mydataninja-chart-script'], $myDataNinjaConfig['VERSION'], true);
 
   $orderStatistics = mdnj_get_order_statistics();
   wp_localize_script('mydataninja-plugin-interface-script', 'php_vars', [
@@ -152,6 +152,8 @@ function mdnj_enqueue_custom_styles() {
     'allTimeAverage' => $orderStatistics['allTime']['average'],
   ]);
 }
+
+add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 
 add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 

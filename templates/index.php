@@ -23,8 +23,6 @@ $meta_keys = $wpdb->get_col("
 ");
 ?>
 
-<script src="<?php echo plugins_url('/assets/js/chart.js', __DIR__); ?>"></script>
-
 <div class="mydataninja wrap">
     <div class="mydataninja-logo">
         <img src="<?php echo plugins_url('/assets/icons/mydataninja.png', __DIR__) ?>" alt="MyDataNinja Logo">
