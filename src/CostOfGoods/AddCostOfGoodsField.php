@@ -3,7 +3,7 @@
 global $cog_field_name;
 $cog_field_name = get_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
 
-function add_cost_of_goods_field()
+function mdnj_add_cost_of_goods_field()
 {
   global $woocommerce, $post, $cog_field_name;
 
@@ -30,16 +30,16 @@ function add_cost_of_goods_field()
       <script>
           jQuery(document).ready(function($) {
               var costOfGoodsFieldWrapper = $('.' + <?php echo wp_json_encode($cog_field_name); ?> + '_field');
-              costOfGoodsFieldWrapper.append('<span class="description"><?php display_profit_field(); ?></span>');
+              costOfGoodsFieldWrapper.append('<span class="description"><?php mdnj_display_profit_field(); ?></span>');
           });
       </script>
     <?php
   }
 }
 
-add_action('woocommerce_product_options_pricing', 'add_cost_of_goods_field');
+add_action('woocommerce_product_options_pricing', 'mdnj_add_cost_of_goods_field');
 
-function add_cost_of_goods_field_to_variations($loop, $variation_data, $variation)
+function mdnj_add_cost_of_goods_field_to_variations($loop, $variation_data, $variation)
 {
   global $cog_field_name;
 
@@ -55,9 +55,9 @@ function add_cost_of_goods_field_to_variations($loop, $variation_data, $variatio
   wp_nonce_field('save_cost_of_goods_nonce', 'cost_of_goods_nonce_field');
 }
 
-add_action('woocommerce_variation_options_pricing', 'add_cost_of_goods_field_to_variations', 10, 3);
+add_action('woocommerce_variation_options_pricing', 'mdnj_add_cost_of_goods_field_to_variations', 10, 3);
 
-function save_cost_of_goods_field($post_id)
+function mdnj_save_cost_of_goods_field($post_id)
 {
   global $cog_field_name;
 
@@ -76,9 +76,9 @@ function save_cost_of_goods_field($post_id)
   update_post_meta($post_id, $cog_field_name, $cost_of_goods);
 }
 
-add_action('woocommerce_process_product_meta', 'save_cost_of_goods_field');
+add_action('woocommerce_process_product_meta', 'mdnj_save_cost_of_goods_field');
 
-function save_cost_of_goods_field_for_variations($variation_id, $i): void
+function mdnj_save_cost_of_goods_field_for_variations($variation_id, $i): void
 {
   global $cog_field_name;
 
@@ -98,9 +98,9 @@ function save_cost_of_goods_field_for_variations($variation_id, $i): void
   }
 }
 
-add_action('woocommerce_save_product_variation', 'save_cost_of_goods_field_for_variations', 10, 2);
+add_action('woocommerce_save_product_variation', 'mdnj_save_cost_of_goods_field_for_variations', 10, 2);
 
-function display_profit_field()
+function mdnj_display_profit_field()
 {
   global $post, $cog_field_name;
 
@@ -121,4 +121,4 @@ function display_profit_field()
   }
 }
 
-add_action('woocommerce_product_after_variable_attributes', 'display_profit_field');
+add_action('woocommerce_product_after_variable_attributes', 'mdnj_display_profit_field');
