@@ -12,14 +12,14 @@ function mdnj_add_cost_of_goods_field()
   $include_profits = get_option('mdnj_include_profits', 'yes');
   if ($include_profits === 'yes') {
 
-    $label = __('Cost of Goods', 'mydataninja-woocommerce-plugin') . ' (' . get_woocommerce_currency_symbol() . ')';
+    $label = __('Cost of Goods', 'mydataninja-ad-performance-tracking-order-reports-crm-analytics-and-optimization-tools') . ' (' . get_woocommerce_currency_symbol() . ')';
 
     woocommerce_wp_text_input([
       'id' => $cog_field_name,
       'label' => $label,
-      'placeholder' => __('Enter cost of goods', 'mydataninja-woocommerce-plugin'),
+      'placeholder' => __('Enter cost of goods', 'mydataninja-ad-performance-tracking-order-reports-crm-analytics-and-optimization-tools'),
       'desc_tip' => 'true',
-      'description' => __('Enter the cost of goods for calculating profit.', 'mydataninja-woocommerce-plugin'),
+      'description' => __('Enter the cost of goods for calculating profit.', 'mydataninja-ad-performance-tracking-order-reports-crm-analytics-and-optimization-tools'),
       'type' => 'number',
       'custom_attributes' => [
         'step' => 'any',
@@ -47,9 +47,9 @@ function mdnj_add_cost_of_goods_field_to_variations($loop, $variation_data, $var
 
   woocommerce_wp_text_input([
     'id' => $cog_field_name . '[' . $variation->ID . ']',
-    'label' => __('Cost of Goods', 'mydataninja-woocommerce-plugin') . ' (' . get_woocommerce_currency_symbol() . ')',
+    'label' => __('Cost of Goods', 'mydataninja-ad-performance-tracking-order-reports-crm-analytics-and-optimization-tools') . ' (' . get_woocommerce_currency_symbol() . ')',
     'desc_tip' => 'true',
-    'description' => __('Enter the cost of goods for calculating profit.', 'mydataninja-woocommerce-plugin'),
+    'description' => __('Enter the cost of goods for calculating profit.', 'mydataninja-ad-performance-tracking-order-reports-crm-analytics-and-optimization-tools'),
     'value' => get_post_meta($variation->ID, $cog_field_name, true),
     'wrapper_class' => 'form-row',
   ]);
