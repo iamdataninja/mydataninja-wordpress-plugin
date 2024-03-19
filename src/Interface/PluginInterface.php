@@ -101,20 +101,16 @@ function display_plugin_interface() {
 function saveOptions()
 {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_POST['mydataninja_nonce_field'])) {
-      return;
-    }
-
     $nonce_field = isset($_POST['mydataninja_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['mydataninja_nonce_field'])) : '';
 
     if (!wp_verify_nonce($nonce_field, 'mydataninja_nonce')) {
       return;
     }
 
-    $update_option_value = isset($_POST['_include_profits']) ? sanitize_text_field($_POST['_include_profits']) : 'no';
-    update_option('_include_profits', $update_option_value);
+    $include_profits = isset($_POST['_include_profits']) ? sanitize_text_field($_POST['_include_profits']) : 'no';
+    update_option('_include_profits', $include_profits === 'on' ? 'yes' : 'no');
 
-    if ($update_option_value) {
+    if ($include_profits === 'yes') {
       update_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
     }
 
@@ -124,10 +120,10 @@ function saveOptions()
     }
 
     $include_tracker = isset($_POST['_include_tracker']) ? sanitize_text_field($_POST['_include_tracker']) : 'no';
-    update_option('_include_tracker', $include_tracker === 'yes' ? 'yes' : 'no');
+    update_option('_include_tracker', $include_tracker === 'on' ? 'yes' : 'no');
 
     $use_existing_cog_field = isset($_POST['_use_existing_cog_field']) ? sanitize_text_field($_POST['_use_existing_cog_field']) : 'no';
-    update_option('_use_existing_cog_field', $use_existing_cog_field === 'yes' ? 'yes' : 'no');
+    update_option('_use_existing_cog_field', $use_existing_cog_field === 'on' ? 'yes' : 'no');
 
     $existing_cog_field_name = isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods';
     update_option('_existing_cog_field_name', $existing_cog_field_name);
