@@ -27,7 +27,7 @@ $meta_keys = $wpdb->get_col("
 <!-- chart -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div class='mx-2'>
+<div class='mydataninja mx-2'>
     <div class="text-center my-4">
         <img src="https://mydataninja.com/wp-content/uploads/2023/07/logo.png" alt="MyDataNinja Logo" class='logo'>
     </div>

@@ -113,14 +113,6 @@ body {
     background-color:var(--primary-hover) !important;
 }
 
-a:focus {
-    box-shadow: none;
-}
-
-a { 
-    text-decoration: none !important;
-}
-
 .title{
     font-family: montHeavy !important;
 }
