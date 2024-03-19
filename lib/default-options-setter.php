@@ -1,6 +1,6 @@
 <?php
 
-function set_default_options_on_activation($file) {
+function mdnj_set_default_options_on_activation($file) {
   if (get_option('_include_profits') === false) {
     update_option('_include_profits', 'yes');
   }
@@ -17,5 +17,5 @@ function set_default_options_on_activation($file) {
     update_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
   }
 
-  register_activation_hook($file, 'set_default_options_on_activation');
+  register_activation_hook($file, 'mdnj_set_default_options_on_activation');
 }
