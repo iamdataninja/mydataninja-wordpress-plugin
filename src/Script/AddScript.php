@@ -1,10 +1,10 @@
 <?php
 
-function attach_website_route_callback($request) {
+function mdnj_attach_website_route_callback($request) {
     $parameters = $request->get_params();
 
     $consumer_secret = $request->get_param('consumer_secret');
-    if (!check_user($consumer_secret)) {
+    if (!mdnj_check_user($consumer_secret)) {
         return new WP_Error('invalid_consumer_key_or_secret', 'Invalid consumer key or secret', array('status' => 403));
     }
 
@@ -18,16 +18,16 @@ function attach_website_route_callback($request) {
     }
 }
 
-function create_attach_website_endpoint() {
+function mdnj_create_attach_website_endpoint() {
     register_rest_route('mydataninja/v1', '/attach-website', array(
         'methods' => 'POST',
-        'callback' => 'attach_website_route_callback',
+        'callback' => 'mdnj_attach_website_route_callback',
     ));
 }
 
-add_action('rest_api_init', 'create_attach_website_endpoint');
+add_action('rest_api_init', 'mdnj_create_attach_website_endpoint');
 
-function check_user($consumer_secret_substr) {
+function mdnj_check_user($consumer_secret_substr) {
   global $wpdb;
   $prefix = 'MyDataNinja - API';
 
@@ -55,7 +55,7 @@ function check_user($consumer_secret_substr) {
   return False;
 }
 
-function add_ninja_script() {
+function mdnj_add_ninja_script() {
     global $wp;
     $current_url = home_url(add_query_arg([], $wp->request));
 
@@ -73,4 +73,4 @@ function add_ninja_script() {
     }
 }
 
-add_action('wp_footer', 'add_ninja_script');
+add_action('wp_footer', 'mdnj_add_ninja_script');
