@@ -1,13 +1,13 @@
 <?php
 
 global $cog_field_name;
-$cog_field_name = get_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
+$cog_field_name = get_option('mdnj_existing_cog_field_name', '_mydataninja_cost_of_goods');
 
 function mdnj_add_cost_of_goods_field()
 {
   global $woocommerce, $post, $cog_field_name;
 
-  $include_profits = get_option('_include_profits', 'yes');
+  $include_profits = get_option('mdnj_include_profits', 'yes');
   if ($include_profits === 'yes') {
 
     $label = __('Cost of Goods', 'mydataninja-woocommerce-plugin') . ' (' . get_woocommerce_currency_symbol() . ')';

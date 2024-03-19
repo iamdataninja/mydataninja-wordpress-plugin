@@ -73,7 +73,7 @@ $meta_keys = $wpdb->get_col("
                                       <p>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
                                   </div>
                                   <div class="checkbox-input narrow-input">
-                                      <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('_include_profits'), 'yes'); ?>>
+                                      <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('mdnj_include_profits'), 'yes'); ?>>
                                   </div>
                               </div>
 
@@ -83,7 +83,7 @@ $meta_keys = $wpdb->get_col("
                                       <p>This setting will add the MyDataNinja JS Pixel to your website so that our system can track your ads and visitors, understanding which advertisements and traffic sources are bringing in orders, along with their associated profit and ROI. This setting is a must in order for MyDataNinja to work properly.</p>
                                   </div>
                                   <div class="checkbox-input">
-                                      <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('_include_tracker'), 'yes'); ?>>
+                                      <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('mdnj_include_tracker'), 'yes'); ?>>
                                   </div>
                               </div>
 
@@ -93,7 +93,7 @@ $meta_keys = $wpdb->get_col("
                                       <p>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
                                   </div>
                                   <div class="checkbox-input">
-                                      <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('_use_existing_cog_field'), 'yes'); ?>>
+                                      <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('mdnj_use_existing_cog_field'), 'yes'); ?>>
                                   </div>
                               </div>
 
@@ -103,7 +103,7 @@ $meta_keys = $wpdb->get_col("
                                     if (!empty($meta_keys)) {
                                       foreach ($meta_keys as $key) {
                                         $pretty_name = pretty_field_name($key);
-                                        $selected = selected($key, get_option('_existing_cog_field_name'), false);
+                                        $selected = selected($key, get_option('mdnj_existing_cog_field_name'), false);
                                         echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($pretty_name) . '</option>';                                      }
                                     } else {
                                       echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
@@ -114,7 +114,7 @@ $meta_keys = $wpdb->get_col("
 
                               <div class="checkbox-row" style="flex-direction: column; text-align: left">
                                 <label for="_default_profit_margin" style="width: 100%;">Default Profit Margin (%)</label>
-                                <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
+                                <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('mdnj_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
                                 <p>This will be used if a product doesn't have a cost of goods (COG) defined or if the user opts out of that option.</p>
                               </div>
                           </div>

@@ -1,7 +1,7 @@
 <?php
 
 global $cog_field_name;
-$cog_field_name = get_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
+$cog_field_name = get_option('mdnj_existing_cog_field_name', '_mydataninja_cost_of_goods');
 
 function mdnj_calculate_order_cost_of_goods($order_id)
 {
@@ -31,7 +31,7 @@ function mdnj_calculate_order_profit($order_id)
   $items = $order->get_items();
 
   $total_profit = 0;
-  $default_profit_margin = get_option('_default_profit_margin', 0);
+  $default_profit_margin = get_option('mdnj_default_profit_margin', 0);
 
   foreach ($items as $item) {
     $product_id = $item->get_variation_id() ? $item->get_variation_id() : $item->get_product_id();
@@ -40,7 +40,7 @@ function mdnj_calculate_order_profit($order_id)
     $product = wc_get_product($product_id);
     $price = $product ? $product->get_price() : 0;
 
-    $include_profits = get_option('_include_profits', 'no');
+    $include_profits = get_option('mdnj_include_profits', 'no');
     if($include_profits == 'yes'){
       if (!empty($cost_of_goods) && $cost_of_goods > 0) {
         $profit_fixed = $price - $cost_of_goods;

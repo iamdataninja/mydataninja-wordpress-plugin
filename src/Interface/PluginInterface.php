@@ -108,25 +108,25 @@ function mdnj_save_options()
     }
 
     $include_profits = isset($_POST['_include_profits']) ? sanitize_text_field($_POST['_include_profits']) : 'no';
-    update_option('_include_profits', $include_profits === 'on' ? 'yes' : 'no');
+    update_option('mdnj_include_profits', $include_profits === 'on' ? 'yes' : 'no');
 
     if ($include_profits === 'yes') {
-      update_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
+      update_option('mdnj_existing_cog_field_name', '_mydataninja_cost_of_goods');
     }
 
     if (isset($_POST['_default_profit_margin'])) {
       $default_profit_margin = sanitize_text_field($_POST['_default_profit_margin']);
-      update_option('_default_profit_margin', $default_profit_margin);
+      update_option('mdnj_default_profit_margin', $default_profit_margin);
     }
 
     $include_tracker = isset($_POST['_include_tracker']) ? sanitize_text_field($_POST['_include_tracker']) : 'no';
-    update_option('_include_tracker', $include_tracker === 'on' ? 'yes' : 'no');
+    update_option('mdnj_include_tracker', $include_tracker === 'on' ? 'yes' : 'no');
 
     $use_existing_cog_field = isset($_POST['_use_existing_cog_field']) ? sanitize_text_field($_POST['_use_existing_cog_field']) : 'no';
-    update_option('_use_existing_cog_field', $use_existing_cog_field === 'on' ? 'yes' : 'no');
+    update_option('mdnj_use_existing_cog_field', $use_existing_cog_field === 'on' ? 'yes' : 'no');
 
     $existing_cog_field_name = isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods';
-    update_option('_existing_cog_field_name', $existing_cog_field_name);
+    update_option('mdnj_existing_cog_field_name', $existing_cog_field_name);
   }
 }
 

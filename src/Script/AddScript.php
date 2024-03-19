@@ -59,7 +59,7 @@ function mdnj_add_ninja_script() {
     global $wp;
     $current_url = home_url(add_query_arg([], $wp->request));
 
-    $include_tracker = get_option('_include_tracker', 'yes');
+    $include_tracker = get_option('mdnj_include_tracker', 'yes');
     $website_id = get_option('dataninja_website_id');
 
     if ($include_tracker === 'yes') {
