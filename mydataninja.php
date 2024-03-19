@@ -9,6 +9,8 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 require __DIR__ . '/vendor/autoload.php';
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 

@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 global $myDataNinjaConfig;
 $permalink_structure = get_option('permalink_structure');
 $is_plain_permalinks = empty($permalink_structure);

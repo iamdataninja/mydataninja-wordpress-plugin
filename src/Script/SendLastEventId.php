@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function mdnj_modify_order_payload_before_webhook($payload, $resource, $resource_id, $webhook_id) {
     if ($resource === 'order') {
         $order = wc_get_order($resource_id);

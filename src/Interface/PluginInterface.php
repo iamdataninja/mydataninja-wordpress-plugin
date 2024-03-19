@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function mdnj_add_plugin_interface_menu() {
   add_menu_page(
     'MyDataNinja WooCommerce Plugin',

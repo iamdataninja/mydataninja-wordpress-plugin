@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function check_woocommerce_dependency() {
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     deactivate_plugins(plugin_basename('mydataninja/mydataninja.php'));

@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function mdnj_attach_website_route_callback($request) {
     $parameters = $request->get_params();
 

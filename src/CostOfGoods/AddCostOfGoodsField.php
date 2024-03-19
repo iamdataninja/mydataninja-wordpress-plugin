@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 global $cog_field_name;
 $cog_field_name = get_option('mdnj_existing_cog_field_name', '_mydataninja_cost_of_goods');
 
