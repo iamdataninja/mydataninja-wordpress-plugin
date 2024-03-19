@@ -65,7 +65,9 @@ function save_cost_of_goods_field($post_id)
     return;
   }
 
-  if (!wp_verify_nonce($_POST['cost_of_goods_nonce_field'], 'save_cost_of_goods_nonce')) {
+  $nonce_field = isset($_POST['cost_of_goods_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['cost_of_goods_nonce_field'])) : '';
+
+  if (!wp_verify_nonce($nonce_field, 'save_cost_of_goods_nonce')) {
     return;
   }
 
@@ -84,13 +86,15 @@ function save_cost_of_goods_field_for_variations($variation_id, $i): void
     return;
   }
 
-  if (!wp_verify_nonce($_POST['cost_of_goods_nonce_field'], 'save_cost_of_goods_nonce')) {
+  $nonce_field = isset($_POST['cost_of_goods_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['cost_of_goods_nonce_field'])) : '';
+
+  if (!wp_verify_nonce($nonce_field, 'save_cost_of_goods_nonce')) {
     return;
   }
 
-  $cost_of_goods = $_POST[$cog_field_name][$variation_id];
-  if (isset($cost_of_goods)) {
-    update_post_meta($variation_id, $cog_field_name, sanitize_text_field($cost_of_goods));
+  $cost_of_goods = isset($_POST[$cog_field_name][$variation_id]) ? sanitize_text_field(wp_unslash($_POST[$cog_field_name][$variation_id])) : '';
+  if (!empty($cost_of_goods)) {
+    update_post_meta($variation_id, $cog_field_name, $cost_of_goods);
   }
 }
 
