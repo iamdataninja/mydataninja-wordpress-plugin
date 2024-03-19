@@ -105,22 +105,32 @@ function saveOptions()
       return;
     }
 
-    if (!wp_verify_nonce($_POST['mydataninja_nonce_field'], 'mydataninja_nonce')) {
+    $nonce_field = isset($_POST['mydataninja_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['mydataninja_nonce_field'])) : '';
+
+    if (!wp_verify_nonce($nonce_field, 'mydataninja_nonce')) {
       return;
     }
 
-    update_option('_include_profits', isset($_POST['_include_profits']) ? 'yes' : 'no');
-    if (isset($_POST['_include_profits'])) {
+    $update_option_value = isset($_POST['_include_profits']) ? sanitize_text_field($_POST['_include_profits']) : 'no';
+    update_option('_include_profits', $update_option_value);
+
+    if ($update_option_value) {
       update_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
     }
 
     if (isset($_POST['_default_profit_margin'])) {
-      update_option('_default_profit_margin', sanitize_text_field($_POST['_default_profit_margin']));
+      $default_profit_margin = sanitize_text_field($_POST['_default_profit_margin']);
+      update_option('_default_profit_margin', $default_profit_margin);
     }
 
-    update_option('_include_tracker', isset($_POST['_include_tracker']) ? 'yes' : 'no');
-    update_option('_use_existing_cog_field', isset($_POST['_use_existing_cog_field']) ? 'yes' : 'no');
-    update_option('_existing_cog_field_name', isset($_POST['_use_existing_cog_field']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods');
+    $include_tracker = isset($_POST['_include_tracker']) ? sanitize_text_field($_POST['_include_tracker']) : 'no';
+    update_option('_include_tracker', $include_tracker === 'yes' ? 'yes' : 'no');
+
+    $use_existing_cog_field = isset($_POST['_use_existing_cog_field']) ? sanitize_text_field($_POST['_use_existing_cog_field']) : 'no';
+    update_option('_use_existing_cog_field', $use_existing_cog_field === 'yes' ? 'yes' : 'no');
+
+    $existing_cog_field_name = isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods';
+    update_option('_existing_cog_field_name', $existing_cog_field_name);
   }
 }
 
