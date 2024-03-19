@@ -1,177 +1,41 @@
-.wrap {
-    color: #333;
+@font-face {
+    font-family: FiraGoRegular;
+    src: url(../fonts/FiraGO-Regular.ttf);
 }
 
-.mydataninja a {
-    text-decoration: none;
-    color: white!important;
+@font-face {
+    font-family: sfRegular;
+    src: url(../fonts/sf-pro-display-regular.woff);
 }
 
-.authorize-btn[disabled] {
-    background-color: rgb(22 163 74);
-    opacity: 0.8;
-    cursor: not-allowed;
+@font-face {
+    font-family: montHeavy;
+    src: url(../fonts/mont-heavy.otf);
 }
 
-.mydataninja-logo {
-    text-align: center;
-    margin-bottom: 20px;
+body {
+    font-family: sfRegular !important;
+    color: #252D3A;
 }
 
-.mydataninja-logo img {
+:root {
+    --secondary: #FF4E00;
+    --secondary-hover: #ff4e00b5 ;
+    --primary:#2C7DF0;
+    --primary-hover:#0d6efdb3;
+    --light:#D8D8D8;
+    --fs-7: 14px;
+    --fs-8: 12px;
+}
+
+.logo {
     max-width: 150px;
     height: auto;
 }
 
-.interface-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
 .custom-interface {
-    min-width: 700px;
     max-width: 700px;
-    margin: 20px auto;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.btn {
-    color: #fff;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.authorize-btn {
-    background-color: #FF4E00;
-}
-
-.save-btn {
-    background-color: #3B82F6;
-}
-
-.checkbox-container {
-    border: 1px solid #D3D3D3;
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 10px;
-}
-
-.checkbox-container input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-}
-
-.checkboxes {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 5px 0px;
-}
-
-.checkbox-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 7px 0;
-    width: 80%;
-}
-
-.checkbox-row p {
-    font-size: 12px;
-    color: gray;
-    margin-top: 5px;
-}
-
-.checkbox-label {
-    font-size: 14px;
-    text-align: left;
-    flex: 10;
-}
-
-.checkbox-input {
-    justify-content: flex-end;
-    flex: 1;
-    display: flex;
-    align-items: center;
-}
-
-.custom-interface {
-    padding: 20px;
-    border: 1px solid #ddd;
-    margin-top: 20px;
-}
-
-.custom-interface p {
-    margin-bottom: 20px;
-}
-
-.authorize-btn,
-.install-btn {
-    padding: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.tabs {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    border-bottom: 1px solid #ddd;
-}
-
-.tab-link {
-    background-color: #f1f1f1;
-    color: #222;
-    display: inline-block;
-    padding: 10px 15px;
-    cursor: pointer;
-}
-
-.tab-link:hover {
-    background-color: #ddd;
-}
-
-.tab-link.current {
-    background-color: #ccc;
-}
-
-.tab-content {
-    display: none;
-    padding: 5px;
-    border-top: none;
-}
-
-.tab-content.current {
-    display: block;
-}
-
-.no-underline {
-    text-decoration: none;
-}
-
-.no-underline:hover {
-    text-decoration: none;
-    color: inherit;
-}
-
-.warning-message {
-    color: #9F6000;
-    background-color: #FEEFB3;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 10px 0;
+    width:700px
 }
 
 .widget-container {
@@ -179,15 +43,15 @@
 }
 
 .widget {
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 10px;
+    padding: 25px !important;
     border: 1px solid #D3D3D3;
     border-radius: 10px;
-    margin-top: 10px;
     width: 100%;
+    margin: 0px !important;
 }
 
 .widget > div {
@@ -197,9 +61,117 @@
     align-items: center;
 }
 
+.inner-widget{
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%; 
+}
+
+.inner-widget .inner-widget{
+    background:rgba(0,0,0,0.15); 
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin: 5px 
+}
+
 #sales, #groupedNetworks {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 10px;
+   justify-content: space-between;
+   gap: 10px;
+}
+
+.error {
+    background:linear-gradient(123.14deg, rgb(221, 32, 17) 4.05%, rgb(253, 67, 53) 91.29%) !important;
+}
+
+.success {
+    background:  linear-gradient(123.14deg, rgb(108, 143, 27) 4.05%, rgb(145, 199, 22) 91.29%) !important;
+}
+
+.fs-8{
+    font-size: var(--fs-8);
+}
+
+.fs-7{
+    font-size: var(--fs-7);
+}
+
+.btn-secondary {
+    background-color:var(--secondary) !important;
+    border-color: transparent !important;
+}
+
+.btn-secondary:hover {
+    background-color:var(--secondary-hover) !important;
+    border-color: transparent !important;
+}
+.btn-primary {
+    background-color:var(--primary) !important;
+    border-color: transparent !important;
+}
+.btn-primary:hover {
+    background-color:var(--primary-hover) !important;
+}
+
+a:focus {
+    box-shadow: none;
+}
+
+a { 
+    text-decoration: none !important;
+}
+
+.title{
+    font-family: montHeavy !important;
+}
+
+.input-group {
+    flex-wrap: nowrap !important;
+}
+
+.input-group input {
+   width: 100% !important;
+}
+
+input[type=number]:focus {
+    box-shadow: none !important;
+    border: 1px solid var(--secondary);
+}
+
+p {
+    margin: 0px !important
+}
+
+.form-check-input:checked{
+    background-color: transparent !important;
+}
+
+.default {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+}
+
+form{
+    margin: 0
+}
+
+.nav-item .active{
+    background-color: #FFF8F4 !important;
+    border: 2px solid var(--secondary) !important;
+    color: #2E3849 !important;
+}
+
+.nav-link {
+    width: 120px;
+    background-color: white !important;
+    border: 2px solid var(--light) !important; 
+    color: #2E3849 !important;
+}
+
+select:focus {
+    border-color: var(--secondary) !important;
+    color: black !important;
+    box-shadow: none !important;
 }

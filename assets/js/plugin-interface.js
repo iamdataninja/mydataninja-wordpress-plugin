@@ -1,27 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var tabLinks = document.querySelectorAll('.tab-link');
-    var tabContents = document.querySelectorAll('.tab-content');
-
-    tabLinks.forEach(function(tabLink) {
-        tabLink.addEventListener('click', function() {
-            var tabId = this.getAttribute('data-tab');
-
-            // Remove current class from all tabs and contents
-            tabLinks.forEach(function(tabLink) {
-                tabLink.classList.remove('current');
-            });
-            tabContents.forEach(function(tabContent) {
-                tabContent.classList.remove('current');
-            });
-
-            // Add current class to clicked tab and its content
-            this.classList.add('current');
-            document.getElementById(tabId).classList.add('current');
-        });
-    });
-});
-
-document.addEventListener('DOMContentLoaded', function() {
     var includeCogCheckbox = document.querySelector('input[name="_include_profits"]');
     var useExistingCogCheckbox = document.querySelector('input[name="_use_existing_cog_field"]');
     var selectField = document.getElementById('_existing_cog_field_name');
@@ -47,25 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var tabLinks = document.querySelectorAll('.tab-link');
-    var tabContents = document.querySelectorAll('.tab-content');
-
-    tabLinks.forEach(function(tabLink) {
+    document.querySelectorAll('.nav-link').forEach(function(tabLink) {
         tabLink.addEventListener('click', function() {
-            var tabId = this.getAttribute('data-tab');
-
-            tabLinks.forEach(function(tabLink) {
-                tabLink.classList.remove('current');
-            });
-            tabContents.forEach(function(tabContent) {
-                tabContent.classList.remove('current');
-            });
-
-            this.classList.add('current');
-            document.getElementById(tabId).classList.add('current');
-
-            var newUrl = '/wp-admin/admin.php?page=' + (tabId === 'tab-1' ? 'mydataninja-settings' : 'mydataninja-reports');
-            window.history.pushState({}, '', newUrl);
+            var tabId = this.getAttribute('data-bs-target').substring(1);
+            window.history.pushState({}, '', '/wp-admin/admin.php?page=' + (tabId === 'setting' ? 'mydataninja-settings' : 'mydataninja-reports'));
         });
     });
 });
@@ -82,9 +44,9 @@ async function sendRequest(url) {
 
 function createDiv(title, value) {
     return `
-    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
-        <h4 style="font-size: 0.875rem; text-align: center; margin-bottom: 0;">${title}</h4>
-        <h1 style="font-size: 1.125rem; margin-top: 0;">$${value ?? 0}</h1>
+    <div class='inner-widget'>
+        <p class='fs-7 text-center'>${title}</p>
+        <p class='fs-5' >$${value ?? 0}</p>
     </div>
 `;
 }
@@ -107,16 +69,21 @@ async function fetchAndRenderData() {
     } catch (error) {
         console.error('Error:', error);
         const widgetContainer = document.querySelector('.widget-container');
-        widgetContainer.innerHTML = "<p>Currently, we are unable to retrieve MyDataNinja Widgets.</p>";
+        widgetContainer.innerHTML = "<p  class='alert alert-warning fs-7'>Currently, we are unable to retrieve MyDataNinja Widgets.</p>";
     }
 }
 
 function renderData(container, data, keys) {
     container.innerHTML += createDiv('Total Profit', data.profit ?? data.income);
     const dataDiv = document.createElement('div');
-    dataDiv.style.display = 'flex';
-    dataDiv.style.justifyContent = 'space-between';
+    dataDiv.className='inner-widget'
     keys.forEach(key => dataDiv.innerHTML += createDiv(key, data[key.toLowerCase()]));
+
+    if (data.profit <= 0) {
+        container.classList.add('error');
+    } else {
+        container.classList.add('success');
+    }
     container.appendChild(dataDiv);
 }
 
@@ -125,7 +92,7 @@ function renderGroupedNetworks(container, data) {
         const groupDiv = document.createElement('div');
         groupDiv.className = 'widget';
         container.appendChild(groupDiv);
-        groupDiv.innerHTML += `<h3>${group.charAt(0).toUpperCase() + group.slice(1)}</h3>`;
+        groupDiv.innerHTML += `<h3 class='fs-4'>${group.charAt(0).toUpperCase() + group.slice(1)}</h3>`;
         renderData(groupDiv, data.data[group], ['Income', 'Spent', 'ROI']);
     }
 }
@@ -147,14 +114,16 @@ function renderChart() {
                     type: 'line',
                     fill: false,
                     borderColor: '#3B82F6',
+                    backgroundColor: '#fff',
                     yAxisID: 'y2',
                 },
                 {
                     label: '# of Orders',
                     data: [php_vars.todayOrders, php_vars.monthOrders, php_vars.allTimeOrders],
                     backgroundColor: 'rgba(255, 78, 0, 0.7)',
-                    borderColor: 'rgba(255, 78, 0, 0.8)',
-                    borderWidth: 1,
+                    borderColor: '#FF4E00',
+                    borderWidth: 2,
+                    borderRadius: 3,
                     yAxisID: 'y1',
                 }
             ]
