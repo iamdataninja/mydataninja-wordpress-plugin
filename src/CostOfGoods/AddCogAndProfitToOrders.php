@@ -3,7 +3,7 @@
 global $cog_field_name;
 $cog_field_name = get_option('_existing_cog_field_name', '_mydataninja_cost_of_goods');
 
-function calculate_order_cost_of_goods($order_id)
+function mdnj_calculate_order_cost_of_goods($order_id)
 {
   global $cog_field_name;
 
@@ -23,7 +23,7 @@ function calculate_order_cost_of_goods($order_id)
   return $total_cost_of_goods;
 }
 
-function calculate_order_profit($order_id)
+function mdnj_calculate_order_profit($order_id)
 {
   global $cog_field_name;
 
@@ -55,12 +55,12 @@ function calculate_order_profit($order_id)
   return $total_profit;
 }
 
-function add_profit_and_cost_of_goods_to_order_response($response, $object) {
+function mdnj_add_profit_and_cost_of_goods_to_order_response($response, $object) {
   $order_id = $object->get_id();
-  $response->data['mydataninja_profit'] = calculate_order_profit($order_id);
-  $response->data['mydataninja_cost_of_goods'] = calculate_order_cost_of_goods($order_id);
+  $response->data['mydataninja_profit'] = mdnj_calculate_order_profit($order_id);
+  $response->data['mydataninja_cost_of_goods'] = mdnj_calculate_order_cost_of_goods($order_id);
 
   return $response;
 }
 
-add_filter('woocommerce_rest_prepare_shop_order_object', 'add_profit_and_cost_of_goods_to_order_response', 11092002, 2);
+add_filter('woocommerce_rest_prepare_shop_order_object', 'mdnj_add_profit_and_cost_of_goods_to_order_response', 11092002, 2);
