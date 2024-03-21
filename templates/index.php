@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 global $myDataNinjaConfig;
 $permalink_structure = get_option('permalink_structure');
 $is_plain_permalinks = empty($permalink_structure);
@@ -21,16 +23,14 @@ $meta_keys = $wpdb->get_col("
 ");
 ?>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <div class="mydataninja wrap">
     <div class="mydataninja-logo">
-        <img src="https://mydataninja.com/wp-content/uploads/2023/07/logo.png" alt="MyDataNinja Logo">
+        <img src="<?php echo plugins_url('/assets/icons/mydataninja.png', __DIR__) ?>" alt="MyDataNinja Logo">
     </div>
     <div class="interface-container">
         <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
         <div class="custom-interface">
-            <?php if (is_api_key_authorized()): ?>
+            <?php if (mdnj_is_api_key_authorized()): ?>
                 <ul class="tabs">
                     <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
                     <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
@@ -42,7 +42,7 @@ $meta_keys = $wpdb->get_col("
                   <?php wp_nonce_field('mydataninja_nonce', 'mydataninja_nonce_field'); ?>
                     <p>
                       <?php
-                      if ($is_plain_permalinks && is_api_key_authorized()) {
+                      if ($is_plain_permalinks && mdnj_is_api_key_authorized()) {
                         echo '<div class="warning-message">In order to ensure optimal functionality of the plugin, we kindly request you to refrain from using the "plain" option.</div>';
                       } elseif ($is_plain_permalinks) {
                         echo 'To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.';
@@ -53,7 +53,7 @@ $meta_keys = $wpdb->get_col("
                     </p>
 
                   <?php
-                  if (is_api_key_authorized() && !$is_plain_permalinks) {
+                  if (mdnj_is_api_key_authorized() && !$is_plain_permalinks) {
                     echo '<button class="btn authorize-btn" disabled>Authorized Successfully</button>';
                     echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn authorize-btn">Open MyDataNinja</a>';                  } else {
                     if ($is_plain_permalinks) {
@@ -64,7 +64,7 @@ $meta_keys = $wpdb->get_col("
                   }
                   ?>
 
-                  <?php if(is_api_key_authorized()): ?>
+                  <?php if(mdnj_is_api_key_authorized()): ?>
                       <div class="checkbox-container">
                           <div class="checkboxes">
                               <div class="checkbox-row">
@@ -73,7 +73,7 @@ $meta_keys = $wpdb->get_col("
                                       <p>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
                                   </div>
                                   <div class="checkbox-input narrow-input">
-                                      <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('_include_profits'), 'yes'); ?>>
+                                      <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('mdnj_include_profits'), 'yes'); ?>>
                                   </div>
                               </div>
 
@@ -83,7 +83,7 @@ $meta_keys = $wpdb->get_col("
                                       <p>This setting will add the MyDataNinja JS Pixel to your website so that our system can track your ads and visitors, understanding which advertisements and traffic sources are bringing in orders, along with their associated profit and ROI. This setting is a must in order for MyDataNinja to work properly.</p>
                                   </div>
                                   <div class="checkbox-input">
-                                      <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('_include_tracker'), 'yes'); ?>>
+                                      <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('mdnj_include_tracker'), 'yes'); ?>>
                                   </div>
                               </div>
 
@@ -93,7 +93,7 @@ $meta_keys = $wpdb->get_col("
                                       <p>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
                                   </div>
                                   <div class="checkbox-input">
-                                      <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('_use_existing_cog_field'), 'yes'); ?>>
+                                      <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('mdnj_use_existing_cog_field'), 'yes'); ?>>
                                   </div>
                               </div>
 
@@ -103,7 +103,7 @@ $meta_keys = $wpdb->get_col("
                                     if (!empty($meta_keys)) {
                                       foreach ($meta_keys as $key) {
                                         $pretty_name = pretty_field_name($key);
-                                        $selected = selected($key, get_option('_existing_cog_field_name'), false);
+                                        $selected = selected($key, get_option('mdnj_existing_cog_field_name'), false);
                                         echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($pretty_name) . '</option>';                                      }
                                     } else {
                                       echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
@@ -114,7 +114,7 @@ $meta_keys = $wpdb->get_col("
 
                               <div class="checkbox-row" style="flex-direction: column; text-align: left">
                                 <label for="_default_profit_margin" style="width: 100%;">Default Profit Margin (%)</label>
-                                <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
+                                <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('mdnj_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
                                 <p>This will be used if a product doesn't have a cost of goods (COG) defined or if the user opts out of that option.</p>
                               </div>
                           </div>

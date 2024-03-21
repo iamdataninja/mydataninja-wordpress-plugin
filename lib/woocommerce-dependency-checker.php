@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function check_woocommerce_dependency() {
   if (!is_plugin_active('woocommerce/woocommerce.php')) {
     deactivate_plugins(plugin_basename('mydataninja/mydataninja.php'));
@@ -13,7 +15,7 @@ function check_woocommerce_dependency() {
 function show_woocommerce_dependency_error() {
   ?>
     <div class="error">
-        <p><?php esc_html_e('MyDataNinja Plugin has been deactivated because WooCommerce is not active.', 'mydataninja'); ?></p>
+        <p><?php esc_html_e('MyDataNinja Plugin has been deactivated because WooCommerce is not active.', 'mydataninja-ad-performance-tracking-order-reports-crm-analytics-and-optimization-tools'); ?></p>
     </div>
   <?php
 }

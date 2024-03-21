@@ -59,3 +59,15 @@ Please ensure your changes are well-documented and include relevant unit tests, 
 == License ==
 
 This project is licensed under the GPLv3 License. The full terms of the license can be found in the `license.txt` file in the root directory of the project.
+
+== Third-Party Service Dependency ==
+We are submitting our plugin, MyDataNinja Plugin, for inclusion in the WordPress Plugin Directory. Our plugin offers Digital Advertisement analytics and tracking solution, which helps customers to understand their advertising profitability and success rate. With the assistance of MyDataNinja's WooCommerce Plugin, you can measure the effectiveness of each ad, campaign, and ad group. Receive special reports and insights about your sales and advertising costs.  It's important to note that our plugin relies on a third-party service to function optimally.
+
+To show users advertisement costs, we need to pull data from different advertising networks, such are Meta and Google Ads. We synchronize customers advertising accounts and show them data per advertisement, adgroup and campaign.
+
+We understand that relying on a third-party service may raise concerns about reliability and dependency. However, we have thoroughly tested our plugin with the third-party service to ensure seamless integration and minimal disruption for users. Additionally, we have designed our plugin with fallback mechanisms in place to gracefully handle situations where the third-party service may be unavailable or experiencing issues.
+We are committed to providing ongoing support and maintenance for our plugin, including promptly addressing any issues related to the third-party service integration. Furthermore, we will keep our users informed about any updates or changes that may affect the functionality of our plugin due to updates or modifications in the third-party service.
+
+Link to the service: https://app.mydataninja.com/
+
+Terms of Use & Privacy Policies: https://mydataninja.com/privacy-policy/

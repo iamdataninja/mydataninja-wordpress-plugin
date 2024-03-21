@@ -9,6 +9,8 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 */
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 require __DIR__ . '/vendor/autoload.php';
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
@@ -18,7 +20,7 @@ if (!check_woocommerce_dependency()) {
 }
 
 require_once __DIR__ . '/lib/default-options-setter.php';
-set_default_options_on_activation(__FILE__);
+mdnj_set_default_options_on_activation(__FILE__);
 require_once __DIR__ . '/includes.php';
 
 $myDataNinjaConfig = include __DIR__ . '/config.php';
