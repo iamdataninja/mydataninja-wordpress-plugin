@@ -7,7 +7,7 @@ function mdnj_add_plugin_interface_menu() {
     'MyDataNinja WooCommerce Plugin',
     'MyDataNinja',
     'manage_options',
-    'mydataninja-plugin',
+    'mydataninja-integration',
     'mdnj_display_plugin_interface',
     plugins_url('../assets/icons/mydataninja.png', __DIR__),
     56
@@ -15,7 +15,7 @@ function mdnj_add_plugin_interface_menu() {
 
   if (mdnj_is_api_key_authorized()){
     add_submenu_page(
-      'mydataninja-plugin',
+      'mydataninja-integration',
       'Reports',
       'Reports',
       'manage_options',
@@ -25,7 +25,7 @@ function mdnj_add_plugin_interface_menu() {
   }
 
   add_submenu_page(
-    'mydataninja-plugin',
+    'mydataninja-integration',
     'Settings',
     'Settings',
     'manage_options',
@@ -33,10 +33,10 @@ function mdnj_add_plugin_interface_menu() {
     'mdnj_display_settings_interface'
   );
 
-  remove_submenu_page('mydataninja-plugin', 'mydataninja-plugin');
+  remove_submenu_page('mydataninja-integration', 'mydataninja-integration');
 
   echo '<style>
-        #toplevel_page_mydataninja-plugin img {
+        #toplevel_page_mydataninja-integration img {
             max-width: 21px;
             max-height: 21px;
             filter: grayscale(100%) brightness(200%);
@@ -92,7 +92,7 @@ function mdnj_display_plugin_interface() {
     mdnj_save_options();
 
     $current_page = $_GET['page'];
-    $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-plugin';
+    $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
     $is_settings_page = $current_page === 'mydataninja-settings';
 
     call_user_func(function() use ($is_reports_page, $is_settings_page) {
@@ -137,10 +137,10 @@ function mdnj_enqueue_custom_styles() {
 
   wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION']);
   wp_enqueue_script('mydataninja-chart-script', plugins_url('assets/js/chart.js', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION'], true);
-  wp_enqueue_script('mydataninja-plugin-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), ['mydataninja-chart-script'], $myDataNinjaConfig['VERSION'], true);
+  wp_enqueue_script('mydataninja-integration-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), ['mydataninja-chart-script'], $myDataNinjaConfig['VERSION'], true);
 
   $orderStatistics = mdnj_get_order_statistics();
-  wp_localize_script('mydataninja-plugin-interface-script', 'php_vars', [
+  wp_localize_script('mydataninja-integration-interface-script', 'php_vars', [
     'accessToken' => get_option('mydataninja_access_token'),
     'currencySymbol' => get_woocommerce_currency_symbol(),
     'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
