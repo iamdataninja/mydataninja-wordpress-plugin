@@ -59,7 +59,7 @@ $meta_keys = $wpdb->get_col("
                     if ($is_plain_permalinks) {
                       echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="btn authorize-btn save-btn no-underline">Adjust Permalink Settings</a>';
                     } else {
-                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . get_bloginfo('name') . '&currency=' . get_woocommerce_currency() . '&base_url=' . home_url() . '" class="btn authorize-btn">Authorize</a>';
+                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . esc_html(get_bloginfo('name')) . '&currency=' . esc_html(get_woocommerce_currency()) . '&base_url=' . esc_url(home_url()) . '" class="btn authorize-btn">Authorize</a>';
                     }
                   }
                   ?>
