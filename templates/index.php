@@ -25,7 +25,7 @@ $meta_keys = $wpdb->get_col("
 
 <div class="mydataninja wrap">
     <div class="mydataninja-logo">
-        <img src="<?php echo plugins_url('/assets/icons/mydataninja.png', __DIR__) ?>" alt="MyDataNinja Logo">
+        <img src="<?php echo esc_url(plugins_url('/assets/icons/mydataninja.png', __DIR__)); ?>" alt="MyDataNinja Logo">
     </div>
     <div class="interface-container">
         <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
