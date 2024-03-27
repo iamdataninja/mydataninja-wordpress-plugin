@@ -80,3 +80,33 @@ function mdnj_add_ninja_script() {
 }
 
 add_action('wp_footer', 'mdnj_add_ninja_script');
+
+function mdnj_save_form_hash_callback($request) {
+  $parameters = $request->get_params();
+
+  $form_hash = isset($parameters['hash']) ? $parameters['hash'] : '';
+  $form_id = isset($parameters['form_id']) ? $parameters['form_id'] : '';
+
+  if (!empty($form_hash)) {
+    update_option('mdnj_form_hash', $form_hash);
+  }
+
+  if (!empty($form_id)) {
+    update_option('mdnj_form_id', $form_id);
+  }
+
+  if (!empty($form_hash) || !empty($form_id)) {
+    return rest_ensure_response(array('success' => true));
+  } else {
+    return new WP_Error('missing_form_hash_or_form_id', 'Form Hash or Form ID is missing', array('status' => 400));
+  }
+}
+
+function mdnj_create_save_form_hash_endpoint() {
+  register_rest_route('mydataninja/v1', '/save-hash', array(
+    'methods' => 'POST',
+    'callback' => 'mdnj_save_form_hash_callback',
+  ));
+}
+
+add_action('rest_api_init', 'mdnj_create_save_form_hash_endpoint');

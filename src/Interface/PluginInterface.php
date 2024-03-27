@@ -33,6 +33,15 @@ function mdnj_add_plugin_interface_menu() {
     'mdnj_display_settings_interface'
   );
 
+  add_submenu_page(
+    'mydataninja-integration',
+    'Form',
+    'Form',
+    'manage_options',
+    'mydataninja-form',
+    'mdnj_display_form_interface'
+  );
+
   remove_submenu_page('mydataninja-integration', 'mydataninja-integration');
 
   echo '<style>
@@ -44,13 +53,30 @@ function mdnj_add_plugin_interface_menu() {
     </style>';
 }
 
+
+add_action('admin_menu', 'mdnj_add_plugin_interface_menu');
+function mdnj_display_plugin_interface() {
+  mdnj_save_options();
+
+  $current_page = $_GET['page'];
+  $is_form_page = $current_page === 'mydataninja-form';
+  $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
+  $is_settings_page = $current_page === 'mydataninja-settings';
+
+
+  call_user_func(function() use ($is_form_page, $is_reports_page, $is_settings_page) {
+    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+  });
+}
+
 function mdnj_display_reports_interface() {
   mdnj_save_options();
 
   $is_reports_page = true;
   $is_settings_page = false;
+  $is_form_page = false;
 
-  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+  call_user_func(function() use ($is_reports_page, $is_settings_page, $is_form_page) {
     include(plugin_dir_path(__DIR__) . '../templates/index.php');
   });
 }
@@ -60,13 +86,25 @@ function mdnj_display_settings_interface() {
 
   $is_reports_page = false;
   $is_settings_page = true;
+  $is_form_page = false;
 
-  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+  call_user_func(function() use ($is_reports_page, $is_settings_page, $is_form_page) {
     include(plugin_dir_path(__DIR__) . '../templates/index.php');
   });
 }
 
-add_action('admin_menu', 'mdnj_add_plugin_interface_menu');
+function mdnj_display_form_interface() {
+  mdnj_save_options();
+
+  $is_reports_page = false;
+  $is_settings_page = false;
+  $is_form_page = true;
+
+  call_user_func(function() use ($is_reports_page, $is_settings_page, $is_form_page) {
+    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+  });
+}
+
 
 function mdnj_is_api_key_authorized() {
   global $wpdb;
@@ -86,18 +124,6 @@ function mdnj_is_api_key_authorized() {
   }
 
   return $result > 0;
-}
-
-function mdnj_display_plugin_interface() {
-    mdnj_save_options();
-
-    $current_page = $_GET['page'];
-    $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
-    $is_settings_page = $current_page === 'mydataninja-settings';
-
-    call_user_func(function() use ($is_reports_page, $is_settings_page) {
-      include(plugin_dir_path(__DIR__) . '../templates/index.php');
-    });
 }
 
 function mdnj_save_options()

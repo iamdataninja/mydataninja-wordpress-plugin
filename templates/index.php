@@ -34,8 +34,12 @@ $meta_keys = $wpdb->get_col("
                 <ul class="tabs">
                     <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
                     <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
+                    <?php if(get_option('mdnj_form_hash')): ?>
+                        <li class="tab-link <?php echo $is_form_page ? 'current' : ''; ?>" data-tab="tab-3">Form</li>
+                    <?php endif; ?>
                 </ul>
             <?php endif; ?>
+
 
             <div id="tab-1" class="tab-content <?php echo $is_settings_page ? 'current' : ''; ?>">
                 <form method="post" action="">
@@ -139,6 +143,15 @@ $meta_keys = $wpdb->get_col("
                     </div>
                     <div id="groupedNetworks"></div>
                 </div>
+            </div>
+
+            <div id="tab-3" class="tab-content <?php echo $is_form_page ? 'current' : ''; ?>" style="height: 700px">
+                <div style="margin-top: 10px">
+                    <a href="<?php echo esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . get_option('mdnj_form_hash')); ?>" target="_blank"><button class="btn save-btn">Open</button></a>
+                    <a href="<?php echo esc_url($myDataNinjaConfig["FRONT_BASE_URL"] . "/crm/dataninja/" . get_option('mdnj_form_id') . "/integration"); ?>" target="_blank"><button class="btn authorize-btn">Edit</button></a>
+                </div>
+
+                <iframe src="<?php echo esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . get_option('mdnj_form_hash')); ?>" frameborder="0" width="100%" height="90%" style="margin-top: 20px"></iframe>
             </div>
         </div>
     </div>

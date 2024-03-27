@@ -64,7 +64,13 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('current');
             document.getElementById(tabId).classList.add('current');
 
-            var newUrl = '/wp-admin/admin.php?page=' + (tabId === 'tab-1' ? 'mydataninja-settings' : 'mydataninja-reports');
+            const tabs = {
+                'tab-1': 'mydataninja-settings',
+                'tab-2': 'mydataninja-reports',
+                'tab-3': 'mydataninja-form'
+            };
+
+            const newUrl = '/wp-admin/admin.php?page=' + tabs[tabId];
             window.history.pushState({}, '', newUrl);
         });
     });
