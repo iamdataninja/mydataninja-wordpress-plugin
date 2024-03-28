@@ -23,7 +23,7 @@ $meta_keys = $wpdb->get_col("
 ");
 ?>
 
-<div class="mydataninja wrap">
+<div class="mydataninja mdnj-wrap">
     <div class="mydataninja-logo">
         <img src="<?php echo esc_url(plugins_url('/assets/icons/mydataninja.png', __DIR__)); ?>" alt="MyDataNinja Logo">
     </div>
