@@ -55,8 +55,15 @@ function mdnj_add_plugin_interface_menu() {
 
 
 add_action('admin_menu', 'mdnj_add_plugin_interface_menu');
+
 function mdnj_display_plugin_interface() {
   mdnj_save_options();
+
+  $nonce_field = isset($_POST['mydataninja_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['mydataninja_nonce_field'])) : '';
+
+  if (!wp_verify_nonce($nonce_field, 'mydataninja_nonce')) {
+    return;
+  }
 
   $current_page = $_GET['page'];
   $is_form_page = $current_page === 'mydataninja-form';
