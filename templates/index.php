@@ -27,7 +27,7 @@ $meta_keys = $wpdb->get_col("
     <div class="mydataninja-logo">
         <img src="<?php echo esc_url(plugins_url('/assets/icons/mydataninja.png', __DIR__)); ?>" alt="MyDataNinja Logo">
     </div>
-    <div class="interface-container">
+    <div class="mdnj-interface-container">
         <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
         <div class="custom-interface">
             <?php if (mdnj_is_api_key_authorized()): ?>
