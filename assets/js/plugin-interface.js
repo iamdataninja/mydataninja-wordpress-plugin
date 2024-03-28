@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', function() {
-    var tabLinks = document.querySelectorAll('.tab-link');
-    var tabContents = document.querySelectorAll('.tab-content');
+    var tabLinks = document.querySelectorAll('.mdnj-tab-link');
+    var tabContents = document.querySelectorAll('.mdnj-tab-content');
 
     tabLinks.forEach(function(tabLink) {
         tabLink.addEventListener('click', function() {
             var tabId = this.getAttribute('data-tab');
 
-            // Remove current class from all tabs and contents
             tabLinks.forEach(function(tabLink) {
                 tabLink.classList.remove('current');
             });
@@ -47,8 +46,8 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var tabLinks = document.querySelectorAll('.tab-link');
-    var tabContents = document.querySelectorAll('.tab-content');
+    var tabLinks = document.querySelectorAll('.mdnj-tab-link');
+    var tabContents = document.querySelectorAll('.mdnj-tab-content');
 
     tabLinks.forEach(function(tabLink) {
         tabLink.addEventListener('click', function() {
@@ -64,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('current');
             document.getElementById(tabId).classList.add('current');
 
-            var newUrl = '/wp-admin/admin.php?page=' + (tabId === 'tab-1' ? 'mydataninja-settings' : 'mydataninja-reports');
+            var newUrl = '/wp-admin/admin.php?page=' + (tabId === 'mdnj-tab-1' ? 'mydataninja-settings' : 'mydataninja-reports');
             window.history.pushState({}, '', newUrl);
         });
     });
@@ -92,7 +91,7 @@ function createDiv(title, value) {
 async function fetchAndRenderData() {
     try {
         const totals = document.getElementById('totals');
-        const groupedNetworks = document.getElementById('groupedNetworks');
+        const groupedNetworks = document.getElementById('mdnj-groupedNetworks');
         const totalSales = document.getElementById('totalSales');
 
         const [totalsData, groupedNetworksData, totalSalesData] = await Promise.all([
@@ -106,7 +105,7 @@ async function fetchAndRenderData() {
         renderData(totalSales, totalSalesData, ['Quantity', 'AOV']);
     } catch (error) {
         console.error('Error:', error);
-        const widgetContainer = document.querySelector('.widget-container');
+        const widgetContainer = document.querySelector('.mdnj-widget-container');
         widgetContainer.innerHTML = "<p>Currently, we are unable to retrieve MyDataNinja Widgets.</p>";
     }
 }
@@ -123,7 +122,7 @@ function renderData(container, data, keys) {
 function renderGroupedNetworks(container, data) {
     for (const group in data.data) {
         const groupDiv = document.createElement('div');
-        groupDiv.className = 'widget';
+        groupDiv.className = 'mdnj-widget';
         container.appendChild(groupDiv);
         groupDiv.innerHTML += `<h3>${group.charAt(0).toUpperCase() + group.slice(1)}</h3>`;
         renderData(groupDiv, data.data[group], ['Income', 'Spent', 'ROI']);

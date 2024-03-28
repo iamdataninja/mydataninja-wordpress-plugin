@@ -72,7 +72,7 @@ function mdnj_is_api_key_authorized() {
   global $wpdb;
   $prefix = 'MyDataNinja - API';
 
-  $cache_key = 'mydataninja_api_key_count';
+  $cache_key = 'mdnj_api_key_count';
   $result = wp_cache_get($cache_key);
 
   if ($result === false) {
@@ -91,7 +91,7 @@ function mdnj_is_api_key_authorized() {
 function mdnj_display_plugin_interface() {
     mdnj_save_options();
 
-    $current_page = $_GET['page'];
+    $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
     $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
     $is_settings_page = $current_page === 'mydataninja-settings';
 
@@ -103,9 +103,9 @@ function mdnj_display_plugin_interface() {
 function mdnj_save_options()
 {
   if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nonce_field = isset($_POST['mydataninja_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['mydataninja_nonce_field'])) : '';
+    $nonce_field = isset($_POST['mdnj_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['mdnj_nonce_field'])) : '';
 
-    if (!wp_verify_nonce($nonce_field, 'mydataninja_nonce')) {
+    if (!wp_verify_nonce($nonce_field, 'mdnj_nonce')) {
       return;
     }
 
@@ -113,7 +113,7 @@ function mdnj_save_options()
     update_option('mdnj_include_profits', $include_profits === 'on' ? 'yes' : 'no');
 
     if ($include_profits === 'yes') {
-      update_option('mdnj_existing_cog_field_name', '_mydataninja_cost_of_goods');
+      update_option('mdnj_existing_cog_field_name', 'mdnj_cost_of_goods');
     }
 
     if (isset($_POST['_default_profit_margin'])) {
@@ -127,7 +127,7 @@ function mdnj_save_options()
     $use_existing_cog_field = isset($_POST['_use_existing_cog_field']) ? sanitize_text_field($_POST['_use_existing_cog_field']) : 'no';
     update_option('mdnj_use_existing_cog_field', $use_existing_cog_field === 'on' ? 'yes' : 'no');
 
-    $existing_cog_field_name = isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : '_mydataninja_cost_of_goods';
+    $existing_cog_field_name = isset($_POST['_existing_cog_field_name']) ? sanitize_text_field($_POST['_existing_cog_field_name']) : 'mdnj_cost_of_goods';
     update_option('mdnj_existing_cog_field_name', $existing_cog_field_name);
   }
 }
@@ -141,7 +141,7 @@ function mdnj_enqueue_custom_styles() {
 
   $orderStatistics = mdnj_get_order_statistics();
   wp_localize_script('mydataninja-integration-interface-script', 'php_vars', [
-    'accessToken' => get_option('mydataninja_access_token'),
+    'accessToken' => get_option('mdnj_access_token'),
     'currencySymbol' => get_woocommerce_currency_symbol(),
     'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
     'todayOrders' => $orderStatistics['today']['count'],

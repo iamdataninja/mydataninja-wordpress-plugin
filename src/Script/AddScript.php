@@ -13,7 +13,7 @@ function mdnj_attach_website_route_callback($request) {
     $website_id = isset($parameters['website_id']) ? $parameters['website_id'] : '';
 
     if (!empty($website_id)) {
-        update_option('dataninja_website_id', $website_id);
+        update_option('mdnj_dataninja_website_id', $website_id);
         return rest_ensure_response(array('success' => true));
     } else {
         return new WP_Error('missing_website_id', 'Website ID is missing', array('status' => 400));
@@ -33,7 +33,7 @@ function mdnj_check_user($consumer_secret_substr) {
   global $wpdb;
   $prefix = 'MyDataNinja - API';
 
-  $results = wp_cache_get('mydataninja_api_keys');
+  $results = wp_cache_get('mdnj_api_keys');
 
   if ($results === false) {
     $results = $wpdb->get_results($wpdb->prepare(
@@ -41,7 +41,7 @@ function mdnj_check_user($consumer_secret_substr) {
       sanitize_text_field($prefix) . '%'
     ), ARRAY_A);
 
-    wp_cache_set('mydataninja_api_keys', $results);
+    wp_cache_set('mdnj_api_keys', $results);
   }
 
   if ($results) {
@@ -64,7 +64,7 @@ function mdnj_add_ninja_script() {
     $current_url = home_url(add_query_arg([], $wp->request));
 
     $include_tracker = get_option('mdnj_include_tracker', 'yes');
-    $website_id = get_option('dataninja_website_id');
+    $website_id = get_option('mdnj_dataninja_website_id');
 
       if ($include_tracker === 'yes') {
         wp_enqueue_script('mydataninja-tracker-script', plugins_url('assets/js/tracker.js', plugin_dir_path(__DIR__)), [], $myDataNinjaConfig['VERSION'], true);

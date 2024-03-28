@@ -1,4 +1,4 @@
-.wrap {
+.mdnj-wrap {
     color: #333;
 }
 
@@ -7,7 +7,7 @@
     color: white!important;
 }
 
-.authorize-btn[disabled] {
+.mdnj-authorize-btn[disabled] {
     background-color: rgb(22 163 74);
     opacity: 0.8;
     cursor: not-allowed;
@@ -23,14 +23,14 @@
     height: auto;
 }
 
-.interface-container {
+.mdnj-interface-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.custom-interface {
+.mdnj-custom-interface {
     min-width: 700px;
     max-width: 700px;
     margin: 20px auto;
@@ -41,7 +41,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn {
+.mdnj-btn {
     color: #fff;
     padding: 10px 15px;
     font-size: 16px;
@@ -50,27 +50,27 @@
     cursor: pointer;
 }
 
-.authorize-btn {
+.mdnj-authorize-btn {
     background-color: #FF4E00;
 }
 
-.save-btn {
+.mdnj-save-btn {
     background-color: #3B82F6;
 }
 
-.checkbox-container {
+.mdnj-checkbox-container {
     border: 1px solid #D3D3D3;
     margin-top: 15px;
     padding: 15px;
     border-radius: 10px;
 }
 
-.checkbox-container input[type="checkbox"] {
+.mdnj-checkbox-container input[type="checkbox"] {
     width: 18px;
     height: 18px;
 }
 
-.checkboxes {
+.mdnj-checkboxes {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,7 +79,7 @@
     margin: 5px 0px;
 }
 
-.checkbox-row {
+.mdnj-checkbox-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -87,43 +87,43 @@
     width: 80%;
 }
 
-.checkbox-row p {
+.mdnj-checkbox-row p {
     font-size: 12px;
     color: gray;
     margin-top: 5px;
 }
 
-.checkbox-label {
+.mdnj-checkbox-label {
     font-size: 14px;
     text-align: left;
     flex: 10;
 }
 
-.checkbox-input {
+.mdnj-checkbox-input {
     justify-content: flex-end;
     flex: 1;
     display: flex;
     align-items: center;
 }
 
-.custom-interface {
+.mdnj-custom-interface {
     padding: 20px;
     border: 1px solid #ddd;
     margin-top: 20px;
 }
 
-.custom-interface p {
+.mdnj-custom-interface p {
     margin-bottom: 20px;
 }
 
-.authorize-btn,
-.install-btn {
+.mdnj-authorize-btn,
+.mdnj-install-btn {
     padding: 10px;
     margin-right: 10px;
     cursor: pointer;
 }
 
-.tabs {
+.mdnj-tabs {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -131,7 +131,7 @@
     border-bottom: 1px solid #ddd;
 }
 
-.tab-link {
+.mdnj-tab-link {
     background-color: #f1f1f1;
     color: #222;
     display: inline-block;
@@ -139,34 +139,34 @@
     cursor: pointer;
 }
 
-.tab-link:hover {
+.mdnj-tab-link:hover {
     background-color: #ddd;
 }
 
-.tab-link.current {
+.mdnj-tab-link.current {
     background-color: #ccc;
 }
 
-.tab-content {
+.mdnj-tab-content {
     display: none;
     padding: 5px;
     border-top: none;
 }
 
-.tab-content.current {
+.mdnj-tab-content.current {
     display: block;
 }
 
-.no-underline {
+.mdnj-no-underline {
     text-decoration: none;
 }
 
-.no-underline:hover {
+.mdnj-no-underline:hover {
     text-decoration: none;
     color: inherit;
 }
 
-.warning-message {
+.mdnj-warning-message {
     color: #9F6000;
     background-color: #FEEFB3;
     padding: 10px;
@@ -174,11 +174,11 @@
     margin: 10px 0;
 }
 
-.widget-container {
+.mdnj-widget-container {
     margin-top: 50px;
 }
 
-.widget {
+.mdnj-widget {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -190,14 +190,14 @@
     width: 100%;
 }
 
-.widget > div {
+.mdnj-widget > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-#sales, #groupedNetworks {
+#mdnj-sales, #mdnj-groupedNetworks {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;

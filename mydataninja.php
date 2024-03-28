@@ -15,7 +15,7 @@ require __DIR__ . '/vendor/autoload.php';
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
 require_once __DIR__ . '/lib/woocommerce-dependency-checker.php';
-if (!check_woocommerce_dependency()) {
+if (!mdnj_check_woocommerce_dependency()) {
   return;
 }
 
