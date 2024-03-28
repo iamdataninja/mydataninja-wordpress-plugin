@@ -14,7 +14,7 @@ function check_woocommerce_dependency() {
 function mydataninja_woocommerce_dependency_notice() {
   ?>
     <div class="notice notice-warning is-dismissible">
-        <p><?php _e('The MyDataNinja Plugin is active but has limited functionality as WooCommerce is inactive.
+        <p><?php esc_html_e('The MyDataNinja Plugin is active but has limited functionality as WooCommerce is inactive.
 
 
 
