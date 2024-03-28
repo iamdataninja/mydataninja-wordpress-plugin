@@ -70,19 +70,9 @@ $meta_keys = $wpdb->get_col("
                   }
                   ?>
 
-                  <?php if(mdnj_is_api_key_authorized() && is_plugin_active('woocommerce/woocommerce.php')): ?>
+                  <?php if(mdnj_is_api_key_authorized()): ?>
                       <div class="checkbox-container">
                           <div class="checkboxes">
-                              <div class="checkbox-row">
-                                  <div class="checkbox-label wide-label">
-                                      <label for="_include_profits">Include MyDataNinja "Cost of Goods" Field</label>
-                                      <p>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
-                                  </div>
-                                  <div class="checkbox-input narrow-input">
-                                      <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('mdnj_include_profits'), 'yes'); ?>>
-                                  </div>
-                              </div>
-
                               <div class="checkbox-row">
                                   <div class="checkbox-label">
                                       <label for="_include_tracker">Include Tracker on Website</label>
@@ -92,37 +82,48 @@ $meta_keys = $wpdb->get_col("
                                       <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('mdnj_include_tracker'), 'yes'); ?>>
                                   </div>
                               </div>
-
-                              <div class="checkbox-row">
-                                  <div class="checkbox-label">
-                                      <label for="_use_existing_cog_field">Use Existing Cost of Goods Field</label>
-                                      <p>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
+                              <?php if(is_plugin_active('woocommerce/woocommerce.php')): ?>
+                                  <div class="checkbox-row">
+                                      <div class="checkbox-label wide-label">
+                                          <label for="_include_profits">Include MyDataNinja "Cost of Goods" Field</label>
+                                          <p>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
+                                      </div>
+                                      <div class="checkbox-input narrow-input">
+                                          <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('mdnj_include_profits'), 'yes'); ?>>
+                                      </div>
                                   </div>
-                                  <div class="checkbox-input">
-                                      <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('mdnj_use_existing_cog_field'), 'yes'); ?>>
+
+                                  <div class="checkbox-row">
+                                      <div class="checkbox-label">
+                                          <label for="_use_existing_cog_field">Use Existing Cost of Goods Field</label>
+                                          <p>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
+                                      </div>
+                                      <div class="checkbox-input">
+                                          <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('mdnj_use_existing_cog_field'), 'yes'); ?>>
+                                      </div>
                                   </div>
-                              </div>
 
-                              <div class="checkbox-row">
-                                  <select id="_existing_cog_field_name" name="_existing_cog_field_name" style="min-width: 100%">
-                                    <?php
-                                    if (!empty($meta_keys)) {
-                                      foreach ($meta_keys as $key) {
-                                        $pretty_name = pretty_field_name($key);
-                                        $selected = selected($key, get_option('mdnj_existing_cog_field_name'), false);
-                                        echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($pretty_name) . '</option>';                                      }
-                                    } else {
-                                      echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
-                                    }
-                                    ?>
-                                  </select>
-                              </div>
+                                  <div class="checkbox-row">
+                                      <select id="_existing_cog_field_name" name="_existing_cog_field_name" style="min-width: 100%">
+                                        <?php
+                                        if (!empty($meta_keys)) {
+                                          foreach ($meta_keys as $key) {
+                                            $pretty_name = pretty_field_name($key);
+                                            $selected = selected($key, get_option('mdnj_existing_cog_field_name'), false);
+                                            echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($pretty_name) . '</option>';                                      }
+                                        } else {
+                                          echo "<option>Currently, there are no available custom fields as there are no products in the database.</option>";
+                                        }
+                                        ?>
+                                      </select>
+                                  </div>
 
-                              <div class="checkbox-row" style="flex-direction: column; text-align: left">
-                                <label for="_default_profit_margin" style="width: 100%;">Default Profit Margin (%)</label>
-                                <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('mdnj_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
-                                <p>This will be used if a product doesn't have a cost of goods (COG) defined or if the user opts out of that option.</p>
-                              </div>
+                                  <div class="checkbox-row" style="flex-direction: column; text-align: left">
+                                    <label for="_default_profit_margin" style="width: 100%;">Default Profit Margin (%)</label>
+                                    <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('mdnj_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
+                                    <p>This will be used if a product doesn't have a cost of goods (COG) defined or if the user opts out of that option.</p>
+                                  </div>
+                              <?php endif; ?>
                           </div>
 
                           <input type="submit" class="btn save-btn" style="font-size: 14px; width: 80%" value="Save Changes">
@@ -172,7 +173,7 @@ $meta_keys = $wpdb->get_col("
                     echo '<div style="
                             width: 100%;
                             display: flex;
-                            align-items: center;
+                            align-items: center;    
                             column-gap: 10px;
                             justify-content: space-between;
                         ">';
