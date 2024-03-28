@@ -203,3 +203,13 @@
     grid-template-rows: 1fr;
     gap: 10px;
 }
+
+.form-action-icon {
+    margin-right: 10px;
+    opacity: 80%;
+}
+
+.custom-interface input[type="text"] {
+    background-color: white;
+    margin-top: 5px;
+}

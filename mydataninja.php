@@ -15,12 +15,12 @@ require __DIR__ . '/vendor/autoload.php';
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 
 require_once __DIR__ . '/lib/woocommerce-dependency-checker.php';
-if (!check_woocommerce_dependency()) {
-  return;
+if (check_woocommerce_dependency()) {
+    require_once __DIR__ . '/lib/default-options-setter.php';
+    mdnj_set_default_options_on_activation(__FILE__);
+    require_once __DIR__ . '/includes.php';
 }
 
-require_once __DIR__ . '/lib/default-options-setter.php';
-mdnj_set_default_options_on_activation(__FILE__);
-require_once __DIR__ . '/includes.php';
+require_once __DIR__ . '/form-includes.php';
 
 $myDataNinjaConfig = include __DIR__ . '/config.php';

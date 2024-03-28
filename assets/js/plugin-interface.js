@@ -76,6 +76,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+document.addEventListener('DOMContentLoaded', (event) => {
+    const copyIcons = document.querySelectorAll('.copy-icon');
+
+    copyIcons.forEach((icon) => {
+        icon.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const anchor = event.target.tagName === 'A' ? event.target : event.target.parentElement;
+            const inputId = anchor.getAttribute('data-input-id');
+            const input = document.getElementById(inputId);
+
+            if (input) {
+                input.select();
+                document.execCommand('copy');
+
+                alert('Content copied to clipboard');
+            }
+        });
+    });
+});
+
 async function sendRequest(url) {
     const response = await fetch(url, {
         method: 'GET',

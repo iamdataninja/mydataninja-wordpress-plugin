@@ -13,7 +13,7 @@ function mdnj_add_plugin_interface_menu() {
     56
   );
 
-  if (mdnj_is_api_key_authorized()){
+  if (mdnj_is_api_key_authorized() && is_plugin_active('woocommerce/woocommerce.php')){
     add_submenu_page(
       'mydataninja-integration',
       'Reports',
@@ -26,20 +26,20 @@ function mdnj_add_plugin_interface_menu() {
 
   add_submenu_page(
     'mydataninja-integration',
-    'Settings',
-    'Settings',
-    'manage_options',
-    'mydataninja-settings',
-    'mdnj_display_settings_interface'
-  );
-
-  add_submenu_page(
-    'mydataninja-integration',
     'Form',
     'Form',
     'manage_options',
     'mydataninja-form',
     'mdnj_display_form_interface'
+  );
+
+  add_submenu_page(
+    'mydataninja-integration',
+    'Settings',
+    'Settings',
+    'manage_options',
+    'mydataninja-settings',
+    'mdnj_display_settings_interface'
   );
 
   remove_submenu_page('mydataninja-integration', 'mydataninja-integration');
@@ -168,8 +168,7 @@ function mdnj_enqueue_custom_styles() {
   $orderStatistics = mdnj_get_order_statistics();
   wp_localize_script('mydataninja-integration-interface-script', 'php_vars', [
     'accessToken' => get_option('mydataninja_access_token'),
-    'currencySymbol' => get_woocommerce_currency_symbol(),
-    'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
+    'currencySymbol' => function_exists('get_woocommerce_currency_symbol') ? get_woocommerce_currency_symbol() : '$',    'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
     'todayOrders' => $orderStatistics['today']['count'],
     'todayAverage' => $orderStatistics['today']['average'],
     'monthOrders' => $orderStatistics['month']['count'],
@@ -184,6 +183,14 @@ add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 
 function mdnj_get_order_statistics() {
+  if (!function_exists('wc_get_orders')) {
+    return [
+      'today' => ['count' => 0, 'average' => 0],
+      'month' => ['count' => 0, 'average' => 0],
+      'allTime' => ['count' => 0, 'average' => 0]
+    ];
+  }
+
   $today = gmdate('Y-m-d');
   $firstDayOfMonth = gmdate('Y-m-01');
   $dateRanges = [

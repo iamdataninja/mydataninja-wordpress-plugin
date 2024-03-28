@@ -33,9 +33,11 @@ $meta_keys = $wpdb->get_col("
             <?php if (mdnj_is_api_key_authorized()): ?>
                 <ul class="tabs">
                     <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
-                    <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
+                      <?php if(is_plugin_active('woocommerce/woocommerce.php')): ?>
+                          <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
+                      <?php endif; ?>
                     <?php if(get_option('mdnj_form_hash')): ?>
-                        <li class="tab-link <?php echo $is_form_page ? 'current' : ''; ?>" data-tab="tab-3">Form</li>
+                        <li class="tab-link <?php echo $is_form_page ? 'current' : ''; ?>" data-tab="tab-3">Forms</li>
                     <?php endif; ?>
                 </ul>
             <?php endif; ?>
@@ -68,7 +70,7 @@ $meta_keys = $wpdb->get_col("
                   }
                   ?>
 
-                  <?php if(mdnj_is_api_key_authorized()): ?>
+                  <?php if(mdnj_is_api_key_authorized() && is_plugin_active('woocommerce/woocommerce.php')): ?>
                       <div class="checkbox-container">
                           <div class="checkboxes">
                               <div class="checkbox-row">
@@ -145,13 +147,41 @@ $meta_keys = $wpdb->get_col("
                 </div>
             </div>
 
-            <div id="tab-3" class="tab-content <?php echo $is_form_page ? 'current' : ''; ?>" style="height: 700px">
-                <div style="margin-top: 10px">
-                    <a href="<?php echo esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . get_option('mdnj_form_hash')); ?>" target="_blank"><button class="btn save-btn">Open</button></a>
-                    <a href="<?php echo esc_url($myDataNinjaConfig["FRONT_BASE_URL"] . "/crm/dataninja/" . get_option('mdnj_form_id') . "/integration"); ?>" target="_blank"><button class="btn authorize-btn">Edit</button></a>
+            <div id="tab-3" class="tab-content <?php echo $is_form_page ? 'current' : ''; ?>" style="height: 700px;overflow: scroll;">
+                <div style="padding: 0 40px; display: flex; flex-direction: column; align-items: center;">
+                  <?php
+                  $forms = get_option('mdnj_forms', []);
+                  foreach ($forms as $form) {
+                    echo '<div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; margin-top: 20px;">';
+                        echo '<h3 class="form-name">' . esc_html($form['name']) . '</h3>';
+                        echo '<div class="form-actions">';
+                            echo '<a href="' . esc_url($myDataNinjaConfig["FRONT_BASE_URL"] . "/crm/dataninja/" . $form["id"] . "/integration") . '" target="_blank" class="form-action-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/edit.svg', __DIR__)) . '" alt="Edit"></a>';
+                            echo '<a href="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" target="_blank" class="form-action-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/external-link.svg', __DIR__)) . '" alt="Open"></a>';
+                        echo '</div>';
+                    echo '</div>';
+                    echo '<div style="
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            column-gap: 10px;
+                            justify-content: space-between;
+                        ">';
+                        echo '<input type="text" id="iframe-input-' . esc_attr($form["hash"]) . '" value=\'<iframe src="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" frameborder="0" width="100%"></iframe>\' readonly style="width: 100%;">';
+                        echo '<a href="#" data-input-id="iframe-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
+                    echo '</div>';
+                    echo '<div style="
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            column-gap: 10px;
+                            justify-content: space-between;
+                        ">';
+                        echo '<input type="text" id="shortcode-input-' . esc_attr($form["hash"]) . '" value=\'[mydataninja_iframe hash="' . esc_attr($form["hash"]) . '"]\' readonly style="width: 100%;">';
+                        echo '<a href="#" data-input-id="shortcode-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
+                    echo '</div>';
+                  }
+                  ?>
                 </div>
-
-                <iframe src="<?php echo esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . get_option('mdnj_form_hash')); ?>" frameborder="0" width="100%" height="90%" style="margin-top: 20px"></iframe>
             </div>
         </div>
     </div>
