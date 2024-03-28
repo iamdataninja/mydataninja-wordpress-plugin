@@ -32,12 +32,12 @@ $meta_keys = $wpdb->get_col("
         <div class="mdnj-custom-interface">
             <?php if (mdnj_is_api_key_authorized()): ?>
                 <ul class="mdnj-tabs">
-                    <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>
-                    <li class="tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="tab-2">Reports</li>
+                    <li class="mdnj-tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="mdnj-tab-1">Settings</li>
+                    <li class="mdnj-tab-link <?php echo $is_reports_page ? 'current' : ''; ?>" data-tab="mdnj-tab-2">Reports</li>
                 </ul>
             <?php endif; ?>
 
-            <div id="tab-1" class="tab-content <?php echo $is_settings_page ? 'current' : ''; ?>">
+            <div id="mdnj-tab-1" class="mdnj-tab-content <?php echo $is_settings_page ? 'current' : ''; ?>">
                 <form method="post" action="">
                   <?php wp_nonce_field('mydataninja_nonce', 'mydataninja_nonce_field'); ?>
                     <p>
@@ -126,7 +126,7 @@ $meta_keys = $wpdb->get_col("
                 </form>
             </div>
 
-            <div id="tab-2" class="tab-content <?php echo $is_reports_page ? 'current' : ''; ?>">
+            <div id="mdnj-tab-2" class="mdnj-tab-content <?php echo $is_reports_page ? 'current' : ''; ?>">
                 <h2>Order Reports</h2>
 
                 <canvas id="ordersChart"></canvas>

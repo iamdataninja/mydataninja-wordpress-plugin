@@ -131,7 +131,7 @@
     border-bottom: 1px solid #ddd;
 }
 
-.tab-link {
+.mdnj-tab-link {
     background-color: #f1f1f1;
     color: #222;
     display: inline-block;
@@ -139,21 +139,21 @@
     cursor: pointer;
 }
 
-.tab-link:hover {
+.mdnj-tab-link:hover {
     background-color: #ddd;
 }
 
-.tab-link.current {
+.mdnj-tab-link.current {
     background-color: #ccc;
 }
 
-.tab-content {
+.mdnj-tab-content {
     display: none;
     padding: 5px;
     border-top: none;
 }
 
-.tab-content.current {
+.mdnj-tab-content.current {
     display: block;
 }
 
