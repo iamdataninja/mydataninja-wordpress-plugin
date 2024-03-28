@@ -3,19 +3,24 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 function check_woocommerce_dependency() {
-  if (!is_plugin_active('woocommerce/woocommerce.php')) {
-    deactivate_plugins(plugin_basename('mydataninja/mydataninja.php'));
-    add_action('admin_notices', 'show_woocommerce_dependency_error');
+  if (is_plugin_active('woocommerce/woocommerce.php')) {
+    return true;
+  } else {
+    add_action('admin_notices', 'mydataninja_woocommerce_dependency_notice');
     return false;
   }
-
-  return true;
 }
 
-function show_woocommerce_dependency_error() {
+function mydataninja_woocommerce_dependency_notice() {
   ?>
-    <div class="error">
-        <p><?php esc_html_e('MyDataNinja Plugin has been deactivated because WooCommerce is not active.', 'mydataninja-ad-performance-tracking-order-reports-crm-analytics-and-optimization-tools'); ?></p>
+    <div class="notice notice-warning is-dismissible">
+        <p><?php esc_html_e('The MyDataNinja Plugin is active but has limited functionality as WooCommerce is inactive.
+
+
+
+
+
+', 'mydataninja'); ?></p>
     </div>
   <?php
 }

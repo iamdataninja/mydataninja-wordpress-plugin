@@ -13,7 +13,7 @@ function mdnj_add_plugin_interface_menu() {
     56
   );
 
-  if (mdnj_is_api_key_authorized()){
+  if (mdnj_is_api_key_authorized() && is_plugin_active('woocommerce/woocommerce.php')){
     add_submenu_page(
       'mydataninja-integration',
       'Reports',
@@ -23,6 +23,15 @@ function mdnj_add_plugin_interface_menu() {
       'mdnj_display_reports_interface'
     );
   }
+
+  add_submenu_page(
+    'mydataninja-integration',
+    'Forms',
+    'Forms',
+    'manage_options',
+    'mydataninja-forms',
+    'mdnj_display_form_interface'
+  );
 
   add_submenu_page(
     'mydataninja-integration',
@@ -44,13 +53,37 @@ function mdnj_add_plugin_interface_menu() {
     </style>';
 }
 
+
+add_action('admin_menu', 'mdnj_add_plugin_interface_menu');
+
+function mdnj_display_plugin_interface() {
+  mdnj_save_options();
+
+  $nonce_field = isset($_POST['mydataninja_nonce_field']) ? sanitize_text_field(wp_unslash($_POST['mydataninja_nonce_field'])) : '';
+
+  if (!wp_verify_nonce($nonce_field, 'mydataninja_nonce')) {
+    return;
+  }
+
+  $current_page = $_GET['page'];
+  $is_form_page = $current_page === 'mydataninja-form';
+  $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
+  $is_settings_page = $current_page === 'mydataninja-settings';
+
+
+  call_user_func(function() use ($is_form_page, $is_reports_page, $is_settings_page) {
+    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+  });
+}
+
 function mdnj_display_reports_interface() {
   mdnj_save_options();
 
   $is_reports_page = true;
   $is_settings_page = false;
+  $is_form_page = false;
 
-  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+  call_user_func(function() use ($is_reports_page, $is_settings_page, $is_form_page) {
     include(plugin_dir_path(__DIR__) . '../templates/index.php');
   });
 }
@@ -60,13 +93,25 @@ function mdnj_display_settings_interface() {
 
   $is_reports_page = false;
   $is_settings_page = true;
+  $is_form_page = false;
 
-  call_user_func(function() use ($is_reports_page, $is_settings_page) {
+  call_user_func(function() use ($is_reports_page, $is_settings_page, $is_form_page) {
     include(plugin_dir_path(__DIR__) . '../templates/index.php');
   });
 }
 
-add_action('admin_menu', 'mdnj_add_plugin_interface_menu');
+function mdnj_display_form_interface() {
+  mdnj_save_options();
+
+  $is_reports_page = false;
+  $is_settings_page = false;
+  $is_form_page = true;
+
+  call_user_func(function() use ($is_reports_page, $is_settings_page, $is_form_page) {
+    include(plugin_dir_path(__DIR__) . '../templates/index.php');
+  });
+}
+
 
 function mdnj_is_api_key_authorized() {
   global $wpdb;
@@ -86,18 +131,6 @@ function mdnj_is_api_key_authorized() {
   }
 
   return $result > 0;
-}
-
-function mdnj_display_plugin_interface() {
-    mdnj_save_options();
-
-    $current_page = $_GET['page'];
-    $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
-    $is_settings_page = $current_page === 'mydataninja-settings';
-
-    call_user_func(function() use ($is_reports_page, $is_settings_page) {
-      include(plugin_dir_path(__DIR__) . '../templates/index.php');
-    });
 }
 
 function mdnj_save_options()
@@ -142,8 +175,7 @@ function mdnj_enqueue_custom_styles() {
   $orderStatistics = mdnj_get_order_statistics();
   wp_localize_script('mydataninja-integration-interface-script', 'php_vars', [
     'accessToken' => get_option('mydataninja_access_token'),
-    'currencySymbol' => get_woocommerce_currency_symbol(),
-    'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
+    'currencySymbol' => function_exists('get_woocommerce_currency_symbol') ? get_woocommerce_currency_symbol() : '$',    'apiBaseUrl' => $myDataNinjaConfig['API_BASE_URL'],
     'todayOrders' => $orderStatistics['today']['count'],
     'todayAverage' => $orderStatistics['today']['average'],
     'monthOrders' => $orderStatistics['month']['count'],
@@ -158,6 +190,14 @@ add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 add_action('admin_enqueue_scripts', 'mdnj_enqueue_custom_styles');
 
 function mdnj_get_order_statistics() {
+  if (!function_exists('wc_get_orders')) {
+    return [
+      'today' => ['count' => 0, 'average' => 0],
+      'month' => ['count' => 0, 'average' => 0],
+      'allTime' => ['count' => 0, 'average' => 0]
+    ];
+  }
+
   $today = gmdate('Y-m-d');
   $firstDayOfMonth = gmdate('Y-m-01');
   $dateRanges = [

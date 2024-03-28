@@ -64,8 +64,35 @@ document.addEventListener('DOMContentLoaded', function() {
             this.classList.add('current');
             document.getElementById(tabId).classList.add('current');
 
-            var newUrl = '/wp-admin/admin.php?page=' + (tabId === 'tab-1' ? 'mydataninja-settings' : 'mydataninja-reports');
+            const tabs = {
+                'tab-1': 'mydataninja-settings',
+                'tab-2': 'mydataninja-reports',
+                'tab-3': 'mydataninja-forms'
+            };
+
+            const newUrl = '/wp-admin/admin.php?page=' + tabs[tabId];
             window.history.pushState({}, '', newUrl);
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', (event) => {
+    const copyIcons = document.querySelectorAll('.copy-icon');
+
+    copyIcons.forEach((icon) => {
+        icon.addEventListener('click', (event) => {
+            event.preventDefault();
+
+            const anchor = event.target.tagName === 'A' ? event.target : event.target.parentElement;
+            const inputId = anchor.getAttribute('data-input-id');
+            const input = document.getElementById(inputId);
+
+            if (input) {
+                input.select();
+                document.execCommand('copy');
+
+                alert('Content copied to clipboard');
+            }
         });
     });
 });
