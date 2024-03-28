@@ -65,7 +65,7 @@ $meta_keys = $wpdb->get_col("
                   ?>
 
                   <?php if(mdnj_is_api_key_authorized()): ?>
-                      <div class="checkbox-container">
+                      <div class="mdnj-checkbox-container">
                           <div class="checkboxes">
                               <div class="checkbox-row">
                                   <div class="checkbox-label wide-label">
