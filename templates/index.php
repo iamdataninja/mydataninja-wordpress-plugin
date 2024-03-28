@@ -29,7 +29,7 @@ $meta_keys = $wpdb->get_col("
     </div>
     <div class="mdnj-interface-container">
         <h1>Welcome to MyDataNinja WooCommerce Plugin</h1>
-        <div class="custom-interface">
+        <div class="mdnj-custom-interface">
             <?php if (mdnj_is_api_key_authorized()): ?>
                 <ul class="tabs">
                     <li class="tab-link <?php echo $is_settings_page ? 'current' : ''; ?>" data-tab="tab-1">Settings</li>

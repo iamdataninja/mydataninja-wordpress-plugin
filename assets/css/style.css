@@ -30,7 +30,7 @@
     text-align: center;
 }
 
-.custom-interface {
+.mdnj-custom-interface {
     min-width: 700px;
     max-width: 700px;
     margin: 20px auto;
@@ -106,13 +106,13 @@
     align-items: center;
 }
 
-.custom-interface {
+.mdnj-custom-interface {
     padding: 20px;
     border: 1px solid #ddd;
     margin-top: 20px;
 }
 
-.custom-interface p {
+.mdnj-custom-interface p {
     margin-bottom: 20px;
 }
 
