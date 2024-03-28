@@ -6,7 +6,7 @@ global $myDataNinjaConfig;
 $permalink_structure = get_option('permalink_structure');
 $is_plain_permalinks = empty($permalink_structure);
 
-function pretty_field_name($field_name) {
+function mdnj_pretty_field_name($field_name) {
   $pretty_name = str_replace('_', ' ', $field_name);
   $pretty_name = ucwords($pretty_name);
   return $pretty_name;
@@ -39,7 +39,7 @@ $meta_keys = $wpdb->get_col("
 
             <div id="mdnj-tab-1" class="mdnj-tab-content <?php echo $is_settings_page ? 'current' : ''; ?>">
                 <form method="post" action="">
-                  <?php wp_nonce_field('mydataninja_nonce', 'mydataninja_nonce_field'); ?>
+                  <?php wp_nonce_field('mdnj_nonce', 'mdnj_nonce_field'); ?>
                     <p>
                       <?php
                       if ($is_plain_permalinks && mdnj_is_api_key_authorized()) {
@@ -102,7 +102,7 @@ $meta_keys = $wpdb->get_col("
                                     <?php
                                     if (!empty($meta_keys)) {
                                       foreach ($meta_keys as $key) {
-                                        $pretty_name = pretty_field_name($key);
+                                        $pretty_name = mdnj_pretty_field_name($key);
                                         $selected = selected($key, get_option('mdnj_existing_cog_field_name'), false);
                                         echo '<option value="' . esc_attr($key) . '" ' . esc_attr($selected) . '>' . esc_html($pretty_name) . '</option>';                                      }
                                     } else {

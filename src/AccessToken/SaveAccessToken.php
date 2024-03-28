@@ -7,7 +7,7 @@ function mdnj_get_and_save_access_token(WP_REST_Request $request) {
     return new WP_Error('missing_access_token', 'Access token is missing', array('status' => 400));
   }
 
-  update_option('mydataninja_access_token', $access_token);
+  update_option('mdnj_access_token', $access_token);
   return rest_ensure_response(array('success' => true));
 }
 

@@ -3,7 +3,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 global $cog_field_name;
-$cog_field_name = get_option('mdnj_existing_cog_field_name', '_mydataninja_cost_of_goods');
+$cog_field_name = get_option('mdnj_existing_cog_field_name', 'mdnj_cost_of_goods');
 
 function mdnj_calculate_order_cost_of_goods($order_id)
 {

@@ -14,7 +14,7 @@ function mdnj_set_default_options_on_activation($file) {
   }
 
   if (get_option('mdnj_existing_cog_field_name') === false) {
-    update_option('mdnj_existing_cog_field_name', '_mydataninja_cost_of_goods');
+    update_option('mdnj_existing_cog_field_name', 'mdnj_cost_of_goods');
   }
 
   register_activation_hook($file, 'mdnj_set_default_options_on_activation');
