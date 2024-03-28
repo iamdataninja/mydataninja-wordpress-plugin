@@ -117,13 +117,13 @@
 }
 
 .mdnj-authorize-btn,
-.install-btn {
+.mdnj-install-btn {
     padding: 10px;
     margin-right: 10px;
     cursor: pointer;
 }
 
-.tabs {
+.mdnj-tabs {
     list-style-type: none;
     margin: 0;
     padding: 0;
