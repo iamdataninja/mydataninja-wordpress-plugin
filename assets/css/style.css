@@ -7,7 +7,7 @@
     color: white!important;
 }
 
-.authorize-btn[disabled] {
+.mdnj-authorize-btn[disabled] {
     background-color: rgb(22 163 74);
     opacity: 0.8;
     cursor: not-allowed;
@@ -50,7 +50,7 @@
     cursor: pointer;
 }
 
-.authorize-btn {
+.mdnj-authorize-btn {
     background-color: #FF4E00;
 }
 
@@ -116,7 +116,7 @@
     margin-bottom: 20px;
 }
 
-.authorize-btn,
+.mdnj-authorize-btn,
 .install-btn {
     padding: 10px;
     margin-right: 10px;
