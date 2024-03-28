@@ -34,8 +34,8 @@ function mdnj_add_event_id_to_order_object($response, $object, $request) {
 add_filter('woocommerce_rest_prepare_shop_order_object', 'mdnj_add_event_id_to_order_object', 10, 3);
 
 function mdnj_add_njeventid_to_order( $order_id ) {
-  $njeventid = isset($_COOKIE['njeventid']) ? $_COOKIE['njeventid'] : null;
-  
+  $njeventid = isset($_COOKIE['njeventid']) ? sanitize_text_field($_COOKIE['njeventid']) : null;
+
   if(!$njeventid) return;
   
   update_post_meta($order_id, 'event_id', $njeventid);

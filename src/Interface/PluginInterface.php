@@ -91,7 +91,7 @@ function mdnj_is_api_key_authorized() {
 function mdnj_display_plugin_interface() {
     mdnj_save_options();
 
-    $current_page = $_GET['page'];
+    $current_page = isset($_GET['page']) ? sanitize_text_field($_GET['page']) : '';
     $is_reports_page = $current_page === 'mydataninja-reports' || $current_page === 'mydataninja-integration';
     $is_settings_page = $current_page === 'mydataninja-settings';
 
