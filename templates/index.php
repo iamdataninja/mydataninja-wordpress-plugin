@@ -54,12 +54,12 @@ $meta_keys = $wpdb->get_col("
 
                   <?php
                   if (mdnj_is_api_key_authorized() && !$is_plain_permalinks) {
-                    echo '<button class="btn mdnj-authorize-btn" disabled>Authorized Successfully</button>';
-                    echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn mdnj-authorize-btn">Open MyDataNinja</a>';                  } else {
+                    echo '<button class="mdnj-btn mdnj-authorize-btn" disabled>Authorized Successfully</button>';
+                    echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="mdnj-btn mdnj-authorize-btn">Open MyDataNinja</a>';                  } else {
                     if ($is_plain_permalinks) {
-                      echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="btn mdnj-authorize-btn save-btn no-underline">Adjust Permalink Settings</a>';
+                      echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="mdnj-btn mdnj-authorize-btn save-btn no-underline">Adjust Permalink Settings</a>';
                     } else {
-                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . esc_html(get_bloginfo('name')) . '&currency=' . esc_html(get_woocommerce_currency()) . '&base_url=' . esc_url(home_url()) . '" class="btn mdnj-authorize-btn">Authorize</a>';
+                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . esc_html(get_bloginfo('name')) . '&currency=' . esc_html(get_woocommerce_currency()) . '&base_url=' . esc_url(home_url()) . '" class="mdnj-btn mdnj-authorize-btn">Authorize</a>';
                     }
                   }
                   ?>
@@ -119,7 +119,7 @@ $meta_keys = $wpdb->get_col("
                               </div>
                           </div>
 
-                          <input type="submit" class="btn save-btn" style="font-size: 14px; width: 80%" value="Save Changes">
+                          <input type="submit" class="mdnj-btn save-btn" style="font-size: 14px; width: 80%" value="Save Changes">
                       </div>
                   <?php endif; ?>
 
