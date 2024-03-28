@@ -43,7 +43,7 @@ $meta_keys = $wpdb->get_col("
                     <p>
                       <?php
                       if ($is_plain_permalinks && mdnj_is_api_key_authorized()) {
-                        echo '<div class="warning-message">In order to ensure optimal functionality of the plugin, we kindly request you to refrain from using the "plain" option.</div>';
+                        echo '<div class="mdnj-warning-message">In order to ensure optimal functionality of the plugin, we kindly request you to refrain from using the "plain" option.</div>';
                       } elseif ($is_plain_permalinks) {
                         echo 'To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.';
                       } else {
@@ -57,7 +57,7 @@ $meta_keys = $wpdb->get_col("
                     echo '<button class="mdnj-btn mdnj-authorize-btn" disabled>Authorized Successfully</button>';
                     echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="mdnj-btn mdnj-authorize-btn">Open MyDataNinja</a>';                  } else {
                     if ($is_plain_permalinks) {
-                      echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="mdnj-btn mdnj-authorize-btn mdnj-save-btn no-underline">Adjust Permalink Settings</a>';
+                      echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="mdnj-btn mdnj-authorize-btn mdnj-save-btn mdnj-no-underline">Adjust Permalink Settings</a>';
                     } else {
                       echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . esc_html(get_bloginfo('name')) . '&currency=' . esc_html(get_woocommerce_currency()) . '&base_url=' . esc_url(home_url()) . '" class="mdnj-btn mdnj-authorize-btn">Authorize</a>';
                     }
@@ -131,7 +131,7 @@ $meta_keys = $wpdb->get_col("
 
                 <canvas id="ordersChart"></canvas>
 
-                <div class="widget-container">
+                <div class="mdnj-widget-container">
                     <h2>MyDataNinja Widgets</h2>
                     <div id="sales">
                         <div id="totals" class="widget"></div>
