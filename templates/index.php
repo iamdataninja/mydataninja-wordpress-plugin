@@ -68,7 +68,7 @@ $meta_keys = $wpdb->get_col("
                       <div class="mdnj-checkbox-container">
                           <div class="mdnj-checkboxes">
                               <div class="mdnj-checkbox-row">
-                                  <div class="checkbox-label wide-label">
+                                  <div class="mdnj-checkbox-label wide-label">
                                       <label for="_include_profits">Include MyDataNinja "Cost of Goods" Field</label>
                                       <p>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
                                   </div>
@@ -78,7 +78,7 @@ $meta_keys = $wpdb->get_col("
                               </div>
 
                               <div class="mdnj-checkbox-row">
-                                  <div class="checkbox-label">
+                                  <div class="mdnj-checkbox-label">
                                       <label for="_include_tracker">Include Tracker on Website</label>
                                       <p>This setting will add the MyDataNinja JS Pixel to your website so that our system can track your ads and visitors, understanding which advertisements and traffic sources are bringing in orders, along with their associated profit and ROI. This setting is a must in order for MyDataNinja to work properly.</p>
                                   </div>
@@ -88,7 +88,7 @@ $meta_keys = $wpdb->get_col("
                               </div>
 
                               <div class="mdnj-checkbox-row">
-                                  <div class="checkbox-label">
+                                  <div class="mdnj-checkbox-label">
                                       <label for="_use_existing_cog_field">Use Existing Cost of Goods Field</label>
                                       <p>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
                                   </div>
