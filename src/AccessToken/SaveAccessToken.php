@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 function mdnj_get_and_save_access_token(WP_REST_Request $request) {
   $access_token = $request->get_param('access_token');
 

@@ -1,5 +1,7 @@
 <?php
 
+if ( ! defined( 'ABSPATH' ) ) exit;
+
 include_once __DIR__ . '/src/CostOfGoods/AddCostOfGoodsField.php';
 include_once __DIR__ . '/src/CostOfGoods/AddCogAndProfitToOrders.php';
 include_once __DIR__ . '/src/Script/AddScript.php';
