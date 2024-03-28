@@ -133,11 +133,11 @@ $meta_keys = $wpdb->get_col("
 
                 <div class="mdnj-widget-container">
                     <h2>MyDataNinja Widgets</h2>
-                    <div id="sales">
+                    <div id="mdnj-sales">
                         <div id="totals" class="mdnj-widget"></div>
                         <div id="totalSales" class="mdnj-widget"></div>
                     </div>
-                    <div id="groupedNetworks"></div>
+                    <div id="mdnj-groupedNetworks"></div>
                 </div>
             </div>
         </div>

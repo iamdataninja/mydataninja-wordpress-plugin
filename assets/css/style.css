@@ -197,7 +197,7 @@
     align-items: center;
 }
 
-#sales, #groupedNetworks {
+#mdnj-sales, #mdnj-groupedNetworks {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr;
