@@ -178,7 +178,7 @@
     margin-top: 50px;
 }
 
-.widget {
+.mdnj-widget {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -190,7 +190,7 @@
     width: 100%;
 }
 
-.widget > div {
+.mdnj-widget > div {
     display: flex;
     flex-direction: column;
     justify-content: center;
