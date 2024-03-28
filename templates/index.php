@@ -72,7 +72,7 @@ $meta_keys = $wpdb->get_col("
                                       <label for="_include_profits">Include MyDataNinja "Cost of Goods" Field</label>
                                       <p>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
                                   </div>
-                                  <div class="checkbox-input narrow-input">
+                                  <div class="mdnj-checkbox-input narrow-input">
                                       <input type="checkbox" id="_include_profits" name="_include_profits" <?php checked(get_option('mdnj_include_profits'), 'yes'); ?>>
                                   </div>
                               </div>
@@ -82,7 +82,7 @@ $meta_keys = $wpdb->get_col("
                                       <label for="_include_tracker">Include Tracker on Website</label>
                                       <p>This setting will add the MyDataNinja JS Pixel to your website so that our system can track your ads and visitors, understanding which advertisements and traffic sources are bringing in orders, along with their associated profit and ROI. This setting is a must in order for MyDataNinja to work properly.</p>
                                   </div>
-                                  <div class="checkbox-input">
+                                  <div class="mdnj-checkbox-input">
                                       <input type="checkbox" id="_include_tracker" name="_include_tracker" <?php checked(get_option('mdnj_include_tracker'), 'yes'); ?>>
                                   </div>
                               </div>
@@ -92,7 +92,7 @@ $meta_keys = $wpdb->get_col("
                                       <label for="_use_existing_cog_field">Use Existing Cost of Goods Field</label>
                                       <p>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
                                   </div>
-                                  <div class="checkbox-input">
+                                  <div class="mdnj-checkbox-input">
                                       <input type="checkbox" id="_use_existing_cog_field" name="_use_existing_cog_field" <?php checked(get_option('mdnj_use_existing_cog_field'), 'yes'); ?>>
                                   </div>
                               </div>
