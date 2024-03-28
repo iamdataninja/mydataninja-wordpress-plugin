@@ -67,7 +67,7 @@ $meta_keys = $wpdb->get_col("
                   <?php if(mdnj_is_api_key_authorized()): ?>
                       <div class="mdnj-checkbox-container">
                           <div class="mdnj-checkboxes">
-                              <div class="checkbox-row">
+                              <div class="mdnj-checkbox-row">
                                   <div class="checkbox-label wide-label">
                                       <label for="_include_profits">Include MyDataNinja "Cost of Goods" Field</label>
                                       <p>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
@@ -77,7 +77,7 @@ $meta_keys = $wpdb->get_col("
                                   </div>
                               </div>
 
-                              <div class="checkbox-row">
+                              <div class="mdnj-checkbox-row">
                                   <div class="checkbox-label">
                                       <label for="_include_tracker">Include Tracker on Website</label>
                                       <p>This setting will add the MyDataNinja JS Pixel to your website so that our system can track your ads and visitors, understanding which advertisements and traffic sources are bringing in orders, along with their associated profit and ROI. This setting is a must in order for MyDataNinja to work properly.</p>
@@ -87,7 +87,7 @@ $meta_keys = $wpdb->get_col("
                                   </div>
                               </div>
 
-                              <div class="checkbox-row">
+                              <div class="mdnj-checkbox-row">
                                   <div class="checkbox-label">
                                       <label for="_use_existing_cog_field">Use Existing Cost of Goods Field</label>
                                       <p>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
@@ -97,7 +97,7 @@ $meta_keys = $wpdb->get_col("
                                   </div>
                               </div>
 
-                              <div class="checkbox-row">
+                              <div class="mdnj-checkbox-row">
                                   <select id="_existing_cog_field_name" name="_existing_cog_field_name" style="min-width: 100%">
                                     <?php
                                     if (!empty($meta_keys)) {
@@ -112,7 +112,7 @@ $meta_keys = $wpdb->get_col("
                                   </select>
                               </div>
 
-                              <div class="checkbox-row" style="flex-direction: column; text-align: left">
+                              <div class="mdnj-checkbox-row" style="flex-direction: column; text-align: left">
                                 <label for="_default_profit_margin" style="width: 100%;">Default Profit Margin (%)</label>
                                 <input type="number" id="_default_profit_margin" name="_default_profit_margin" value="<?php echo esc_attr(get_option('mdnj_default_profit_margin')); ?>" min="0" max="100" placeholder="0%" style="width: 100%">
                                 <p>This will be used if a product doesn't have a cost of goods (COG) defined or if the user opts out of that option.</p>
