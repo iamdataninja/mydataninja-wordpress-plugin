@@ -66,7 +66,7 @@ $meta_keys = $wpdb->get_col("
 
                   <?php if(mdnj_is_api_key_authorized()): ?>
                       <div class="mdnj-checkbox-container">
-                          <div class="checkboxes">
+                          <div class="mdnj-checkboxes">
                               <div class="checkbox-row">
                                   <div class="checkbox-label wide-label">
                                       <label for="_include_profits">Include MyDataNinja "Cost of Goods" Field</label>
