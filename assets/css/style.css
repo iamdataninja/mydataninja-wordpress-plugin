@@ -213,3 +213,44 @@
     background-color: white;
     margin-top: 5px;
 }
+
+.ninja-forms {
+    height: 700px;
+    overflow: scroll;
+}
+
+.form-container {
+    padding: 0 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.form-fields {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    justify-content: space-between;
+}
+
+.form-fields input {
+    width: 100%;
+}
+
+.form-container span {
+    margin-top: 10px;
+    text-align: left;
+    color: gray;
+    font-size: 11px;
+    padding-left: 0;
+    margin-left: 0;
+}
