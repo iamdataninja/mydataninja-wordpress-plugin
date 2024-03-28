@@ -26,10 +26,10 @@ function mdnj_add_plugin_interface_menu() {
 
   add_submenu_page(
     'mydataninja-integration',
-    'Form',
-    'Form',
+    'Forms',
+    'Forms',
     'manage_options',
-    'mydataninja-form',
+    'mydataninja-forms',
     'mdnj_display_form_interface'
   );
 

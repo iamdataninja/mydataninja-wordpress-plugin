@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const tabs = {
                 'tab-1': 'mydataninja-settings',
                 'tab-2': 'mydataninja-reports',
-                'tab-3': 'mydataninja-form'
+                'tab-3': 'mydataninja-forms'
             };
 
             const newUrl = '/wp-admin/admin.php?page=' + tabs[tabId];
