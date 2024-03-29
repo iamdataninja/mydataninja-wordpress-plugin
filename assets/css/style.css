@@ -34,8 +34,7 @@ body {
 }
 
 .custom-interface {
-    max-width: 700px;
-    width:700px
+    width:100%
 }
 
 .widget-container {
@@ -167,3 +166,15 @@ select:focus {
     color: black !important;
     box-shadow: none !important;
 }
+
+.link:focus{
+    box-shadow: none !important;
+    color:white !important
+}
+
+@media only screen and (min-width: 600px) {
+    .checkbox-container {
+      max-width: 70%;
+      margin: auto;
+    }
+  }

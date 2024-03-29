@@ -33,10 +33,10 @@ $meta_keys = $wpdb->get_col("
     </div>
     <div class="d-flex falign-items-center text-center flex-column ">
         <h1 class='title fs-4'>Welcome to MyDataNinja WooCommerce Plugin</h1>
-        <div class="card p-4 my-2 mx-auto shadow bg-body-tertiary custom-interface">
+        <div class="p-4 my-2 mx-auto shadow bg-body-tertiary custom-interface">
 
             <?php if (is_api_key_authorized()): ?>
-                <ul class="nav nav-pills mb-3 m-auto gap-2" id="pills-tab" role="tablist">
+                <ul class="nav nav-pills mb-3 m-auto gap-2 d-flex justify-content-center align-items-center" id="pills-tab" role="tablist">
                   <li class="nav-item" role="presentation">
                     <button class="nav-link active"  id="setting-tab" data-bs-toggle="pill" data-bs-target="#setting" type="button" role="tab" aria-controls="setting" aria-selected="true">Settings</button>
                   </li>
@@ -50,27 +50,29 @@ $meta_keys = $wpdb->get_col("
               <div id="setting" role="tabpanel" aria-labelledby="setting-tab" tabindex="0" class="tab-content tab-pane fade <?php echo $is_settings_page ? 'active show' : ''; ?>">
                   <form method="post" action="">
                     <?php wp_nonce_field('mydataninja_nonce', 'mydataninja_nonce_field'); ?>
-                      <p class="fs-6">
-                        <?php
-                        if ($is_plain_permalinks && is_api_key_authorized()) {
-                          echo '<div class="alert alert-warning fs-6">In order to ensure optimal functionality of the plugin, we kindly request you to refrain from using the "plain" option.</div>';
-                        } elseif ($is_plain_permalinks) {
-                          echo 'To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.';
-                        } else {
-                          echo 'Click "Authorize" to seamlessly link your store with <a href="https://mydataninja.com/" class="text-decoration-underline fw-bold" style="color: #FF4E00!important;">MyDataNinja.</a> Unlock valuable insights into your order profitability, effortlessly monitor user behavior, enhance their experience, and optimize your orders and ads with precision.';
-                        }
-                        ?>
-                      </p>
+                      <div class='d-flex justify-content-center align-items-center'>
+                        <p class="fs-6"  style="max-width: 700px; width: 100%">
+                          <?php
+                          if ($is_plain_permalinks && is_api_key_authorized()) {
+                            echo '<div class="alert alert-warning fs-6">In order to ensure optimal functionality of the plugin, we kindly request you to refrain from using the "plain" option.</div>';
+                          } elseif ($is_plain_permalinks) {
+                            echo 'To proceed with the authorization, please ensure that your permalinks are not set to "plain". You can adjust this in your settings.';
+                          } else {
+                            echo 'Click "Authorize" to seamlessly link your store with <a href="https://mydataninja.com/" class="text-decoration-underline fw-bold" style="color: #FF4E00!important;">MyDataNinja.</a> Unlock valuable insights into your order profitability, effortlessly monitor user behavior, enhance their experience, and optimize your orders and ads with precision.';
+                          }
+                          ?>
+                        </p>
+                      </div>
 
                     <?php
                     if (is_api_key_authorized() && !$is_plain_permalinks) {
-                      echo '<button class="btn btn-secondary disabled mt-3" disabled>Authorized Successfully</button>';
-                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn btn-secondary mt-3">Open MyDataNinja</a>';               
+                      echo '<button class="btn btn-secondary disabled mt-3 mx-2" disabled>Authorized Successfully</button>';
+                      echo '<a target="_blank" href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="btn btn-secondary mt-3 mx-2 link">Open MyDataNinja</a>';               
                       } else {
                       if ($is_plain_permalinks) {
-                        echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="btn btn-primary mt-3">Adjust Permalink Settings</a>';
+                        echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="btn btn-primary mt-3 mx-2 link">Adjust Permalink Settings</a>';
                       } else {
-                        echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . get_bloginfo('name') . '&currency=' . get_woocommerce_currency() . '&base_url=' . home_url() . '" class="btn btn-secondary mt-3">Authorize</a>';
+                        echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . get_bloginfo('name') . '&currency=' . get_woocommerce_currency() . '&base_url=' . home_url() . '" class="btn btn-secondary mt-3 mx-2 link">Authorize</a>';
                       }
                     }
                     ?>
@@ -78,7 +80,7 @@ $meta_keys = $wpdb->get_col("
                     <?php if(is_api_key_authorized()): ?>
                       <div class="checkbox-container">
                         <div class="d-flex flex-col justify-content-center align-items-center flex-wrap my-4 gap-3">
-                            <div class="d-flex justify-contetn-between align-items-center gap-4">
+                            <div class="d-flex justify-content-between align-items-center gap-4">
                                 <div class="text-start">
                                     <label for="_include_profits" class='fw-bolder mb-1 fs-6'>Include MyDataNinja "Cost of Goods" Field</label>
                                     <p class='fs-7 text-secondary'>This setting will add a new field for every product, where you must enter the cost of each product. Our system can then calculate the profit per product and profit per order.</p>
@@ -88,7 +90,7 @@ $meta_keys = $wpdb->get_col("
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-contetn-between align-items-center gap-4">
+                            <div class="d-flex justify-content-between align-items-center gap-4">
                                 <div class="text-start">
                                     <label for="_include_tracker" class='fw-bolder mb-1 fs-6'>Include Tracker on Website</label>
                                     <p class='fs-7 text-secondary'>This setting will add the MyDataNinja JS Pixel to your website so that our system can track your ads and visitors, understanding which advertisements and traffic sources are bringing in orders, along with their associated profit and ROI. This setting is a must in order for MyDataNinja to work properly.</p>
@@ -98,7 +100,7 @@ $meta_keys = $wpdb->get_col("
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-contetn-between align-items-center gap-4 w-100">
+                            <div class="d-flex justify-content-between align-items-center gap-4 w-100">
                                 <div class="text-start">
                                     <label for="_use_existing_cog_field" class='fw-bolder mb-1 fs-6'>Use Existing Cost of Goods Field</label>
                                     <p class='fs-7 text-secondary'>If you already have a "Cost of Goods" field and don't want to add a new one from our system, please choose this setting and indicate which existing field is handling that. This way, MyDataNinja can retrieve information from that field.</p>
@@ -108,7 +110,7 @@ $meta_keys = $wpdb->get_col("
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-contetn-between align-items-center gap-4 w-100">
+                            <div class="d-flex justify-content-between align-items-center gap-4 w-100">
                                 <select id="_existing_cog_field_name" name="_existing_cog_field_name" style="min-width: 100%; height: 40px">
                                   <?php
                                   if (!empty($meta_keys)) {
