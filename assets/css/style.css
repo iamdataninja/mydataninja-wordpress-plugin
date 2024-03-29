@@ -219,13 +219,13 @@
     overflow: scroll;
 }
 
-.form-container {
+.mdnj_form-container {
     padding: 0 40px;
     display: flex;
     flex-direction: column;
 }
 
-.form-header {
+.mdnj_form-header {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -233,11 +233,11 @@
     width: 100%;
 }
 
-.form-header {
+.mdnj_form-header {
     cursor: pointer;
 }
 
-.form-fields {
+.mdnj_form-fields {
     width: 100%;
     display: flex;
     align-items: center;
@@ -245,11 +245,11 @@
     justify-content: space-between;
 }
 
-.form-fields input {
+.mdnj_form-fields input {
     width: 100%;
 }
 
-.form-container span {
+.mdnj_form-container span {
     margin-top: 10px;
     text-align: left;
     color: gray;
@@ -260,8 +260,9 @@
 
 #mdnj-forms-accordion {
     display: none;
+    text-align: left;
 }
 
-.arrow-icon img {
+.mdnj_arrow-icon img {
     transition: transform 0.4s ease-in-out;
 }

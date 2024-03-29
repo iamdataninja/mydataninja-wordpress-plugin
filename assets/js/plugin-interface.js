@@ -218,14 +218,14 @@ fetchAndRenderData();
 renderChart();
 
 jQuery(document).ready(function($) {
-    $('.arrow-icon, .form-header').click(function(e) {
+    $('.mdnj_arrow-icon, .mdnj_form-header').click(function(e) {
         if ($(e.target).hasClass('form-action-icon')) {
             return;
         }
 
         e.preventDefault();
-        const accordion = $(this).closest('.form-header').next('#mdnj-forms-accordion');
-        const icon = $(this).find('.arrow-icon img');
+        const accordion = $(this).closest('.mdnj_form-header').next('#mdnj-forms-accordion');
+        const icon = $(this).find('.mdnj_arrow-icon img');
 
         if (accordion.is(':visible')) {
             icon[0].style.transform = 'rotate(0deg)';

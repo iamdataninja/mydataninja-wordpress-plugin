@@ -149,29 +149,29 @@ $meta_keys = $wpdb->get_col("
             </div>
 
             <div id="tab-3" class="tab-content ninja-forms <?php echo $is_form_page ? 'current' : ''; ?>">
-                <div class="form-container">
+                <div class="mdnj_form-container">
                   <?php
                   $forms = get_option('mdnj_forms', []);
                   foreach ($forms as $form) {
-                    echo '<div class="form-header">';
+                    echo '<div class="mdnj_form-header">';
                         echo '<h3 class="form-name">' . esc_html($form['name']) . '</h3>';
                         echo '<div class="form-actions">';
                             echo '<a href="' . esc_url($myDataNinjaConfig["FRONT_BASE_URL"] . "/crm/dataninja/" . $form["id"] . "/integration") . '" target="_blank"><img class="form-action-icon" width="20" src="' . esc_url(plugins_url('/assets/icons/edit.svg', __DIR__)) . '" alt="Edit"></a>';
                             echo '<a href="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" target="_blank"><img class="form-action-icon" width="20" src="' . esc_url(plugins_url('/assets/icons/external-link.svg', __DIR__)) . '" alt="Open"></a>';
-                            echo '<a href="#" class="form-action-icon arrow-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/arrow.svg', __DIR__)) . '" alt="Open Accordion"></a>';
+                            echo '<a href="#" class="form-action-icon mdnj_arrow-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/arrow.svg', __DIR__)) . '" alt="Open Accordion"></a>';
                         echo '</div>';
                     echo '</div>';
                     echo '<div id="mdnj-forms-accordion">';
-                        echo '<div class="form-fields">';
+                        echo '<div class="mdnj_form-fields">';
                         echo '<input type="text" id="iframe-input-' . esc_attr($form["hash"]) . '" value=\'<iframe src="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" frameborder="0" width="100%"></iframe>\' readonly >';
                         echo '<a href="#" data-input-id="iframe-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
                         echo '</div>';
-                        echo '<div class="form-fields">';
+                        echo '<div class="mdnj_form-fields" style="margin-bottom: 10px;">';
                         echo '<input type="text" id="shortcode-input-' . esc_attr($form["hash"]) . '" value=\'[mydataninja_iframe hash="' . esc_attr($form["hash"]) . '"]\' readonly >';
                         echo '<a href="#" data-input-id="shortcode-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
                         echo '</div>';
                         echo '<span>For a native form integration, use this JavaScript code. Ensure the "Include Tracker" option is enabled.</span>';
-                        echo '<div class="form-fields">';
+                        echo '<div class="mdnj_form-fields">';
                         echo '<input type="text" id="loadform-input-' . esc_attr($form["hash"]) . '" value=\'nj.push(["loadForm", "' . esc_attr($form["hash"]) . '", "body"])\'' . ' readonly >';
                         echo '<a href="#" data-input-id="loadform-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
                         echo '</div>';
