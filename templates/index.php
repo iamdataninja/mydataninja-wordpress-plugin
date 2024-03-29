@@ -156,8 +156,8 @@ $meta_keys = $wpdb->get_col("
                     echo '<div class="form-header">';
                         echo '<h3 class="form-name">' . esc_html($form['name']) . '</h3>';
                         echo '<div class="form-actions">';
-                            echo '<a href="' . esc_url($myDataNinjaConfig["FRONT_BASE_URL"] . "/crm/dataninja/" . $form["id"] . "/integration") . '" target="_blank" class="form-action-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/edit.svg', __DIR__)) . '" alt="Edit"></a>';
-                            echo '<a href="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" target="_blank" class="form-action-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/external-link.svg', __DIR__)) . '" alt="Open"></a>';
+                            echo '<a href="' . esc_url($myDataNinjaConfig["FRONT_BASE_URL"] . "/crm/dataninja/" . $form["id"] . "/integration") . '" target="_blank"><img class="form-action-icon" width="20" src="' . esc_url(plugins_url('/assets/icons/edit.svg', __DIR__)) . '" alt="Edit"></a>';
+                            echo '<a href="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" target="_blank"><img class="form-action-icon" width="20" src="' . esc_url(plugins_url('/assets/icons/external-link.svg', __DIR__)) . '" alt="Open"></a>';
                             echo '<a href="#" class="form-action-icon arrow-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/arrow.svg', __DIR__)) . '" alt="Open Accordion"></a>';
                         echo '</div>';
                     echo '</div>';

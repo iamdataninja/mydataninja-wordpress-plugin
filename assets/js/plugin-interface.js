@@ -218,10 +218,14 @@ fetchAndRenderData();
 renderChart();
 
 jQuery(document).ready(function($) {
-    $('.arrow-icon').click(function(e) {
+    $('.arrow-icon, .form-header').click(function(e) {
+        if ($(e.target).hasClass('form-action-icon')) {
+            return;
+        }
+
         e.preventDefault();
         const accordion = $(this).closest('.form-header').next('#mdnj-forms-accordion');
-        const icon = $(this).find('img'); // Get the img tag inside .arrow-icon
+        const icon = $(this).find('.arrow-icon img');
 
         if (accordion.is(':visible')) {
             icon[0].style.transform = 'rotate(0deg)';

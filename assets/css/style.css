@@ -233,6 +233,10 @@
     width: 100%;
 }
 
+.form-header {
+    cursor: pointer;
+}
+
 .form-fields {
     width: 100%;
     display: flex;
