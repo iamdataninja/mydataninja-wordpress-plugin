@@ -216,3 +216,19 @@ function renderChart() {
 
 fetchAndRenderData();
 renderChart();
+
+jQuery(document).ready(function($) {
+    $('.arrow-icon').click(function(e) {
+        e.preventDefault();
+        const accordion = $(this).closest('.form-header').next('#mdnj-forms-accordion');
+        const icon = $(this).find('img'); // Get the img tag inside .arrow-icon
+
+        if (accordion.is(':visible')) {
+            icon[0].style.transform = 'rotate(0deg)';
+        } else {
+            icon[0].style.transform = 'rotate(-180deg)';
+        }
+
+        accordion.slideToggle();
+    });
+});

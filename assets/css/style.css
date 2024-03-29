@@ -231,7 +231,6 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 20px;
 }
 
 .form-fields {
@@ -253,4 +252,12 @@
     font-size: 11px;
     padding-left: 0;
     margin-left: 0;
+}
+
+#mdnj-forms-accordion {
+    display: none;
+}
+
+.arrow-icon img {
+    transition: transform 0.4s ease-in-out;
 }
