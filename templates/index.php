@@ -150,6 +150,13 @@ $meta_keys = $wpdb->get_col("
 
             <div id="tab-3" class="tab-content ninja-forms <?php echo $is_form_page ? 'current' : ''; ?>">
                 <div class="mdnj_form-container">
+                    <div>
+                        <p class="mdnj-card-style">
+                            If you want to integrate your forms with our CRM,
+                            <a style="color: #FF4E00!important;" href="https://docs.mydataninja.com/docs/crm/crm-api-integration/" target="_blank">Click here</a>
+                            to learn how.
+                        </p>
+                    </div>
                   <?php
                   $forms = get_option('mdnj_forms', []);
                   foreach ($forms as $form) {

@@ -266,3 +266,12 @@
 .mdnj_arrow-icon img {
     transition: transform 0.4s ease-in-out;
 }
+
+.mdnj-card-style {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+    background-color: #fff;
+}
