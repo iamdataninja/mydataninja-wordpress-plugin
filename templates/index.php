@@ -170,23 +170,64 @@ $meta_keys = $wpdb->get_col("
                     echo '</div>';
                     echo '<div id="mdnj-forms-accordion">';
                         echo '<div class="mdnj_form-fields">';
-                        echo '<input type="text" id="iframe-input-' . esc_attr($form["hash"]) . '" value=\'<iframe src="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" frameborder="0" width="100%"></iframe>\' readonly >';
-                        echo '<a href="#" data-input-id="iframe-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
+                            echo '<input type="text" id="iframe-input-' . esc_attr($form["hash"]) . '" value=\'<iframe src="' . esc_url($myDataNinjaConfig["API_BASE_URL"] . "/ext/form/load/" . $form["hash"]) . '" frameborder="0" width="100%"></iframe>\' readonly >';
+                            echo '<a href="#" data-input-id="iframe-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
                         echo '</div>';
                         echo '<div class="mdnj_form-fields" style="margin-bottom: 10px;">';
-                        echo '<input type="text" id="shortcode-input-' . esc_attr($form["hash"]) . '" value=\'[mydataninja_iframe hash="' . esc_attr($form["hash"]) . '"]\' readonly >';
-                        echo '<a href="#" data-input-id="shortcode-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
+                            echo '<input type="text" id="shortcode-input-' . esc_attr($form["hash"]) . '" value=\'[mydataninja_iframe hash="' . esc_attr($form["hash"]) . '"]\' readonly >';
+                            echo '<a href="#" data-input-id="shortcode-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
                         echo '</div>';
-                        echo '<span>For a native form integration, use this JavaScript code. Ensure the "Include Tracker" option is enabled.</span>';
+                        echo '<span>Effortlessly integrate specific fields into pages with a matching class. Simply tick the box and click "Save Forms". Ensure the "Include Tracker" option is enabled.</span>';
                         echo '<div class="mdnj_form-fields">';
-                        echo '<input type="text" id="loadform-input-' . esc_attr($form["hash"]) . '" value=\'nj.push(["loadForm", "' . esc_attr($form["hash"]) . '", "body"])\'' . ' readonly >';
-                        echo '<a href="#" data-input-id="loadform-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
+                            $selected_forms = get_option('mdnj_selected_forms', []);
+                            $selected_hashes = array_column($selected_forms, 'hash');
+                            $selected_classes = array_column($selected_forms, 'class');
+                            echo '<input style="flex: 1;" type="checkbox" class="form-checkbox" data-form-class=".logged-in-as" data-form-hash="' . esc_attr($form["hash"]) . '" ' . checked(in_array($form["hash"], $selected_hashes), true, false) . '>';
+                            $index = array_search($form["hash"], $selected_hashes);
+                            echo '<input id="mdnj-style-' . esc_attr($form["hash"]) . '" style="flex: 99;" type="text" id="loadform-input-' . esc_attr($form["hash"]) . '" value="' . ($index !== false ? esc_attr($selected_classes[$index]) : '') . '" placeholder="' . ($index === false ? 'Enter the name of the class where your form will be included' : '') . '">';
+                            echo '<a href="#" data-input-id="loadform-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';                        echo '<a href="#" data-input-id="loadform-input-' . esc_attr($form["hash"]) . '" class="form-action-icon copy-icon"><img width="20" src="' . esc_url(plugins_url('/assets/icons/copy.svg', __DIR__)) . '" alt="Copy"></a>';
                         echo '</div>';
                     echo '</div>';
                   }
                   ?>
+                <button type="submit" id="save-changes-button" class="btn save-btn" style="font-size: 14px;">Save Forms</button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Get all checkboxes
+    const checkboxes = document.querySelectorAll('.form-checkbox');
+
+    checkboxes.forEach(function(checkbox) {
+        checkbox.addEventListener('click', function() {
+            const selectedCheckboxes = document.querySelectorAll('.form-checkbox:checked');
+            if (selectedCheckboxes.length > 5) {
+                checkbox.checked = false;
+                alert('You can select a maximum of 5 forms.');
+            }
+        });
+    });
+
+    document.getElementById('save-changes-button').addEventListener('click', function(event) {
+        event.preventDefault();
+        const selectedForms = Array.from(checkboxes).filter(checkbox => checkbox.checked).map(function(checkbox) {
+            const hash = checkbox.getAttribute('data-form-hash');
+            const formClass = document.getElementById('mdnj-style-' + hash).value;
+            return {
+                hash: hash,
+                class: formClass
+            };
+        });
+
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '<?php echo esc_url(rest_url('mydataninja/v1/select_forms')); ?>');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.setRequestHeader('X-WP-Nonce', '<?php echo esc_js(wp_create_nonce('wp_rest')); ?>');
+        xhr.send(JSON.stringify({ forms: selectedForms }));
+    });
+</script>
+
+<?php
