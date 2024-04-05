@@ -2,7 +2,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-global $myDataNinjaConfig;
+global $mdnj_myDataNinjaConfig;
 $permalink_structure = get_option('permalink_structure');
 $is_plain_permalinks = empty($permalink_structure);
 
@@ -55,11 +55,11 @@ $meta_keys = $wpdb->get_col("
                   <?php
                   if (mdnj_is_api_key_authorized() && !$is_plain_permalinks) {
                     echo '<button class="mdnj-btn mdnj-authorize-btn" disabled>Authorized Successfully</button>';
-                    echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="mdnj-btn mdnj-authorize-btn">Open MyDataNinja</a>';                  } else {
+                    echo '<a href="' . esc_url($mdnj_myDataNinjaConfig['FRONT_BASE_URL']) . '/dashboard" class="mdnj-btn mdnj-authorize-btn">Open MyDataNinja</a>';                  } else {
                     if ($is_plain_permalinks) {
                       echo '<a href="' . esc_url(admin_url('options-permalink.php')) . '" class="mdnj-btn mdnj-authorize-btn mdnj-save-btn mdnj-no-underline">Adjust Permalink Settings</a>';
                     } else {
-                      echo '<a href="' . esc_url($myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . esc_html(get_bloginfo('name')) . '&currency=' . esc_html(get_woocommerce_currency()) . '&base_url=' . esc_url(home_url()) . '" class="mdnj-btn mdnj-authorize-btn">Authorize</a>';
+                      echo '<a href="' . esc_url($mdnj_myDataNinjaConfig['FRONT_BASE_URL']) . '/crm/woocommerce?name=' . esc_html(get_bloginfo('name')) . '&currency=' . esc_html(get_woocommerce_currency()) . '&base_url=' . esc_url(home_url()) . '" class="mdnj-btn mdnj-authorize-btn">Authorize</a>';
                     }
                   }
                   ?>
