@@ -17,6 +17,7 @@ function mdnj_create_get_token_endpoint() {
   register_rest_route('mydataninja/v1', '/get-token', array(
     'methods' => 'POST',
     'callback' => 'mdnj_get_and_save_access_token',
+    'permission_callback' => '__return_true',
   ));
 }
 

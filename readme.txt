@@ -30,10 +30,10 @@ MyDataNinja is a comprehensive marketing automation platform that provides insig
 
 == Installation ==
 
-1. Download the plugin zip file from the GitHub repository.
-2. Log in to your WordPress dashboard, navigate to the Plugins menu and click 'Add New'.
-3. Click 'Upload Plugin', and select the downloaded zip file.
-4. Click 'Install Now' and then 'Activate' to start using the MyDataNinja WooCommerce Integration.
+1. Upload the plugin files to the ‘/wp-content/plugins’ directory, or install the plugin through the WordPress plugins screen directly.
+Activate the plugin through the ‘Plugins’ screen in WordPress.
+2. MyDataNinja will appear in sidebar
+3. Click on "MyDataNinja" and then click "Authorize"
 
 == Screenshots ==
 

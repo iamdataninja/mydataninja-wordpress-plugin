@@ -19,5 +19,6 @@ function mdnj_register_endpoints() {
     register_rest_route( $mdnj_api_prefix, '/check', [
         'methods'   => 'GET',
         'callback'  => 'mdnj_check_handler',
+        'permission_callback' => '__return_true',
     ]);
 }

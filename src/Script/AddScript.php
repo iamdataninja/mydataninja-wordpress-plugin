@@ -24,6 +24,7 @@ function mdnj_create_attach_website_endpoint() {
     register_rest_route('mydataninja/v1', '/attach-website', array(
         'methods' => 'POST',
         'callback' => 'mdnj_attach_website_route_callback',
+        'permission_callback' => '__return_true',
     ));
 }
 
