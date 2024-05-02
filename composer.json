@@ -1,3 +1,6 @@
 {
-  "require": {}
+  "require": {},
+  "scripts": {
+    "sync-wordpress": "rsync -av --progress --exclude=/.git --exclude=/.github --exclude=/dotorg ./ "
+  }
 }
