@@ -1,11 +1,10 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (! defined('ABSPATH')) exit;
 
 return [
   'API_BASE_URL' => 'https://api.mydataninja.com',
   'FRONT_BASE_URL' => 'https://app.mydataninja.com',
 
-  'VERSION' => 1,
+  'VERSION' => '1.0.3',
 ];
-

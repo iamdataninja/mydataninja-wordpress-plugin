@@ -1,0 +1,15 @@
+# Checkout git branch
+
+git checkout -b v[version_number]
+
+# Replace version number in all files
+
+find and replace v1.0.n with v1.0.n+1
+
+# edit files and commit
+
+run scripts:
+
+```
+composer run script release-version
+```

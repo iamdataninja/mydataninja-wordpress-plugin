@@ -1,6 +1,6 @@
 {
   "require": {},
   "scripts": {
-    "sync-wordpress": "rsync -av --progress --exclude=/.git --exclude=/.github --exclude=/dotorg ./ "
+    "release-version": "mkdir dotorg/tags/1.0.3 && rsync -av --progress --exclude=/.git --exclude=/.github --exclude=/dotorg --exclude=/update-version ./ ./dotorg/tags/1.0.3"
   }
 }
