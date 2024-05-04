@@ -21,6 +21,34 @@ if (!mdnj_check_woocommerce_dependency()) {
 
 require_once __DIR__ . '/lib/default-options-setter.php';
 mdnj_set_default_options_on_activation(__FILE__);
-require_once __DIR__ . '/includes.php';
 
-$mdnj_myDataNinjaConfig = include __DIR__ . '/config.php';
+require_once __DIR__ . '/functions.php';
+include_once __DIR__ . '/src/CostOfGoods/AddCostOfGoodsField.php';
+include_once __DIR__ . '/src/CostOfGoods/AddCogAndProfitToOrders.php';
+include_once __DIR__ . '/src/Script/AddScript.php';
+include_once __DIR__ . '/src/Script/SendLastEventId.php';
+include_once __DIR__ . '/src/Interface/PluginInterface.php';
+include_once __DIR__ . '/src/AccessToken/SaveAccessToken.php';
+include_once __DIR__ . '/src/REST/endpoints.php';
+
+register_activation_hook(__FILE__, 'mydataninja_activate');
+function mydataninja_activate()
+{
+  set_transient('mydataninja_activation_redirect', true, 30);
+}
+
+add_action('admin_init', 'mydataninja_redirect_after_activation');
+function mydataninja_redirect_after_activation()
+{
+  // Check if the transient is set
+  if (get_transient('mydataninja_activation_redirect')) {
+    // Delete the transient
+    delete_transient('mydataninja_activation_redirect');
+
+    // Redirect to the desired page (change 'my-plugin-settings' to your actual page slug)
+    if (is_admin() && !isset($_GET['activate-multi'])) {
+      wp_safe_redirect(admin_url(mydataninja_config('REDIRECT_AFTER_ACTIVATION')));
+      exit;
+    }
+  }
+}
