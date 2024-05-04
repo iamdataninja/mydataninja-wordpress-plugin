@@ -131,17 +131,15 @@ function mdnj_save_options()
 
 function mdnj_enqueue_custom_styles()
 {
-  global $mdnj_myDataNinjaConfig;
-
-  wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)), [], $mdnj_myDataNinjaConfig['VERSION']);
-  wp_enqueue_script('mydataninja-chart-script', plugins_url('assets/js/chart.js', plugin_dir_path(__DIR__)), [], $mdnj_myDataNinjaConfig['VERSION'], true);
-  wp_enqueue_script('mydataninja-integration-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), ['mydataninja-chart-script'], $mdnj_myDataNinjaConfig['VERSION'], true);
+  wp_enqueue_style('mydataninja-custom-style', plugins_url('assets/css/style.css', plugin_dir_path(__DIR__)), [], mydataninja_config('VERSION'));
+  wp_enqueue_script('mydataninja-chart-script', plugins_url('assets/js/chart.js', plugin_dir_path(__DIR__)), [], mydataninja_config('VERSION'), true);
+  wp_enqueue_script('mydataninja-integration-interface-script', plugins_url('assets/js/plugin-interface.js', plugin_dir_path(__DIR__)), ['mydataninja-chart-script'], mydataninja_config('VERSION'), true);
 
   $orderStatistics = mdnj_get_order_statistics();
   wp_localize_script('mydataninja-integration-interface-script', 'php_vars', [
     'accessToken' => get_option('mdnj_access_token'),
     'currencySymbol' => get_woocommerce_currency_symbol(),
-    'apiBaseUrl' => $mdnj_myDataNinjaConfig['API_BASE_URL'],
+    'apiBaseUrl' => mydataninja_config('API_BASE_URL'),
     'todayOrders' => $orderStatistics['today']['count'],
     'todayAverage' => $orderStatistics['today']['average'],
     'monthOrders' => $orderStatistics['month']['count'],
