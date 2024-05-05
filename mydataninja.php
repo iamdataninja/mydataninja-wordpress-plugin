@@ -22,14 +22,7 @@ if (!mdnj_check_woocommerce_dependency()) {
 require_once __DIR__ . '/lib/default-options-setter.php';
 mdnj_set_default_options_on_activation(__FILE__);
 
-require_once __DIR__ . '/functions.php';
-include_once __DIR__ . '/src/CostOfGoods/AddCostOfGoodsField.php';
-include_once __DIR__ . '/src/CostOfGoods/AddCogAndProfitToOrders.php';
-include_once __DIR__ . '/src/Script/AddScript.php';
-include_once __DIR__ . '/src/Script/SendLastEventId.php';
-include_once __DIR__ . '/src/Interface/PluginInterface.php';
-include_once __DIR__ . '/src/AccessToken/SaveAccessToken.php';
-include_once __DIR__ . '/src/REST/endpoints.php';
+require_once __DIR__ . '/includes.php';
 
 register_activation_hook(__FILE__, 'mydataninja_activate');
 function mydataninja_activate()
