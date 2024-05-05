@@ -13,3 +13,11 @@ run scripts:
 ```
 composer run script release-version
 ```
+
+# update current stable version in trunk
+
+find and replace in dotorg/trunk/readme.txt current stable version
+
+# run svn
+
+svn add dotorg/tags/1.0.3
