@@ -20,4 +20,4 @@ find and replace in dotorg/trunk/readme.txt current stable version
 
 # run svn
 
-svn add dotorg/tags/1.0.3
+svn add dotorg/tags/1.0.4
