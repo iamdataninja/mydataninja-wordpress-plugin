@@ -4,7 +4,7 @@ git checkout -b v[version_number]
 
 # Replace version number in all files
 
-find and replace v1.0.n with v1.0.n+1
+find and replace v1.1.n with v1.1.n+1
 
 # edit files and commit
 
@@ -20,4 +20,15 @@ find and replace in dotorg/trunk/readme.txt current stable version
 
 # run svn
 
-svn add dotorg/tags/1.0.3
+svn add dotorg/tags/1.0.4
+
+# if not installed svn install with: brew install svn or sudo apt-get install svn
+
+cd dotorg
+svn status
+svn add tags/[version]
+svn add trunk/readme.txt
+svn status # all files must be added
+svn commit -m "released new version"
+
+# may ask for password and username and repository enter from wordpress credentials
