@@ -4,7 +4,7 @@ Tags: woocommerce, e-commerce, google ads, facebook ads, digital advertising
 Requires at least: 6.0
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

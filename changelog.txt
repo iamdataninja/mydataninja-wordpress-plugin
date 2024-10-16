@@ -1,0 +1,13 @@
+*** MyDataNinja WordPress Plugin Changelog ***
+
+2025.04.26 - version 1.1.01
+ * Fix - Fixed cost of goods field overriding existing fields
+
+2025.02.01 - version 1.0.2
+ * New - Refactored MyDataNinja plugin
+
+2025.01.06 - version 1.0.1
+ * New - Adding Cost Of Goods field and corresponding config
+
+2024.12.13 - version 1.0.0
+ * Initial release
