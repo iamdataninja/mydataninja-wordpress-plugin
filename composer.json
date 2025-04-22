@@ -1,5 +1,6 @@
 {
-    "require": {
-        "vlucas/phpdotenv": "^5.6"
-    }
+  "require": {},
+  "scripts": {
+    "sync-wordpress": "rsync -av --progress --exclude=/.git --exclude=/.github --exclude=/dotorg ./ "
+  }
 }
