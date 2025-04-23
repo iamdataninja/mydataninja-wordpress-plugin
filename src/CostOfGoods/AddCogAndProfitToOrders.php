@@ -33,14 +33,14 @@ function mdnj_calculate_order_profit($order_id)
   $items = $order->get_items();
 
   $total_profit = 0;
-  $default_profit_margin = get_option('mdnj_default_profit_margin', 0);
+  $default_profit_margin = (float)get_option('mdnj_default_profit_margin', 0);
 
   foreach ($items as $item) {
     $product_id = $item->get_variation_id() ? $item->get_variation_id() : $item->get_product_id();
 
-    $cost_of_goods = get_post_meta($product_id, $mdnj_cog_field_name, true);
+    $cost_of_goods = (float)get_post_meta($product_id, $mdnj_cog_field_name, true);
     $product = wc_get_product($product_id);
-    $price = $product ? $product->get_price() : 0;
+    $price = $product ? (float)$product->get_price() : 0;
 
     $include_profits = get_option('mdnj_include_profits', 'no');
     if($include_profits == 'yes'){
