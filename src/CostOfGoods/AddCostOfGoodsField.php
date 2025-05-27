@@ -1,6 +1,6 @@
 <?php
 
-if ( ! defined( 'ABSPATH' ) ) exit;
+if (! defined('ABSPATH')) exit;
 
 global $mdnj_cog_field_name;
 $mdnj_cog_field_name = get_option('mdnj_existing_cog_field_name', 'mdnj_cost_of_goods');
@@ -28,14 +28,14 @@ function mdnj_add_cost_of_goods_field()
 
     wp_nonce_field('save_cost_of_goods_nonce', 'cost_of_goods_nonce_field');
 
-    ?>
-      <script>
-          jQuery(document).ready(function($) {
-              var costOfGoodsFieldWrapper = $('.' + <?php echo wp_json_encode($mdnj_cog_field_name); ?> + '_field');
-              costOfGoodsFieldWrapper.append('<span class="description"><?php mdnj_display_profit_field(); ?></span>');
-          });
-      </script>
-    <?php
+?>
+    <script>
+      jQuery(document).ready(function($) {
+        var costOfGoodsFieldWrapper = $('.' + <?php echo esc_html(wp_json_encode($mdnj_cog_field_name)); ?> + '_field');
+        costOfGoodsFieldWrapper.append('<span class="description"><?php mdnj_display_profit_field(); ?></span>');
+      });
+    </script>
+<?php
   }
 }
 
@@ -119,7 +119,7 @@ function mdnj_display_profit_field()
       ),
     );
 
-    echo wp_kses('Profit is ' . wc_price($profit_fixed) . ' (' . number_format($profit_percentage, 2) . '%)', $allowed_html);
+    echo esc_html(wp_kses('Profit is ' . wc_price($profit_fixed) . ' (' . number_format($profit_percentage, 2) . '%)', $allowed_html));
   }
 }
 
